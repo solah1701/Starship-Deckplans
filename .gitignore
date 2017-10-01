@@ -1,0 +1,9 @@
+Library/
+Build/
+obj/
+packages/
+TraceAndTestImpact.testsettings
+SpaceInvaders_Data/
+ProjectSettings/
+Temp/
+Starship Deckplans/Temp/
