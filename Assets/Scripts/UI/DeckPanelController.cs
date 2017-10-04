@@ -20,7 +20,16 @@ public class DeckPanelController : BaseCanvasController
     {
         _deck = deck;
         DeckName.text = deck.DeckName;
-        BlueprintListController.SetBlueprints(_deck.Blueprints);
+        BlueprintListController.InitItems();
+        //TODO: there is an issue here with the blueprint controller
+        // not being instansiated at this point for populateion
+        // it works visually, however when removing an item, it is
+        // not populated on the first pass
+        foreach (var blueprint in _deck.Blueprints)
+        {
+            BlueprintListController.AddItem(blueprint);
+        }
+        //BlueprintListController.SetBlueprints(_deck.Blueprints);
         ShowGameObject(true);
     }
 

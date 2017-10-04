@@ -42,7 +42,7 @@ public class BlueprintListController : MonoBehaviour
         PopulateItems();
     }
 
-    public void PopulateItems()
+    private void PopulateItems()
     {
         var index = 0;
         ClearItems();
@@ -76,9 +76,13 @@ public class BlueprintListController : MonoBehaviour
 
     void TheButtonClicked(Blueprint value)
     {
+        var countBefore = BlueprintNames.Count;
+        Debug.Log(string.Format("before = {0}", countBefore));
         if (BlueprintNames.Contains(value)) BlueprintNames.Remove(value);
+        var countAfter = BlueprintNames.Count;
         PopulateItems();
-        Debug.Log(string.Format("Remove {0}", value.FileName));
+        var countFinal = BlueprintNames.Count;
+        Debug.Log(string.Format("before = {1}, after = {2}, final = {3}, Remove {0}", value.FileName, countBefore, countAfter, countFinal));
     }
 
 }
