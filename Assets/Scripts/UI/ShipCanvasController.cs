@@ -24,7 +24,7 @@ public class ShipCanvasController : BaseCanvasController
 
     private void Start()
     {
-        DeckController.ParentController = this;
+        DeckController.SetParentController(this);
         var startingFile = LoadShipController.GetStartingFile();
         DeckController.ShowGameObject(false);
         if (string.IsNullOrEmpty(startingFile))
@@ -149,6 +149,7 @@ public class ShipCanvasController : BaseCanvasController
         var filepath = FileHelper.GetFilePath(LoadShipController.PathText.text, LoadShipController.FileText.text);
         PopulateShip(filepath);
         LoadShipController.ShowGameObject(false);
+        DeckController.ShowGameObject(false);
         ShowGameObject(true);
         Debug.Log("Load Ship");
     }

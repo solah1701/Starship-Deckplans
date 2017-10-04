@@ -44,7 +44,7 @@ public class ButtonListController : MonoBehaviour
 
     public void RemoveButton()
     {
-        if(string.IsNullOrEmpty(current)) return;
+        if (string.IsNullOrEmpty(current)) return;
         ButtonNames = CanvasController.RemoveButton(current);
         PopulateButtons();
     }
@@ -53,7 +53,7 @@ public class ButtonListController : MonoBehaviour
     {
         var index = 0;
         ClearButtons();
-        if(ButtonNames == null) return;
+        if (ButtonNames == null) return;
         foreach (var buttonName in ButtonNames)
         {
             CreateButton(ButtonPanel, buttonName.Key, index++, TheButtonClicked);

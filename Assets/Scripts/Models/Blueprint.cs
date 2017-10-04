@@ -8,7 +8,7 @@ public class Blueprint
 {
     public string FileName { get; set; }
     public string FilePath { get; set; }
-    public Vector3 Position { get; set; }
-    public Vector3 LocalOrigin { get; set; }
-    public Vector2 Scale { get; set; }
+    //public Vector3 Position { get; set; }
+    //public Vector3 LocalOrigin { get; set; }
+    //public Vector2 Scale { get; set; }
 }

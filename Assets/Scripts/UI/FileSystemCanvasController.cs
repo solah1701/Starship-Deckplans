@@ -166,6 +166,7 @@ public class FileSystemCanvasController : BaseCanvasController
 
     private void FileAction()
     {
+        if (FileTypeName == ConfigClass.FileType.Blueprint) return;
         config.StartingShipFile = FileHelper.GetFilePath(PathText.text, FileText.text);
         SaveConfig();
     }

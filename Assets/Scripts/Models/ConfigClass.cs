@@ -22,7 +22,6 @@ namespace Assets.Scripts.Models
         public string StartingShipFile { get; set; }
         public readonly List<KeyValue> FavouriteBlueprintList;
         public string CurrentBlueprint;
-        //public string CurrentBlueprintFile;
 
         private readonly Dictionary<FileType, List<KeyValue>> _currentListDictionary;
         private readonly Dictionary<FileType, Action<string>> _setCurrentPathDictionary;

@@ -20,6 +20,7 @@ public class DeckPanelController : BaseCanvasController
     {
         _deck = deck;
         DeckName.text = deck.DeckName;
+        BlueprintListController.SetBlueprints(_deck.Blueprints);
         ShowGameObject(true);
     }
 
@@ -35,14 +36,11 @@ public class DeckPanelController : BaseCanvasController
         var filepath = BlueprintFileSystemCanvasController.PathText.text;
         var blueprint = new Blueprint {FileName = filename, FilePath = filepath};
         BlueprintListController.AddItem(blueprint);
+        //TODO: we can add a blueprint here, but deleting is a challenge
+        _deck.Blueprints = BlueprintListController.GetBlueprints();
         BlueprintFileSystemCanvasController.ShowGameObject(false);
         ShowGameObject(true);
         ParentController.ShowGameObject(true);
-    }
-
-    public override void ShowGameObject(bool show)
-    {
-        base.ShowGameObject(show);
     }
 
     protected override void CancelFileAction()

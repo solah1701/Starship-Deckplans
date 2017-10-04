@@ -19,7 +19,12 @@ namespace Assets.Scripts.UI
 
         }
 
-        public BaseCanvasController ParentController;
+        protected BaseCanvasController ParentController;
+
+        public void SetParentController(BaseCanvasController parent)
+        {
+            ParentController = parent;
+        }
 
         public virtual void ShowGameObject(bool show)
         {

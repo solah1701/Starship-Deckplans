@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>WSAPlayer:21</UnityBuildTarget>
     <UnityVersion>2017.1.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -103,8 +101,11 @@
     <Compile Include="Assets\Scripts\Tri.cs" />
     <Compile Include="Assets\Scripts\UI\BaseCanvasController.cs" />
     <Compile Include="Assets\Scripts\UI\BlueprintCanvasController.cs" />
+    <Compile Include="Assets\Scripts\UI\BlueprintItemController.cs" />
+    <Compile Include="Assets\Scripts\UI\BlueprintListController.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonListController.cs" />
     <Compile Include="Assets\Scripts\UI\CreateShipCanvasController.cs" />
+    <Compile Include="Assets\Scripts\UI\DeckPanelController.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\BaseContainerController.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\BlueprintController.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\ButtonController.cs" />
@@ -127,6 +128,5 @@
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
