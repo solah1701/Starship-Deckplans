@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Assets.Scripts.Models;
 using Assets.Scripts.UI;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class BlueprintListController : MonoBehaviour
 {
 
     public GameObject PrefabItem;
+    public GameObject PrefabBluprint;
     public RectTransform BlueprintPanel;
     public BaseCanvasController CanvasController;
 
@@ -45,7 +47,7 @@ public class BlueprintListController : MonoBehaviour
     private void PopulateItems()
     {
         var index = 0;
-        ClearItems();
+        Clear();
         if (BlueprintNames == null) return;
         foreach (var blueprintName in BlueprintNames)
         {
@@ -53,9 +55,24 @@ public class BlueprintListController : MonoBehaviour
         }
     }
 
+    void Clear()
+    {
+        ClearItems();
+        ClearPrefabItems();
+    }
+
     void ClearItems()
     {
         var items = BlueprintPanel.GetComponentsInChildren<BlueprintItemController>();
+        foreach (var item in items)
+        {
+            Destroy(item.gameObject);
+        }
+    }
+
+    void ClearPrefabItems()
+    {
+        var items = BlueprintPanel.GetComponentsInChildren<BlueprintPlane>();
         foreach (var item in items)
         {
             Destroy(item.gameObject);
@@ -72,6 +89,25 @@ public class BlueprintListController : MonoBehaviour
         tempItemPanel.FileNameText.text = item.FileName;
         var tempButton = tempItemPanel.GetComponentInChildren<Button>();
         tempButton.onClick.AddListener(() => TheButtonClicked(item));
+        CreateBlueprintPrefab(item);
+    }
+
+    /// <summary>
+    /// Create the Blueprint Item on a plane from the jpg image file
+    /// </summary>
+    /// <param name="item"></param>
+    void CreateBlueprintPrefab(Blueprint item)
+    {
+        var plane = Instantiate(PrefabBluprint);
+        plane.transform.SetParent(BlueprintPanel, true);
+        var filename = Path.Combine(item.FilePath, item.FileName);
+        WWW www = new WWW(filename);
+
+        //TODO: need to get the async pattern working
+        //yield return www;
+
+        var tmpRenderer = plane.GetComponent<Renderer>();
+        tmpRenderer.material.mainTexture = www.texture;
     }
 
     void TheButtonClicked(Blueprint value)

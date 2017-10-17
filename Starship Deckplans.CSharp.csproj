@@ -98,6 +98,7 @@
     <Compile Include="Assets\Scripts\Models\Deck.cs" />
     <Compile Include="Assets\Scripts\Models\Ship.cs" />
     <Compile Include="Assets\Scripts\MyGameObject.cs" />
+    <Compile Include="Assets\Scripts\Prefabs\BlueprintPlane.cs" />
     <Compile Include="Assets\Scripts\Tri.cs" />
     <Compile Include="Assets\Scripts\UI\BaseCanvasController.cs" />
     <Compile Include="Assets\Scripts\UI\BlueprintCanvasController.cs" />

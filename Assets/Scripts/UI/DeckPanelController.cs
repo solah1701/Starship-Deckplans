@@ -10,12 +10,21 @@ public class DeckPanelController : BaseCanvasController
     public FileSystemCanvasController BlueprintFileSystemCanvasController;
     public BlueprintListController BlueprintListController;
 
+    //public BlueprintListController BlueprintListControllerPrefab;
+    //private BlueprintListController BlueprintListController;
     private Deck _deck;
 
     void Start()
     {
+        Init();
     }
 
+    public void Init()
+    {
+        if (BlueprintListController != null) return;
+        //BlueprintListController = Instantiate(BlueprintListControllerPrefab);
+        Debug.Log("Deck Panel Started");
+    }
     public void PopulateDeck(Deck deck)
     {
         _deck = deck;
@@ -25,11 +34,12 @@ public class DeckPanelController : BaseCanvasController
         // not being instansiated at this point for populateion
         // it works visually, however when removing an item, it is
         // not populated on the first pass
-        foreach (var blueprint in _deck.Blueprints)
-        {
-            BlueprintListController.AddItem(blueprint);
-        }
-        //BlueprintListController.SetBlueprints(_deck.Blueprints);
+        //foreach (var blueprint in _deck.Blueprints)
+        //{
+        //    BlueprintListController.AddItem(blueprint);
+        //}
+        BlueprintListController.SetBlueprints(_deck.Blueprints);
+        Debug.Log(string.Format("blueprint count = {0}", _deck.Blueprints.Count));
         ShowGameObject(true);
     }
 

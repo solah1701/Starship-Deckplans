@@ -84,6 +84,7 @@ public class ShipCanvasController : BaseCanvasController
 
     public override void ButtonListClicked(string value)
     {
+        DeckController.Init();
         DeckController.PopulateDeck(GetDeck(value));
     }
     #endregion
