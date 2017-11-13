@@ -11,8 +11,6 @@ public class DeckPanelController : BaseCanvasController
     public FileSystemCanvasController BlueprintFileSystemCanvasController;
     public BlueprintListController BlueprintListController;
 
-    //public BlueprintListController BlueprintListControllerPrefab;
-    //private BlueprintListController BlueprintListController;
     private Deck _deck;
 
     void Start()
@@ -44,7 +42,7 @@ public class DeckPanelController : BaseCanvasController
         ShowGameObject(true);
     }
 
-    public override List<ConfigClass.KeyValue> AddButton()
+    public override ObjectItemList AddButton()
     {
         AddBlueprint();
         return base.AddButton();

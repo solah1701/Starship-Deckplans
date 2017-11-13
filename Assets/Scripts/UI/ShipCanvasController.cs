@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Assets.Scripts.Extenders;
 using Assets.Scripts.Models;
 using Assets.Scripts.UI;
 using UnityEngine;
@@ -65,18 +66,18 @@ public class ShipCanvasController : BaseCanvasController
     }
 
     #region "Button List Controller"
-    public override List<ConfigClass.KeyValue> InitButtons()
+    public override ObjectItemList InitButtons()
     {
         return GetDecks();
     }
 
-    public override List<ConfigClass.KeyValue> AddButton()
+    public override ObjectItemList AddButton()
     {
         _ship.Decks.Add(AddDeck(_ship.Decks.Count + 1));
         return GetDecks();
     }
 
-    public override List<ConfigClass.KeyValue> RemoveButton(string value)
+    public override ObjectItemList RemoveButton(string value)
     {
         DeckController.ShowGameObject(false);
         return RemoveDeck(value);
@@ -98,9 +99,9 @@ public class ShipCanvasController : BaseCanvasController
         ButtonListController.InitButtons();
     }
 
-    List<ConfigClass.KeyValue> GetDecks()
+    ObjectItemList GetDecks()
     {
-        return _ship.Decks.Select(deck => new ConfigClass.KeyValue { Key = deck.DeckName, Value = deck.DeckName }).ToList();
+        return _ship.Decks.Select(deck => new ButtonItem { Item = new ConfigClass.KeyValue { Key = deck.DeckName, Value = deck.DeckName }}).Cast<ObjectItem>().ConvertList();
     }
 
     Deck AddDeck(int i)
@@ -113,7 +114,7 @@ public class ShipCanvasController : BaseCanvasController
         }
     }
 
-    List<ConfigClass.KeyValue> RemoveDeck(string value)
+    ObjectItemList RemoveDeck(string value)
     {
         _ship.Decks.Remove(GetDeck(value));
         _currentDeck = null;

@@ -17,13 +17,13 @@ namespace Assets.Scripts.Models
             Blueprint
         }
 
-        public readonly List<KeyValue> FavouriteShipList;
+        public readonly List<ButtonItem> FavouriteShipList;
         public string CurrentShip;
         public string StartingShipFile { get; set; }
-        public readonly List<KeyValue> FavouriteBlueprintList;
+        public readonly List<ButtonItem> FavouriteBlueprintList;
         public string CurrentBlueprint;
 
-        private readonly Dictionary<FileType, List<KeyValue>> _currentListDictionary;
+        private readonly Dictionary<FileType, List<ButtonItem>> _currentListDictionary;
         private readonly Dictionary<FileType, Action<string>> _setCurrentPathDictionary;
         private readonly Dictionary<FileType, Func<string>> _getCurrentPathDictionary;
         //private readonly Dictionary<FileType, Action<string>> _setCurrentFileDictionary;
@@ -33,10 +33,10 @@ namespace Assets.Scripts.Models
 
         public ConfigClass()
         {
-            FavouriteBlueprintList = new List<KeyValue>();
-            FavouriteShipList = new List<KeyValue>();
+            FavouriteBlueprintList = new List<ButtonItem>();
+            FavouriteShipList = new List<ButtonItem>();
 
-            _currentListDictionary = new Dictionary<FileType, List<KeyValue>>
+            _currentListDictionary = new Dictionary<FileType, List<ButtonItem>>
             {
                 {FileType.Blueprint, FavouriteBlueprintList},
                 {FileType.Ship, FavouriteShipList}
@@ -93,7 +93,7 @@ namespace Assets.Scripts.Models
         //    _setCurrentFileDictionary[fileType].Invoke(value);
         //}
 
-        public List<KeyValue> GetCurrentList(FileType fileType)
+        public List<ButtonItem> GetCurrentList(FileType fileType)
         {
             return _currentListDictionary[fileType];
         }
@@ -168,13 +168,13 @@ namespace Assets.Scripts.Models
             RemoveFavourite(FavouriteBlueprintList, name);
         }
 
-        private void AddFavourite(List<KeyValue> list, string name, string fullname)
+        private void AddFavourite(List<ButtonItem> list, string name, string fullname)
         {
             if (list.Find(x => x.Key == name) != null) return;
-            list.Add(new KeyValue { Key = name, Value = fullname });
+            list.Add(new ButtonItem { Item = new KeyValue { Key = name, Value = fullname }});
         }
 
-        private void RemoveFavourite(List<KeyValue> list, string name)
+        private void RemoveFavourite(List<ButtonItem> list, string name)
         {
             var item = list.Find(x => x.Key == name);
             if (item == null) return;

@@ -31,19 +31,24 @@ namespace Assets.Scripts.UI
             gameObject.SetActive(show);
         }
 
-        public virtual List<ConfigClass.KeyValue> AddButton()
+        public virtual ObjectItemList AddButton()
         {
             return null;
         }
-        public virtual List<ConfigClass.KeyValue> RemoveButton(string value)
+        public virtual ObjectItemList RemoveButton(string value)
         {
             return null;
         }
         public virtual void ButtonListClicked(string value) { }
-        public virtual List<ConfigClass.KeyValue> InitButtons()
+        public virtual ObjectItemList InitButtons()
         {
             return null;
         }
+
+        public virtual List<T> GetItems<T>()
+        {
+            return null;
+        } 
 
         protected void BindFileController(FileSystemCanvasController fileController, UnityAction action)
         {

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts;
+using Assets.Scripts.Extenders;
 using Assets.Scripts.Models;
 using Assets.Scripts.UI;
 using UnityEngine;
@@ -14,7 +15,7 @@ public class ButtonListController : MonoBehaviour
     public RectTransform ButtonPanel;
     public BaseCanvasController CanvasController;
 
-    private List<ConfigClass.KeyValue> ButtonNames;
+    private ObjectItemList ButtonNames;
     private string current;
 
     // Use this for initialization
@@ -38,7 +39,7 @@ public class ButtonListController : MonoBehaviour
     public void AddButton()
     {
         ButtonNames = CanvasController.AddButton();
-        current = ButtonNames[ButtonNames.Count - 1].Key;
+        current = ButtonNames[ButtonNames.Count - 1].Cast<ButtonItem>().Key;
         PopulateButtons();
     }
 
@@ -56,7 +57,7 @@ public class ButtonListController : MonoBehaviour
         if (ButtonNames == null) return;
         foreach (var buttonName in ButtonNames)
         {
-            CreateButton(ButtonPanel, buttonName.Key, index++, TheButtonClicked);
+            CreateButton(ButtonPanel, buttonName.Cast<ButtonItem>().Key, index++, TheButtonClicked);
         }
     }
 
@@ -93,6 +94,6 @@ public class ButtonListController : MonoBehaviour
     private void TheButtonClicked(string value)
     {
         current = value;
-        CanvasController.ButtonListClicked(ButtonNames.Find(x => x.Key == value).Value);
+        CanvasController.ButtonListClicked(ButtonNames.Find(x => x.Cast<ButtonItem>().Key == value).Cast<ButtonItem>().Value);
     }
 }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using Assets.Scripts;
+using Assets.Scripts.Extenders;
 using Assets.Scripts.Models;
 using Assets.Scripts.UI;
 using UnityEngine;
@@ -79,25 +80,26 @@ public class FileSystemCanvasController : BaseCanvasController
     }
 
     #region "Button List Methods:
-    public override List<ConfigClass.KeyValue> InitButtons()
+    public override ObjectItemList InitButtons()
     {
-        return !LoadConfig() ? null : config.GetCurrentList(FileTypeName);
+        return !LoadConfig() ? null : config.GetCurrentList(FileTypeName).Cast<ObjectItem>().ConvertList();
     }
 
-    public override List<ConfigClass.KeyValue> AddButton()
+    public override ObjectItemList AddButton()
     {
         var directoryInfo = new DirectoryInfo(config.GetCurrentPath(FileTypeName));
         config.AddFavouriteItem(FileTypeName, directoryInfo.Name, directoryInfo.FullName);
         SaveConfig();
-        return config.GetCurrentList(FileTypeName);
+        Debug.Log("Just saved and about to convert list");
+        return config.GetCurrentList(FileTypeName).Cast<ObjectItem>().ConvertList();
     }
 
-    public override List<ConfigClass.KeyValue> RemoveButton(string value)
+    public override ObjectItemList RemoveButton(string value)
     {
         config.RemoveFavouriteItem(FileTypeName, value);
         //config.RemoveFavouriteBlueprint(value);
         SaveConfig();
-        return config.GetCurrentList(FileTypeName);
+        return config.GetCurrentList(FileTypeName).Cast<ObjectItem>().ConvertList();
     }
     public override void ButtonListClicked(string value)
     {
