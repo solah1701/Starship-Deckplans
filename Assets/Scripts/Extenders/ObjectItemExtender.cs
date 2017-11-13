@@ -20,5 +20,9 @@ namespace Assets.Scripts.Extenders
             return (T)Convert.ChangeType(value, typeof(T));
         }
 
+        public static List<ButtonItem> ConvertList(this IEnumerable<ConfigClass.KeyValue> list)
+        {
+            return list.Select(keyValue => new ButtonItem {Item = keyValue}).ToList();
+        }
     }
 }

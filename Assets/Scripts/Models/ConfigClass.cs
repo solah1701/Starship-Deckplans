@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Scripts.Extenders;
 
 namespace Assets.Scripts.Models
 {
@@ -17,13 +18,13 @@ namespace Assets.Scripts.Models
             Blueprint
         }
 
-        public readonly List<ButtonItem> FavouriteShipList;
+        public readonly List<KeyValue> FavouriteShipList;
         public string CurrentShip;
         public string StartingShipFile { get; set; }
-        public readonly List<ButtonItem> FavouriteBlueprintList;
+        public readonly List<KeyValue> FavouriteBlueprintList;
         public string CurrentBlueprint;
 
-        private readonly Dictionary<FileType, List<ButtonItem>> _currentListDictionary;
+        private readonly Dictionary<FileType, List<KeyValue>> _currentListDictionary;
         private readonly Dictionary<FileType, Action<string>> _setCurrentPathDictionary;
         private readonly Dictionary<FileType, Func<string>> _getCurrentPathDictionary;
         //private readonly Dictionary<FileType, Action<string>> _setCurrentFileDictionary;
@@ -33,10 +34,10 @@ namespace Assets.Scripts.Models
 
         public ConfigClass()
         {
-            FavouriteBlueprintList = new List<ButtonItem>();
-            FavouriteShipList = new List<ButtonItem>();
+            FavouriteBlueprintList = new List<KeyValue>();
+            FavouriteShipList = new List<KeyValue>();
 
-            _currentListDictionary = new Dictionary<FileType, List<ButtonItem>>
+            _currentListDictionary = new Dictionary<FileType, List<KeyValue>>
             {
                 {FileType.Blueprint, FavouriteBlueprintList},
                 {FileType.Ship, FavouriteShipList}
@@ -95,7 +96,8 @@ namespace Assets.Scripts.Models
 
         public List<ButtonItem> GetCurrentList(FileType fileType)
         {
-            return _currentListDictionary[fileType];
+            var result = _currentListDictionary[fileType];
+            return result.ConvertList();
         }
 
         public void AddFavouriteItem(FileType fileType, string name, string fullname)
@@ -168,13 +170,13 @@ namespace Assets.Scripts.Models
             RemoveFavourite(FavouriteBlueprintList, name);
         }
 
-        private void AddFavourite(List<ButtonItem> list, string name, string fullname)
+        private void AddFavourite(List<KeyValue> list, string name, string fullname)
         {
             if (list.Find(x => x.Key == name) != null) return;
-            list.Add(new ButtonItem { Item = new KeyValue { Key = name, Value = fullname }});
+            list.Add( new KeyValue { Key = name, Value = fullname });
         }
 
-        private void RemoveFavourite(List<ButtonItem> list, string name)
+        private void RemoveFavourite(List<KeyValue> list, string name)
         {
             var item = list.Find(x => x.Key == name);
             if (item == null) return;
