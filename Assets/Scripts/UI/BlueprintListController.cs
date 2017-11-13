@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Assets.Scripts.Extenders;
 using Assets.Scripts.Models;
 using Assets.Scripts.UI;
@@ -34,17 +35,17 @@ public class BlueprintListController : MonoBehaviour
         CanvasController.AddButton();
     }
 
-    public void AddItem(Blueprint item)
+    public List<Blueprint> AddItem(Blueprint item)
     {
         BlueprintNames.Add(item);
         PopulateItems();
         _current = item;
         Debug.Log(string.Format("Add Item {0}", item));
+        return BlueprintNames.Cast<Blueprint>().ToList();
     }
 
     public void RemoveBlueprint()
     {
-        //TODO: The problem here is that _current is null
         Remove(_current);
     }
 
@@ -58,17 +59,6 @@ public class BlueprintListController : MonoBehaviour
         var countFinal = BlueprintNames.Count;
         Debug.Log(string.Format("before = {1}, after = {2}, final = {3}, Remove {0}", value.FileName, countBefore, countAfter, countFinal));
     }
-
-    //public List<Blueprint> GetBlueprints()
-    //{
-    //    return BlueprintNames;
-    //}
-
-    //public void SetBlueprints(List<Blueprint> value)
-    //{
-    //    BlueprintNames = value;
-    //    PopulateItems();
-    //}
 
     private void PopulateItems()
     {
@@ -107,7 +97,7 @@ public class BlueprintListController : MonoBehaviour
 
     void CreatePrefab(Blueprint item, int index)
     {
-        var ypos = -index * 100 - 100;
+        var ypos = -index * 100 - 60;
         var itemPanel = Instantiate(PrefabItem);
         itemPanel.transform.SetParent(BlueprintPanel, false);
         itemPanel.transform.position += new Vector3(0, ypos, 0);

@@ -32,15 +32,6 @@ public class DeckPanelController : BaseCanvasController
         _deck = deck;
         DeckName.text = deck.DeckName;
         BlueprintListController.InitItems();
-        //TODO: there is an issue here with the blueprint controller
-        // not being instansiated at this point for populateion
-        // it works visually, however when removing an item, it is
-        // not populated on the first pass
-        //foreach (var blueprint in _deck.Blueprints)
-        //{
-        //    BlueprintListController.AddItem(blueprint);
-        //}
-        //BlueprintListController.SetBlueprints(_deck.Blueprints);
         Debug.Log(string.Format("blueprint count = {0}", _deck.Blueprints.Count));
         ShowGameObject(true);
     }
@@ -55,12 +46,7 @@ public class DeckPanelController : BaseCanvasController
         AddBlueprint();
         return base.AddButton();
     }
-
-    public override void ButtonListClicked(string value)
-    {
-        base.ButtonListClicked(value);
-    }
-
+    
     public void AddBlueprint()
     {
         BindFileController(BlueprintFileSystemCanvasController, LoadAction);
@@ -72,9 +58,7 @@ public class DeckPanelController : BaseCanvasController
         var filename = BlueprintFileSystemCanvasController.FileText.text;
         var filepath = BlueprintFileSystemCanvasController.PathText.text;
         var blueprint = new Blueprint {FileName = filename, FilePath = filepath};
-        BlueprintListController.AddItem(blueprint);
-        //TODO: we can add a blueprint here, but deleting is a challenge
-        //_deck.Blueprints = BlueprintListController.GetBlueprints();
+        _deck.Blueprints = BlueprintListController.AddItem(blueprint);
         BlueprintFileSystemCanvasController.ShowGameObject(false);
         ShowGameObject(true);
         ParentController.ShowGameObject(true);
