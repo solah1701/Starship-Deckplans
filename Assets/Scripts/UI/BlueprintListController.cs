@@ -26,6 +26,11 @@ public class BlueprintListController : MonoBehaviour
         BlueprintNames = new List<Blueprint>();
     }
 
+    public void AddBlueprint()
+    {
+        CanvasController.AddButton();
+    }
+
     public void AddItem(Blueprint item)
     {
         BlueprintNames.Add(item);

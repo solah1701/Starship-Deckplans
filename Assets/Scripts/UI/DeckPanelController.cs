@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.Models;
 using Assets.Scripts.UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,6 +42,12 @@ public class DeckPanelController : BaseCanvasController
         BlueprintListController.SetBlueprints(_deck.Blueprints);
         Debug.Log(string.Format("blueprint count = {0}", _deck.Blueprints.Count));
         ShowGameObject(true);
+    }
+
+    public override List<ConfigClass.KeyValue> AddButton()
+    {
+        AddBlueprint();
+        return base.AddButton();
     }
 
     public void AddBlueprint()
