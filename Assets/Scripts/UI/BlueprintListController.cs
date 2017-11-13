@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Assets.Scripts.Extenders;
 using Assets.Scripts.Models;
 using Assets.Scripts.UI;
 using UnityEngine;
@@ -14,7 +15,8 @@ public class BlueprintListController : MonoBehaviour
     public RectTransform BlueprintPanel;
     public BaseCanvasController CanvasController;
 
-    private List<Blueprint> BlueprintNames;
+    private ObjectItemList BlueprintNames;
+    private Blueprint _current;
 
     void Start()
     {
@@ -23,7 +25,8 @@ public class BlueprintListController : MonoBehaviour
 
     public void InitItems()
     {
-        BlueprintNames = new List<Blueprint>();
+        BlueprintNames = CanvasController.InitButtons();
+        PopulateItems();
     }
 
     public void AddBlueprint()
@@ -35,24 +38,37 @@ public class BlueprintListController : MonoBehaviour
     {
         BlueprintNames.Add(item);
         PopulateItems();
+        _current = item;
         Debug.Log(string.Format("Add Item {0}", item));
     }
 
     public void RemoveBlueprint()
     {
-        
+        //TODO: The problem here is that _current is null
+        Remove(_current);
     }
 
-    public List<Blueprint> GetBlueprints()
+    void Remove(Blueprint value)
     {
-        return BlueprintNames;
-    }
-
-    public void SetBlueprints(List<Blueprint> value)
-    {
-        BlueprintNames = value;
+        var countBefore = BlueprintNames.Count;
+        Debug.Log(string.Format("before = {0}", countBefore));
+        if (BlueprintNames.Contains(value)) BlueprintNames.Remove(value);
+        var countAfter = BlueprintNames.Count;
         PopulateItems();
+        var countFinal = BlueprintNames.Count;
+        Debug.Log(string.Format("before = {1}, after = {2}, final = {3}, Remove {0}", value.FileName, countBefore, countAfter, countFinal));
     }
+
+    //public List<Blueprint> GetBlueprints()
+    //{
+    //    return BlueprintNames;
+    //}
+
+    //public void SetBlueprints(List<Blueprint> value)
+    //{
+    //    BlueprintNames = value;
+    //    PopulateItems();
+    //}
 
     private void PopulateItems()
     {
@@ -61,7 +77,7 @@ public class BlueprintListController : MonoBehaviour
         if (BlueprintNames == null) return;
         foreach (var blueprintName in BlueprintNames)
         {
-            CreatePrefab(blueprintName, index++);
+            CreatePrefab(blueprintName.Cast<Blueprint>(), index++);
         }
     }
 
@@ -122,13 +138,7 @@ public class BlueprintListController : MonoBehaviour
 
     void TheButtonClicked(Blueprint value)
     {
-        var countBefore = BlueprintNames.Count;
-        Debug.Log(string.Format("before = {0}", countBefore));
-        if (BlueprintNames.Contains(value)) BlueprintNames.Remove(value);
-        var countAfter = BlueprintNames.Count;
-        PopulateItems();
-        var countFinal = BlueprintNames.Count;
-        Debug.Log(string.Format("before = {1}, after = {2}, final = {3}, Remove {0}", value.FileName, countBefore, countAfter, countFinal));
+        _current = value;
     }
 
 }

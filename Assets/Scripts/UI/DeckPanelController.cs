@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Assets.Scripts.Extenders;
 using Assets.Scripts.Models;
 using Assets.Scripts.UI;
 using UnityEngine;
@@ -24,6 +26,7 @@ public class DeckPanelController : BaseCanvasController
         //BlueprintListController = Instantiate(BlueprintListControllerPrefab);
         Debug.Log("Deck Panel Started");
     }
+
     public void PopulateDeck(Deck deck)
     {
         _deck = deck;
@@ -37,15 +40,25 @@ public class DeckPanelController : BaseCanvasController
         //{
         //    BlueprintListController.AddItem(blueprint);
         //}
-        BlueprintListController.SetBlueprints(_deck.Blueprints);
+        //BlueprintListController.SetBlueprints(_deck.Blueprints);
         Debug.Log(string.Format("blueprint count = {0}", _deck.Blueprints.Count));
         ShowGameObject(true);
+    }
+
+    public override ObjectItemList InitButtons()
+    {
+        return GetBlueprints();
     }
 
     public override ObjectItemList AddButton()
     {
         AddBlueprint();
         return base.AddButton();
+    }
+
+    public override void ButtonListClicked(string value)
+    {
+        base.ButtonListClicked(value);
     }
 
     public void AddBlueprint()
@@ -61,7 +74,7 @@ public class DeckPanelController : BaseCanvasController
         var blueprint = new Blueprint {FileName = filename, FilePath = filepath};
         BlueprintListController.AddItem(blueprint);
         //TODO: we can add a blueprint here, but deleting is a challenge
-        _deck.Blueprints = BlueprintListController.GetBlueprints();
+        //_deck.Blueprints = BlueprintListController.GetBlueprints();
         BlueprintFileSystemCanvasController.ShowGameObject(false);
         ShowGameObject(true);
         ParentController.ShowGameObject(true);
@@ -72,5 +85,10 @@ public class DeckPanelController : BaseCanvasController
         BlueprintFileSystemCanvasController.ShowGameObject(false);
         ParentController.ShowGameObject(true);
         base.CancelFileAction();
+    }
+
+    ObjectItemList GetBlueprints()
+    {
+        return _deck == null ? null : _deck.Blueprints.Cast<ObjectItem>().ConvertList();
     }
 }
