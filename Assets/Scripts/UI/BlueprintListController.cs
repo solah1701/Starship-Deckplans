@@ -38,6 +38,11 @@ public class BlueprintListController : MonoBehaviour
         Debug.Log(string.Format("Add Item {0}", item));
     }
 
+    public void RemoveBlueprint()
+    {
+        
+    }
+
     public List<Blueprint> GetBlueprints()
     {
         return BlueprintNames;

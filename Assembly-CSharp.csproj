@@ -52,13 +52,17 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Config.cs" />
+     <Compile Include="Assets\Scripts\Extenders\ObjectItemExtender.cs" />
      <Compile Include="Assets\Scripts\Helpers\FileHelper.cs" />
      <Compile Include="Assets\Scripts\LookAtObject.cs" />
      <Compile Include="Assets\Scripts\Models\Blueprint.cs" />
+     <Compile Include="Assets\Scripts\Models\ButtonItem.cs" />
      <Compile Include="Assets\Scripts\Models\ConfigClass.cs" />
      <Compile Include="Assets\Scripts\Models\Deck.cs" />
+     <Compile Include="Assets\Scripts\Models\ObjectItem.cs" />
      <Compile Include="Assets\Scripts\Models\Ship.cs" />
      <Compile Include="Assets\Scripts\MyGameObject.cs" />
+     <Compile Include="Assets\Scripts\Prefabs\BlueprintPlane.cs" />
      <Compile Include="Assets\Scripts\Tri.cs" />
      <Compile Include="Assets\Scripts\UI\BaseCanvasController.cs" />
      <Compile Include="Assets\Scripts\UI\BlueprintCanvasController.cs" />
