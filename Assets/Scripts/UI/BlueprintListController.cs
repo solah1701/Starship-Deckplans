@@ -86,7 +86,7 @@ public class BlueprintListController : MonoBehaviour
 
     void CreatePrefab(Blueprint item, int index)
     {
-        var ypos = -index * 98;
+        var ypos = -index * 100 - 100;
         var itemPanel = Instantiate(PrefabItem);
         itemPanel.transform.SetParent(BlueprintPanel, false);
         itemPanel.transform.position += new Vector3(0, ypos, 0);
