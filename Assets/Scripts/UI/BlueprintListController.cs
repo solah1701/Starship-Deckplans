@@ -115,15 +115,12 @@ public class BlueprintListController : MonoBehaviour
     void CreateBlueprintPrefab(Blueprint item)
     {
         var plane = Instantiate(PrefabBluprint);
+        if (plane == null) return;
         plane.transform.SetParent(BlueprintPanel, true);
         var filename = Path.Combine(item.FilePath, item.FileName);
-        WWW www = new WWW(filename);
-
-        //TODO: need to get the async pattern working
-        //yield return www;
-
-        var tmpRenderer = plane.GetComponent<Renderer>();
-        tmpRenderer.material.mainTexture = www.texture;
+        var scriptReference = plane.GetComponent<BlueprintPlane>();
+        if (scriptReference != null)
+            StartCoroutine(scriptReference.SetTexture(filename));
     }
 
     void TheButtonClicked(Blueprint value)
