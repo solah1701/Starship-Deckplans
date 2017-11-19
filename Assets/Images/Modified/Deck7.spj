@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<stitchProject version="2.0" cameraMotion="automatic" computedCameraMotion="rigidScale" projection="perspective">
+  <vignetteCorrection redFactor="0" greenFactor="0" blueFactor="0" globalIntensityScale="1" />
+  <structuredPanoramaSettings startingCorner="TopLeft" primaryDirection="Vertical" primaryDirectionImageCount="2" movementMethod="Zigzag" angularRange="Non360" horizontalOverlap="1" verticalOverlap="1" seamOverlap="20" featureMatchingSearchRadius="0" />
+  <sourceImages>
+    <sourceImage filePath="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Images\Modified\Deck7A.jpg">
+      <cameraPose rotation="-4.8036009653565006E-07" angleUnit="degrees" scale="1.0000000164646983" translationX="-5.490073230474124E-06" translationY="1.2973001966408726" tolerance="4" />
+    </sourceImage>
+    <sourceImage filePath="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Images\Modified\Deck7B.jpg">
+      <cameraPose rotation="0" angleUnit="degrees" scale="1" translationX="0" translationY="0" tolerance="4" />
+    </sourceImage>
+    <sourceImage filePath="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Images\Modified\Deck7C.jpg">
+      <cameraPose rotation="6.3741007813790623E-07" angleUnit="degrees" scale="0.99999996046151129" translationX="1.9800036754353112" translationY="1.2972909501226413" tolerance="4" />
+    </sourceImage>
+    <sourceImage filePath="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Images\Modified\Deck7D.jpg">
+      <cameraPose rotation="2.0185990342571474E-07" angleUnit="degrees" scale="1.000000052916479" translationX="1.9799964103609793" translationY="3.6892787717452968E-06" tolerance="4" />
+    </sourceImage>
+  </sourceImages>
+</stitchProject>

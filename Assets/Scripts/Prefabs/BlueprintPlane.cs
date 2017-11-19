@@ -17,6 +17,10 @@ public class BlueprintPlane : MonoBehaviour
 	    yield return www;
 	    //www.LoadImageIntoTexture(tex);
 	    Renderer renderer = GetComponent<Renderer>();
+		float width = www.texture.width;
+		float height = www.texture.height;
+		float scaleX = (width / height) - 1F;
+		transform.localScale += new Vector3 (scaleX, 0, 0);
 		renderer.material.mainTexture = www.texture;
 	}
 	

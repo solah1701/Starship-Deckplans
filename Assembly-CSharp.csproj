@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Config.cs" />
      <Compile Include="Assets\Scripts\Extenders\ObjectItemExtender.cs" />
      <Compile Include="Assets\Scripts\Helpers\FileHelper.cs" />
+     <Compile Include="Assets\Scripts\Helpers\ImageFileHelper.cs" />
      <Compile Include="Assets\Scripts\LookAtObject.cs" />
      <Compile Include="Assets\Scripts\Models\Blueprint.cs" />
      <Compile Include="Assets\Scripts\Models\ButtonItem.cs" />
