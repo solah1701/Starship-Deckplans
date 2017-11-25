@@ -114,13 +114,12 @@ public class BlueprintListController : MonoBehaviour
     /// <param name="item"></param>
     void CreateBlueprintPrefab(Blueprint item)
     {
-        var plane = Instantiate(PrefabBluprint);
-        if (plane == null) return;
+		var plane = Instantiate(PrefabBluprint);
         plane.transform.SetParent(BlueprintPanel, true);
         var filename = Path.Combine(item.FilePath, item.FileName);
         var scriptReference = plane.GetComponent<BlueprintPlane>();
         if (scriptReference != null)
-            StartCoroutine(scriptReference.SetTexture(filename));
+			StartCoroutine(scriptReference.SetTexture(filename));
     }
 
     void TheButtonClicked(Blueprint value)

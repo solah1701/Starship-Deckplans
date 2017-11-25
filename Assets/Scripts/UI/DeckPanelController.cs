@@ -31,9 +31,10 @@ public class DeckPanelController : BaseCanvasController
     {
         _deck = deck;
         DeckName.text = deck.DeckName;
+		ShowGameObject(true);
         BlueprintListController.InitItems();
         Debug.Log(string.Format("blueprint count = {0}", _deck.Blueprints.Count));
-        ShowGameObject(true);
+        //ShowGameObject(true);
     }
 
     public override ObjectItemList InitButtons()
