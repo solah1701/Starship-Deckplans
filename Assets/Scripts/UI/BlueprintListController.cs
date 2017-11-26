@@ -17,7 +17,7 @@ public class BlueprintListController : MonoBehaviour
     public BaseCanvasController CanvasController;
 
     private ObjectItemList BlueprintNames;
-    private Blueprint _current;
+    public Blueprint Current { get; set; }
 
     void Start()
     {
@@ -39,14 +39,14 @@ public class BlueprintListController : MonoBehaviour
     {
         BlueprintNames.Add(item);
         PopulateItems();
-        _current = item;
+        Current = item;
         Debug.Log(string.Format("Add Item {0}", item));
         return BlueprintNames.Cast<Blueprint>().ToList();
     }
 
     public void RemoveBlueprint()
     {
-        Remove(_current);
+        Remove(Current);
     }
 
     void Remove(Blueprint value)
@@ -116,15 +116,14 @@ public class BlueprintListController : MonoBehaviour
     {
 		var plane = Instantiate(PrefabBluprint);
         plane.transform.SetParent(BlueprintPanel, true);
-        var filename = Path.Combine(item.FilePath, item.FileName);
         var scriptReference = plane.GetComponent<BlueprintPlane>();
-        if (scriptReference != null)
-			StartCoroutine(scriptReference.SetTexture(filename));
+        if (scriptReference == null) return;
+        StartCoroutine(scriptReference.SetBlueprintItem(item));
     }
 
     void TheButtonClicked(Blueprint value)
     {
-        _current = value;
+        Current = value;
     }
 
 }

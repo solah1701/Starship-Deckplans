@@ -9,7 +9,14 @@ public class Blueprint : ObjectItem
 {
     public string FileName { get; set; }
     public string FilePath { get; set; }
-    //public Vector3 Position { get; set; }
+    public Vect3 Position { get; set; }
     //public Vector3 LocalOrigin { get; set; }
-    //public Vector2 Scale { get; set; }
+    public Vect3 Scale { get; set; }
+}
+
+public struct Vect3
+{
+    public float x { get; set; }
+    public float y { get; set; }
+    public float z { get; set; }
 }

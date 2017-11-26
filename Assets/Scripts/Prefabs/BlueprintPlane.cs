@@ -1,55 +1,68 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using Assets.Scripts.Extenders;
 
 public class BlueprintPlane : MonoBehaviour
 {
 
-    //public string url = "http://images.earthcam.com/ec_metros/ourcams/fridays.jpg";
-	//public string _url = "http://www.cygnus-x1.net/links/lcars/blueprints/uss-enterprise-fasa-15mm-deck-plans-sheet-4.jpg";
+    private float _prevMagnitude = 0;
+    private float _scaleX;
+    private Blueprint _currentBlueprint;
 
-	// Use this for initialization
-	public IEnumerator SetTexture (string url)
+    public IEnumerator SetBlueprintItem(Blueprint item)
+    {
+        _currentBlueprint = item;
+        var filename = Path.Combine(item.FilePath, item.FileName);
+        yield return StartCoroutine(SetTexture(filename));
+        if (item.Scale.IsZero())
+        {
+            transform.localScale += new Vector3(_scaleX, 0, 0);
+            _currentBlueprint.Scale = transform.localScale.Map();
+            _currentBlueprint.Position = transform.position.Map();
+            yield return null;
+        }
+        transform.localScale = _currentBlueprint.Scale.Map();
+        transform.position = _currentBlueprint.Position.Map();
+        Debug.Log(string.Format("SetBlueprintItem Scale: {0} Position: {1}", _currentBlueprint.Scale, _currentBlueprint.Position));
+    }
+
+    // Use this for initialization
+    public IEnumerator SetTexture (string url)
 	{
 		url = string.Format ("file://{0}", url);
 	    WWW www = new WWW(url);
-	    //var tex = new Texture2D(4, 4, TextureFormat.DXT5, false);
 	    yield return www;
-	    //www.LoadImageIntoTexture(tex);
 	    Renderer renderer = GetComponent<Renderer>();
 		float width = www.texture.width;
 		float height = www.texture.height;
-		float scaleX = (width / height) - 1F;
-		transform.localScale += new Vector3 (scaleX, 0, 0);
+		_scaleX = (width / height) - 1F;
 		renderer.material.mainTexture = www.texture;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		var myTouch = Input.GetTouch (0);
 		if (Input.touchCount == 1)
-			Pan (myTouch.deltaPosition);
+			Pan ();
 		if (Input.touchCount == 2)
 			Zoom ();
 	}
-
-	private float prevMagnitude = 0;
 
 	void Zoom()
 	{
 		var touch0 = Input.GetTouch (0);
 		var touch1 = Input.GetTouch (1);
-		var touch0delta = touch0.deltaPosition;
-		var touch1delta = touch1.deltaPosition;
-		var touch0pos = touch0.position;
-		var touch1pos = touch1.position;
-		var origVector = touch0pos - touch0delta - touch1pos - touch1delta;
-		var diff = touch0.phase == TouchPhase.Began || touch1.phase == TouchPhase.Began ? 0 : origVector.magnitude - prevMagnitude;
-		Debug.Log(string.Format("Zoom Diff: {0} Magnitude: {1} origMag: {2} phase {3}", diff, origVector.magnitude, prevMagnitude, touch0.phase));
-		prevMagnitude = origVector.magnitude;
+		var touch0Delta = touch0.deltaPosition;
+		var touch1Delta = touch1.deltaPosition;
+		var touch0Pos = touch0.position;
+		var touch1Pos = touch1.position;
+		var origVector = touch0Pos - touch0Delta - touch1Pos - touch1Delta;
+		var diff = touch0.phase == TouchPhase.Began || touch1.phase == TouchPhase.Began ? 0 : origVector.magnitude - _prevMagnitude;
+		_prevMagnitude = origVector.magnitude;
 		if (touch0.phase == TouchPhase.Ended || touch1.phase == TouchPhase.Ended) {
-			prevMagnitude = 0;
+			_prevMagnitude = 0;
 			return;
 		}
 		Zoom (diff);
@@ -57,19 +70,26 @@ public class BlueprintPlane : MonoBehaviour
 
 	void Zoom(float factor)
 	{
-		if (factor < 0.1)
-			return;
 		const float scale = 120;
-		var zoomFactor = factor / scale;
+		float n = 1.0f;
+		if (transform.localScale.x > 3.0f)
+			n = 3.0f;
+		var zoomFactor = factor / (scale / n );
 		var ratio = transform.localScale.x / transform.localScale.z;
 		if (transform.localScale.x + zoomFactor < 0 || transform.localScale.z + zoomFactor < 0)
 			return;
 		transform.localScale += new Vector3 (zoomFactor * ratio, 0, zoomFactor);
+		Debug.Log (string.Format ("Zoom factor: {0} x: {1} z: {2}", zoomFactor, transform.localScale.x, transform.localScale.z));
+        _currentBlueprint.Scale = transform.localScale.Map();
+
 	}
 
-	void Pan(Vector2 position)
-	{ 
-		const float scale = 60;
+	void Pan()
+	{
+        var myTouch = Input.GetTouch(0);
+	    Vector2 position = myTouch.deltaPosition;
+        const float scale = 60;
 		transform.Translate(-position.x / scale, 0, -position.y / scale);
+        _currentBlueprint.Position = transform.position.Map();
 	}
 }
