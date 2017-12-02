@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class BlueprintCanvasController : BaseCanvasController
-{
+public class TestGameObject : MonoBehaviour {
+
+	public string SomeValue;
 
 	// Use this for initialization
 	void Start () {
@@ -14,5 +15,9 @@ public class BlueprintCanvasController : BaseCanvasController
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	public void UpdateValue(InputField field) {
+		SomeValue = field.text;
 	}
 }

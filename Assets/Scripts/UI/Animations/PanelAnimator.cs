@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.UI;
 using UnityEngine;
 
-public class CreateShipCanvasController : BaseCanvasController {
+public class PanelAnimator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

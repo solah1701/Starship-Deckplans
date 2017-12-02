@@ -18,21 +18,18 @@ public class ShipCanvasController : BaseCanvasController
     public ButtonListController ButtonListController;
     public DeckPanelController DeckController;
 
-    private Ship _ship;
+	private Ship _ship = new Ship();
     private bool _isSaving;
     private bool _hasChanged;
     private Deck _currentDeck;
 
     private void Start()
-    {
-        DeckController.SetParentController(this);
-        var startingFile = LoadShipController.GetStartingFile();
-        DeckController.ShowGameObject(false);
-        if (string.IsNullOrEmpty(startingFile))
-            _ship = new Ship();
-        else
-            PopulateShip(startingFile);
-    }
+	{
+		DeckController.SetParentController (this);
+		//var startingFile = LoadShipController.GetStartingFile ();
+		DeckController.ShowGameObject (false);
+		//PopulateShip (startingFile);
+	}
 
     public void NewShip()
     {
@@ -70,6 +67,15 @@ public class ShipCanvasController : BaseCanvasController
     {
         return GetDecks();
     }
+
+	public void InitButtons(ObjectItemList list)
+	{
+	}
+
+	public ObjectItemList GetList()
+	{
+		return new ObjectItemList ();
+	}
 
     public override ObjectItemList AddButton()
     {

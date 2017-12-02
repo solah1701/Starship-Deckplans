@@ -24,6 +24,7 @@ public class FileSystemCanvasController : BaseCanvasController
     public Button ActionButton;
     public Text ActionButtonText;
     public Button CancelButton;
+	public Animator FileSystemAnimator;
 
     private const string configFilename = "config.json";
 

@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>WSAPlayer:21</UnityBuildTarget>
     <UnityVersion>2017.2.0f3</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -225,11 +223,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Config.cs" />
+    <Compile Include="Assets\Scripts\Events\StringEvent.cs" />
     <Compile Include="Assets\Scripts\Extenders\ObjectItemExtender.cs" />
     <Compile Include="Assets\Scripts\Extenders\VectorExtender.cs" />
     <Compile Include="Assets\Scripts\Helpers\FileHelper.cs" />
     <Compile Include="Assets\Scripts\Helpers\ImageFileHelper.cs" />
     <Compile Include="Assets\Scripts\LookAtObject.cs" />
+    <Compile Include="Assets\Scripts\MainPanelController.cs" />
     <Compile Include="Assets\Scripts\Models\Blueprint.cs" />
     <Compile Include="Assets\Scripts\Models\ButtonItem.cs" />
     <Compile Include="Assets\Scripts\Models\ConfigClass.cs" />
@@ -238,29 +238,35 @@
     <Compile Include="Assets\Scripts\Models\Ship.cs" />
     <Compile Include="Assets\Scripts\MyGameObject.cs" />
     <Compile Include="Assets\Scripts\Prefabs\BlueprintPlane.cs" />
+    <Compile Include="Assets\Scripts\ShipManager.cs" />
     <Compile Include="Assets\Scripts\Tri.cs" />
-    <Compile Include="Assets\Scripts\UI\BaseCanvasController.cs" />
-    <Compile Include="Assets\Scripts\UI\BlueprintCanvasController.cs" />
-    <Compile Include="Assets\Scripts\UI\BlueprintItemController.cs" />
-    <Compile Include="Assets\Scripts\UI\BlueprintListController.cs" />
-    <Compile Include="Assets\Scripts\UI\ButtonListController.cs" />
-    <Compile Include="Assets\Scripts\UI\CreateShipCanvasController.cs" />
-    <Compile Include="Assets\Scripts\UI\DeckPanelController.cs" />
+    <Compile Include="Assets\Scripts\UI\Animations\Closed.cs" />
+    <Compile Include="Assets\Scripts\UI\Animations\Open.cs" />
+    <Compile Include="Assets\Scripts\UI\Animations\PanelAnimator.cs" />
+    <Compile Include="Assets\Scripts\UI\Animations\TestGameObject.cs" />
+    <Compile Include="Assets\Scripts\UI\Animations\TestStartPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\ButtonListManager.cs" />
+    <Compile Include="Assets\Scripts\UI\DeckButtonListManager.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\BaseContainerController.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\BlueprintController.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\ButtonController.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\ContainerCanvas.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\ContainerController.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\MenuButton.cs" />
+    <Compile Include="Assets\Scripts\UI\Depricated\MenuCanvasController.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\MenuController.cs" />
-    <Compile Include="Assets\Scripts\UI\DialogBox.cs" />
-    <Compile Include="Assets\Scripts\UI\FileSystemCanvasController.cs" />
-    <Compile Include="Assets\Scripts\UI\LoadShipController.cs" />
-    <Compile Include="Assets\Scripts\UI\MainCanvasController.cs" />
-    <Compile Include="Assets\Scripts\UI\MenuCanvasController.cs" />
-    <Compile Include="Assets\Scripts\UI\ModalDialogCanvasController.cs" />
-    <Compile Include="Assets\Scripts\UI\SaveShipController.cs" />
-    <Compile Include="Assets\Scripts\UI\ShipCanvasController.cs" />
+    <Compile Include="Assets\Scripts\UI\FavouriteButtonListManager.cs" />
+    <Compile Include="Assets\Scripts\UI\ScreenManager.cs" />
+    <Compile Include="Assets\Scripts\UI\Version 1\BaseCanvasController.cs" />
+    <Compile Include="Assets\Scripts\UI\Version 1\BlueprintItemController.cs" />
+    <Compile Include="Assets\Scripts\UI\Version 1\BlueprintListController.cs" />
+    <Compile Include="Assets\Scripts\UI\Version 1\ButtonListController.cs" />
+    <Compile Include="Assets\Scripts\UI\Version 1\DeckPanelController.cs" />
+    <Compile Include="Assets\Scripts\UI\Version 1\DialogBox.cs" />
+    <Compile Include="Assets\Scripts\UI\Version 1\FileSystemCanvasController.cs" />
+    <Compile Include="Assets\Scripts\UI\Version 1\MainCanvasController.cs" />
+    <Compile Include="Assets\Scripts\UI\Version 1\ModalDialogCanvasController.cs" />
+    <Compile Include="Assets\Scripts\UI\Version 1\ShipCanvasController.cs" />
     <Compile Include="Assets\UnityPackages\JsonNetSample\JsonNetSample.cs" />
   </ItemGroup>
   <ItemGroup>

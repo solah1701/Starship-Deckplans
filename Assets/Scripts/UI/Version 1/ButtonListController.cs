@@ -13,7 +13,7 @@ public class ButtonListController : MonoBehaviour
 
     public GameObject PrefabButton;
     public RectTransform ButtonPanel;
-    public BaseCanvasController CanvasController;
+    public ButtonListManager ButtonListManager;
 
     private ObjectItemList ButtonNames;
     private string current;
@@ -32,13 +32,13 @@ public class ButtonListController : MonoBehaviour
 
     public void InitButtons()
     {
-        ButtonNames = CanvasController.InitButtons();
+        ButtonNames = ButtonListManager.InitButtons();
         PopulateButtons();
     }
 
     public void AddButton()
     {
-        ButtonNames = CanvasController.AddButton();
+		ButtonNames = ButtonListManager.AddButton();
         current = ButtonNames[ButtonNames.Count - 1].Cast<ButtonItem>().Key;
         PopulateButtons();
     }
@@ -46,7 +46,7 @@ public class ButtonListController : MonoBehaviour
     public void RemoveButton()
     {
         if (string.IsNullOrEmpty(current)) return;
-        ButtonNames = CanvasController.RemoveButton(current);
+        ButtonNames = ButtonListManager.RemoveButton(current);
         PopulateButtons();
     }
 
@@ -94,6 +94,6 @@ public class ButtonListController : MonoBehaviour
     private void TheButtonClicked(string value)
     {
         current = value;
-        CanvasController.ButtonListClicked(ButtonNames.Find(x => x.Cast<ButtonItem>().Key == value).Cast<ButtonItem>().Value);
+        ButtonListManager.ButtonListClicked(ButtonNames.Find(x => x.Cast<ButtonItem>().Key == value).Cast<ButtonItem>().Value);
     }
 }

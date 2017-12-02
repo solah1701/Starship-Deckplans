@@ -1,11 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starship Deckplans.CSharp.Plugins", "Starship Deckplans.CSharp.Plugins.csproj", "{459510D6-32F9-5431-1908-827A4EF89099}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starship Deckplans", "Assembly-CSharp.csproj", "{B3B2F603-9EC2-02EC-0695-E58B4D869A0C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starship Deckplans.CSharp", "Starship Deckplans.CSharp.csproj", "{A9BC55D5-8556-DAB4-FDC8-13E6B1288243}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starship Deckplans", "Assembly-CSharp-firstpass.csproj", "{87100F52-CF86-6D89-3B07-CC7B7C4A56AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starship Deckplans.CSharp.Editor.Plugins", "Starship Deckplans.CSharp.Editor.Plugins.csproj", "{F18A3FE4-ADD8-10AD-2979-1FD8F6483B9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starship Deckplans", "Assembly-CSharp-Editor-firstpass.csproj", "{73CE5078-6DDD-0A58-4EA4-FBFEF179B5D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,20 +13,23 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{459510D6-32F9-5431-1908-827A4EF89099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{459510D6-32F9-5431-1908-827A4EF89099}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{459510D6-32F9-5431-1908-827A4EF89099}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{459510D6-32F9-5431-1908-827A4EF89099}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A9BC55D5-8556-DAB4-FDC8-13E6B1288243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A9BC55D5-8556-DAB4-FDC8-13E6B1288243}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A9BC55D5-8556-DAB4-FDC8-13E6B1288243}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A9BC55D5-8556-DAB4-FDC8-13E6B1288243}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F18A3FE4-ADD8-10AD-2979-1FD8F6483B9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F18A3FE4-ADD8-10AD-2979-1FD8F6483B9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F18A3FE4-ADD8-10AD-2979-1FD8F6483B9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F18A3FE4-ADD8-10AD-2979-1FD8F6483B9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3B2F603-9EC2-02EC-0695-E58B4D869A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B2F603-9EC2-02EC-0695-E58B4D869A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3B2F603-9EC2-02EC-0695-E58B4D869A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B2F603-9EC2-02EC-0695-E58B4D869A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87100F52-CF86-6D89-3B07-CC7B7C4A56AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87100F52-CF86-6D89-3B07-CC7B7C4A56AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87100F52-CF86-6D89-3B07-CC7B7C4A56AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87100F52-CF86-6D89-3B07-CC7B7C4A56AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73CE5078-6DDD-0A58-4EA4-FBFEF179B5D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73CE5078-6DDD-0A58-4EA4-FBFEF179B5D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73CE5078-6DDD-0A58-4EA4-FBFEF179B5D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73CE5078-6DDD-0A58-4EA4-FBFEF179B5D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal
