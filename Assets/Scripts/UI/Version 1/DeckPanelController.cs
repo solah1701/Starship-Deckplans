@@ -12,16 +12,20 @@ public class DeckPanelController : BaseCanvasController
     public InputField DeckNameText;
 	public ShipManager ShipManager;
 
-    public FileSystemCanvasController BlueprintFileSystemCanvasController;
-    public BlueprintListController BlueprintListController;
+    //public FileSystemCanvasController BlueprintFileSystemCanvasController;
+    //public BlueprintListController BlueprintListController;
 
     private Deck _deck;
 
 	void OnEnable()
 	{
-		DeckNameText.text = ShipManager.GetDeckName();
+		UpdateDeckName ();
 	}
 
+	public void UpdateDeckName()
+	{
+		DeckNameText.text = ShipManager.GetDeckName();
+	}
 /*    void Start()
     {
         Init();

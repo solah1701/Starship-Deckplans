@@ -26,8 +26,8 @@ public class BlueprintListController : MonoBehaviour
 
     public void InitItems()
     {
-        BlueprintNames = CanvasController.InitButtons();
-        PopulateItems();
+        //BlueprintNames = CanvasController.InitButtons();
+        //PopulateItems();
     }
 
     public void AddBlueprint()

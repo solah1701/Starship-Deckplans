@@ -14,6 +14,8 @@ public class ShipManager : MonoBehaviour {
 	public ModalDialogCanvasController DialogBox;
     public ScreenManager ScreenManager;
 
+	public UnityEvent OnDeckChanged;
+
     private Ship _ship;
     private Deck _currentDeck;
     private bool _isSaving;
@@ -22,6 +24,8 @@ public class ShipManager : MonoBehaviour {
 
 	void Start()
 	{
+		if (OnDeckChanged == null)
+			OnDeckChanged = new UnityEvent ();
 		Init ();
 	}
 
@@ -142,11 +146,15 @@ public class ShipManager : MonoBehaviour {
 
 	public void SelectDeck(string value, Animator panel)
 	{
+		GetDeck (value);
 		ScreenManager.OpenPanel (panel);
+		OnDeckChanged.Invoke ();
 	}
 
 	public string GetDeckName()
 	{
+		if (_currentDeck == null)
+			return "";
 		return _currentDeck.DeckName;
 	}
 
