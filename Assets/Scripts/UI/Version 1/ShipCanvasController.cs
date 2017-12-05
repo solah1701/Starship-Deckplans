@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 public class ShipCanvasController : BaseCanvasController
 {
-    public InputField ShipNameText;
+/*    public InputField ShipNameText;
     public ModalDialogCanvasController DialogBox;
     public FileSystemCanvasController FileSystemCanvas;
     public FileSystemCanvasController LoadShipController;
@@ -185,5 +185,5 @@ public class ShipCanvasController : BaseCanvasController
         LoadShipController.ShowGameObject(false);
         SaveShipController.ShowGameObject(false);
         base.CancelFileAction();
-    }
+    }*/
 }

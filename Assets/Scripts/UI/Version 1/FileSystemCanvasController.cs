@@ -114,7 +114,10 @@ public class FileSystemCanvasController : BaseCanvasController
         {
             PopulateFilePanel(PathText.text, FilePanel);
         }
-        catch (DirectoryNotFoundException) { }
+        catch (DirectoryNotFoundException dex)
+		{ 
+			Debug.Log (dex.Message);
+		}
         catch (UnauthorizedAccessException)
         {
             // ignored
@@ -196,6 +199,7 @@ public class FileSystemCanvasController : BaseCanvasController
             x[0] += XOFFSET;
             y[0] = index;
         }
+		Debug.Log (string.Format ("Directory Count: {0}", index));
         var fileInfos = directoryInfo.GetFiles(searchPattern);
         foreach (var fileInfo in fileInfos.Where(fileInfo => CreateButton(panel, fileInfo.Name, x[0], y[0], index++, FileButtonClicked)))
         {

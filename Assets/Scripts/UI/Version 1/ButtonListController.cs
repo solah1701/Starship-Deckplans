@@ -19,7 +19,12 @@ public class ButtonListController : MonoBehaviour
     private string current;
 
     // Use this for initialization
-    void Start()
+	void Start()
+	{
+		InitButtons ();
+	}
+
+    void OnEnable()
     {
         InitButtons();
     }

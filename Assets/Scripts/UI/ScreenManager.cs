@@ -59,7 +59,7 @@ public class ScreenManager : MonoBehaviour {
 
         //Set an element in the new screen as the new Selected one.
         GameObject go = FindFirstEnabledSelectable(anim.gameObject);
-        SetSelected(go);
+        //SetSelected(go);
     }
 
     //Finds the first Selectable element in the providade hierarchy.
@@ -85,16 +85,20 @@ public class ScreenManager : MonoBehaviour {
     {
         if (m_Open == null)
             return;
+        CloseScreen(m_Open);
+    }
 
+    private void CloseScreen(Animator item)
+    {
         //Start the close animation.
-        m_Open.SetBool(m_OpenParameterId, false);
+        item.SetBool(m_OpenParameterId, false);
 
         //Reverting selection to the Selectable used before opening the current screen.
         SetSelected(m_PreviouslySelected);
         //Start Coroutine to disable the hierarchy when closing animation finishes.
-        StartCoroutine(DisablePanelDeleyed(m_Open));
+        StartCoroutine(DisablePanelDeleyed(item));
         //No screen open.
-        m_Open = null;
+        item = null;
     }
 
     //Coroutine that will detect when the Closing animation is finished and it will deactivate the

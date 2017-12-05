@@ -6,6 +6,7 @@ using UnityEngine;
 public class DeckButtonListManager : ButtonListManager {
 
     public ShipManager MyShipManager;
+	public Animator DestinationPanel;
 
     public override ObjectItemList InitButtons()
     {
@@ -26,6 +27,6 @@ public class DeckButtonListManager : ButtonListManager {
 
 	public override void ButtonListClicked (string value)
 	{
-		MyShipManager.SelectDeck (value);
+		MyShipManager.SelectDeck (value, DestinationPanel);
 	}
 }

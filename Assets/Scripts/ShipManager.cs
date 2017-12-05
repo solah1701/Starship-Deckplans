@@ -14,7 +14,7 @@ public class ShipManager : MonoBehaviour {
 	public ModalDialogCanvasController DialogBox;
     public ScreenManager ScreenManager;
 
-    private Ship _ship = new Ship();
+    private Ship _ship;
     private Deck _currentDeck;
     private bool _isSaving;
 
@@ -27,7 +27,7 @@ public class ShipManager : MonoBehaviour {
 
 	public void Init()
 	{
-		PopulateShip (LoadShipController.GetStartingFile ());
+		if(_ship == null) PopulateShip (LoadShipController.GetStartingFile ());
 	}
 
     public void Load()
@@ -55,9 +55,7 @@ public class ShipManager : MonoBehaviour {
     {
         var filepath = FileHelper.GetFilePath(LoadShipController.PathText.text, LoadShipController.FileText.text);
         PopulateShip(filepath);
-		ScreenManager.OpenPanel (LoadShipController.FileSystemAnimator);
 		ScreenManager.OpenPanel (ScreenManager.initiallyOpen);
-        //LoadShipController.ShowGameObject(false);
         Debug.Log("Load Ship");
     }
 
@@ -104,7 +102,7 @@ public class ShipManager : MonoBehaviour {
 
 	public void UpdateShipName(string value)
 	{
-		if(_ship == null) return;
+		if(_ship == null || value == "") return;
 		_ship.ShipName = value;
 	}
 
@@ -142,8 +140,20 @@ public class ShipManager : MonoBehaviour {
         return _currentDeck;
     }
 
-	public void SelectDeck(string value)
+	public void SelectDeck(string value, Animator panel)
 	{
+		ScreenManager.OpenPanel (panel);
+	}
 
+	public string GetDeckName()
+	{
+		return _currentDeck.DeckName;
+	}
+
+	public void UpdateDeckName(string value)
+	{
+		if (_currentDeck == null || value == "")
+			return;
+		_currentDeck.DeckName = value;
 	}
 }

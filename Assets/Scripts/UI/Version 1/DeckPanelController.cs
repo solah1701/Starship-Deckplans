@@ -9,13 +9,20 @@ using UnityEngine.UI;
 
 public class DeckPanelController : BaseCanvasController
 {
-    public InputField DeckName;
+    public InputField DeckNameText;
+	public ShipManager ShipManager;
+
     public FileSystemCanvasController BlueprintFileSystemCanvasController;
     public BlueprintListController BlueprintListController;
 
     private Deck _deck;
 
-    void Start()
+	void OnEnable()
+	{
+		DeckNameText.text = ShipManager.GetDeckName();
+	}
+
+/*    void Start()
     {
         Init();
     }
@@ -75,5 +82,5 @@ public class DeckPanelController : BaseCanvasController
     ObjectItemList GetBlueprints()
     {
         return _deck == null ? null : _deck.Blueprints.Cast<ObjectItem>().ConvertList();
-    }
+    }*/
 }
