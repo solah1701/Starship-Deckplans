@@ -14,9 +14,10 @@ public class BlueprintListController : MonoBehaviour
     public GameObject PrefabItem;
     public GameObject PrefabBluprint;
     public RectTransform BlueprintPanel;
-    public BaseCanvasController CanvasController;
+    public ShipManager ShipManager;
+    //public BaseCanvasController CanvasController;
 
-    private ObjectItemList BlueprintNames;
+    private List<Blueprint> BlueprintNames;
     public Blueprint Current { get; set; }
 
     void Start()
@@ -24,30 +25,40 @@ public class BlueprintListController : MonoBehaviour
         InitItems();
     }
 
+    private ObjectItemList Convert(IEnumerable<Blueprint> list)
+    {
+        return (list as IEnumerable<ObjectItem>).ConvertList();
+    }
+
     public void InitItems()
     {
-        //BlueprintNames = CanvasController.InitButtons();
-        //PopulateItems();
-    }
-
-    public void AddBlueprint()
-    {
-        CanvasController.AddButton();
-    }
-
-    public List<Blueprint> AddItem(Blueprint item)
-    {
-        BlueprintNames.Add(item);
+		BlueprintNames = ShipManager.GetBlueprintList() as List<Blueprint>;
         PopulateItems();
-        Current = item;
-        Debug.Log(string.Format("Add Item {0}", item));
-        return BlueprintNames.Cast<Blueprint>().ToList();
     }
 
-    public void RemoveBlueprint()
+    public void AddItems()
     {
-        Remove(Current);
+		BlueprintNames = ShipManager.AddBlueprint() as List<Blueprint>;
+		Current = BlueprintNames [BlueprintNames.Count - 1];
+        PopulateItems();
     }
+
+    public void RemoveItems()
+    {
+        if (Current == null) return;
+		BlueprintNames = ShipManager.RemoveBlueprint(Current) as List<Blueprint>;
+        PopulateItems();
+        Current = null;
+    }
+
+    //public List<Blueprint> AddItem(Blueprint item)
+    //{
+    //    BlueprintNames.Add(item);
+    //    PopulateItems();
+    //    Current = item;
+    //    Debug.Log(string.Format("Add Item {0}", item));
+    //    return BlueprintNames.Cast<Blueprint>().ToList();
+    //}
 
     void Remove(Blueprint value)
     {
@@ -124,6 +135,7 @@ public class BlueprintListController : MonoBehaviour
     void TheButtonClicked(Blueprint value)
     {
         Current = value;
+		//ButtonListManager.ButtonListClicked (value.FileName);
     }
 
 }

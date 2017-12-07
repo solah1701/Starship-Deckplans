@@ -172,7 +172,7 @@ namespace Assets.Scripts.Models
 
         private void AddFavourite(List<KeyValue> list, string name, string fullname)
         {
-            if (list.Find(x => x.Key == name) != null) return;
+            if (list.Exists(x => x.Key == name)) return;
             list.Add( new KeyValue { Key = name, Value = fullname });
         }
 

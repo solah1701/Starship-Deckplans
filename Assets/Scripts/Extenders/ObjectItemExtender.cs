@@ -10,6 +10,8 @@ namespace Assets.Scripts.Extenders
     {
         public static ObjectItemList ConvertList(this IEnumerable<ObjectItem> value)
         {
+			if (value == null || value.Count() == 0)
+				return new ObjectItemList ();
             var result = new ObjectItemList();
             result.AddRange(value);
             return result;

@@ -8,6 +8,7 @@ public class ScreenManager : MonoBehaviour {
 
     //Screen to open automatically at the start of the Scene
     public Animator initiallyOpen;
+    public Animator previouslyOpen;
 
     //Currently Open Screen
     private Animator m_Open;
@@ -85,6 +86,7 @@ public class ScreenManager : MonoBehaviour {
     {
         if (m_Open == null)
             return;
+        previouslyOpen = m_Open;
         CloseScreen(m_Open);
     }
 

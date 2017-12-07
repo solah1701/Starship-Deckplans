@@ -7,32 +7,37 @@ using UnityEngine;
 using Assets.Scripts.Models;
 using UnityEngine.Events;
 
-public class ShipManager : MonoBehaviour {
+public class ShipManager : MonoBehaviour
+{
 
     public FileSystemCanvasController LoadShipController;
     public FileSystemCanvasController SaveShipController;
-	public ModalDialogCanvasController DialogBox;
+    public FileSystemCanvasController LoadBlueprintController;
+    public ModalDialogCanvasController DialogBox;
     public ScreenManager ScreenManager;
 
-	public UnityEvent OnDeckChanged;
+    public UnityEvent OnDeckChanged;
 
     private Ship _ship;
     private Deck _currentDeck;
     private bool _isSaving;
 
-    public int DeckCount { get { return _ship.Decks.Count; } }
+    public int DeckCount
+    {
+        get { return _ship.Decks.Count; }
+    }
 
-	void Start()
-	{
-		if (OnDeckChanged == null)
-			OnDeckChanged = new UnityEvent ();
-		Init ();
-	}
+    void Start()
+    {
+        if (OnDeckChanged == null)
+            OnDeckChanged = new UnityEvent();
+        Init();
+    }
 
-	public void Init()
-	{
-		if(_ship == null) PopulateShip (LoadShipController.GetStartingFile ());
-	}
+    public void Init()
+    {
+        if (_ship == null) PopulateShip(LoadShipController.GetStartingFile());
+    }
 
     public void Load()
     {
@@ -50,17 +55,27 @@ public class ShipManager : MonoBehaviour {
         Debug.Log("Save screen");
     }
 
-	public void New()
-	{
-		DialogBox.Choice("Creating a new ship will lose any unsaved changes. Do you wish to Save?", DoYesAction, DoNoAction, DoCancelAction);
-	}
+    public void New()
+    {
+        DialogBox.Choice("Creating a new ship will lose any unsaved changes. Do you wish to Save?", DoYesAction,
+            DoNoAction, DoCancelAction);
+    }
 
     void LoadShipAction()
     {
         var filepath = FileHelper.GetFilePath(LoadShipController.PathText.text, LoadShipController.FileText.text);
         PopulateShip(filepath);
-		ScreenManager.OpenPanel (ScreenManager.initiallyOpen);
+        ScreenManager.OpenPanel(ScreenManager.initiallyOpen);
         Debug.Log("Load Ship");
+    }
+
+    void LoadBlueprintAction()
+    {
+        var filepath = FileHelper.GetFilePath(LoadBlueprintController.PathText.text, LoadBlueprintController.FileText.text);
+        var item = new Blueprint {FileName = LoadBlueprintController.FileText.text, FilePath = filepath};
+        if (!_currentDeck.Blueprints.Contains(item))
+            _currentDeck.Blueprints.Add(item);
+        ScreenManager.OpenPanel(ScreenManager.previouslyOpen);
     }
 
     void PopulateShip(string filepath)
@@ -87,10 +102,10 @@ public class ShipManager : MonoBehaviour {
         _ship = new Ship();
     }
 
-	void DoCancelAction()
-	{
-		//Debug.Log("Cancel");
-	}
+    void DoCancelAction()
+    {
+        //Debug.Log("Cancel");
+    }
 
     protected void BindFileController(FileSystemCanvasController fileController, UnityAction action)
     {
@@ -101,41 +116,54 @@ public class ShipManager : MonoBehaviour {
 
     protected virtual void CancelFileAction()
     {
-		ScreenManager.OpenPanel (ScreenManager.initiallyOpen);
+        ScreenManager.OpenPanel(ScreenManager.initiallyOpen);
     }
 
-	public void UpdateShipName(string value)
-	{
-		if(_ship == null || value == "") return;
-		_ship.ShipName = value;
-	}
+    public void UpdateShipName(string value)
+    {
+        if (_ship == null || value == "") return;
+        _ship.ShipName = value;
+    }
 
-	public string GetShipName()
-	{
-		return _ship == null ? "" : _ship.ShipName;
-	}
+    public string GetShipName()
+    {
+        return _ship == null ? "" : _ship.ShipName;
+    }
 
     public ObjectItemList GetDecks()
-	{
-		return _ship == null ? new ObjectItemList() : _ship.Decks.Select(deck => new ButtonItem { Item = new ConfigClass.KeyValue { Key = deck.DeckName, Value = deck.DeckName }}).Cast<ObjectItem>().ConvertList();
-	}
-
-    public ObjectItemList RemoveDeck(string value)
     {
-        _ship.Decks.Remove(GetDeck(value));
-        _currentDeck = null;
+        return _ship == null
+            ? new ObjectItemList()
+            : _ship.Decks.Select(
+                deck => new ButtonItem {Item = new ConfigClass.KeyValue {Key = deck.DeckName, Value = deck.DeckName}})
+                .Cast<ObjectItem>()
+                .ConvertList();
+    }
+
+    public ObjectItemList RemoveDeck()
+    {
+		var index = _ship.Decks.FindIndex (deck => deck.DeckName == _currentDeck.DeckName);
+        _ship.Decks.Remove(_currentDeck);
+		if (_ship.Decks.Count <= index)
+			_currentDeck = _ship.Decks.Last();
+		else
+			_currentDeck = _ship.Decks [index];
+		OnDeckChanged.Invoke();
         return GetDecks();
     }
-    
+
     public void AddDeck(int i)
     {
-		while (true) {
-			var deckName = string.Format ("Deck {0}", i++);
-			if (_ship.Decks.Exists (d => d.DeckName == deckName))
-				continue;
-			_ship.Decks.Add (new Deck { DeckName = deckName });
-			return;
-		}
+        while (true)
+        {
+            var deckName = string.Format("Deck {0}", i++);
+            if (_ship.Decks.Exists(d => d.DeckName == deckName))
+                continue;
+            _ship.Decks.Add(new Deck {DeckName = deckName});
+			GetDeck (deckName);
+			OnDeckChanged.Invoke();
+            return;
+        }
     }
 
     public Deck GetDeck(string value)
@@ -144,24 +172,44 @@ public class ShipManager : MonoBehaviour {
         return _currentDeck;
     }
 
-	public void SelectDeck(string value, Animator panel)
-	{
-		GetDeck (value);
-		ScreenManager.OpenPanel (panel);
-		OnDeckChanged.Invoke ();
-	}
+    public void SelectDeck(string value, Animator panel)
+    {
+        GetDeck(value);
+        ScreenManager.OpenPanel(panel);
+        OnDeckChanged.Invoke();
+    }
 
-	public string GetDeckName()
-	{
+    public string GetDeckName()
+    {
+        if (_currentDeck == null)
+            return "";
+        return _currentDeck.DeckName;
+    }
+
+    public void UpdateDeckName(string value)
+    {
+        if (_currentDeck == null || value == "")
+            return;
+        _currentDeck.DeckName = value;
+    }
+
+    public IEnumerable<Blueprint> GetBlueprintList()
+    {
 		if (_currentDeck == null)
-			return "";
-		return _currentDeck.DeckName;
-	}
+			return new List<Blueprint> ();
+        return _currentDeck.Blueprints;
+    }
 
-	public void UpdateDeckName(string value)
-	{
-		if (_currentDeck == null || value == "")
-			return;
-		_currentDeck.DeckName = value;
-	}
+    public IEnumerable<Blueprint> AddBlueprint()
+    {
+        BindFileController(LoadBlueprintController, LoadBlueprintAction);
+        return GetBlueprintList();
+    }
+
+    public IEnumerable<Blueprint> RemoveBlueprint(Blueprint item)
+    {
+        if (_currentDeck.Blueprints.Contains(item))
+            _currentDeck.Blueprints.Remove(item);
+        return GetBlueprintList();
+    }
 }

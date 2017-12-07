@@ -21,7 +21,7 @@ public class DeckButtonListManager : ButtonListManager {
 
     public override ObjectItemList RemoveButton(string value)
     {
-        MyShipManager.RemoveDeck(value);
+        MyShipManager.RemoveDeck();
         return MyShipManager.GetDecks();
     }
 

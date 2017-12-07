@@ -4,26 +4,24 @@
     <Files>
       <File FileName="Assets\Scripts\UI\ScreenManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UI\Version 1\ShipCanvasController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\Version 1\ButtonListController.cs" Line="26" Column="2" />
-      <File FileName="Assets\Scripts\Models\ObjectItem.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\ShipManager.cs" Line="172" Column="1" />
+      <File FileName="Assets\Scripts\MainPanelController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI\BlueprintListController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI\ButtonListController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Models\ButtonItem.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\Version 1\FileSystemCanvasController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\ButtonListManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\ShipManager.cs" Line="29" Column="1" />
-      <File FileName="Assets\Scripts\UI\FavouriteButtonListManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\DeckButtonListManager.cs" Line="30" Column="52" />
       <File FileName="Assets\Scripts\Models\ConfigClass.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MainPanelController.cs" Line="13" Column="1" />
-      <File FileName="Assets\Scripts\Helpers\FileHelper.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\Animations\TestStartPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Prefabs\BlueprintPlane.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Models\Blueprint.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI\FavouriteButtonListManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\FileSystemCanvasController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI\DeckButtonListManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Scripts\ShipManager.cs" line="57" column="1" />
+      <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Scripts\ShipManager.cs" line="61" column="1" />
       <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Scripts\UI\Version 1\FileSystemCanvasController.cs" line="86" column="1" />
-      <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Scripts\MainPanelController.cs" line="13" column="1" />
+      <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Scripts\ShipManager.cs" line="109" column="1" />
+      <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Scripts\ShipManager.cs" line="170" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
