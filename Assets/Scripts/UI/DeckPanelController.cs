@@ -26,6 +26,11 @@ public class DeckPanelController : BaseCanvasController
 	{
 		DeckNameText.text = ShipManager.GetDeckName();
 	}
+
+	public void GetDeckName()
+	{
+		ShipManager.UpdateDeckName (DeckNameText.text);
+	}
 /*    void Start()
     {
         Init();

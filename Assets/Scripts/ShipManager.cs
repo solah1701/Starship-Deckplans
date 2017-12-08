@@ -88,6 +88,7 @@ public class ShipManager : MonoBehaviour
         var filepath = FileHelper.GetFilePath(SaveShipController.PathText.text, SaveShipController.FileText.text);
         FileHelper.Save(filepath, _ship);
         if (_isSaving) DoNoAction();
+		ScreenManager.OpenPanel (ScreenManager.previouslyOpen);
         Debug.Log("Save Ship");
     }
 
@@ -191,6 +192,7 @@ public class ShipManager : MonoBehaviour
         if (_currentDeck == null || value == "")
             return;
         _currentDeck.DeckName = value;
+		OnDeckChanged.Invoke();
     }
 
     public IEnumerable<Blueprint> GetBlueprintList()
