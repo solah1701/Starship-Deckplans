@@ -21,6 +21,7 @@ public class ShipManager : MonoBehaviour
     private Ship _ship;
     private Deck _currentDeck;
     private bool _isSaving;
+	private string _currentMeshType;
 
     public int DeckCount
     {
@@ -214,4 +215,9 @@ public class ShipManager : MonoBehaviour
             _currentDeck.Blueprints.Remove(item);
         return GetBlueprintList();
     }
+
+	public void SetMeshType(string value)
+	{
+		_currentMeshType = value;
+	}
 }

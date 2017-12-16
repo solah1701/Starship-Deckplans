@@ -116,7 +116,7 @@ public class BlueprintListController : MonoBehaviour
         tempItemPanel.FileNameText.text = item.FileName;
         var tempButton = tempItemPanel.GetComponentInChildren<Button>();
         tempButton.onClick.AddListener(() => TheButtonClicked(item));
-        CreateBlueprintPrefab(item);
+        //CreateBlueprintPrefab(item);
     }
 
     /// <summary>
