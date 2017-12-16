@@ -12,10 +12,8 @@ public class BlueprintListController : MonoBehaviour
 {
 
     public GameObject PrefabItem;
-    public GameObject PrefabBluprint;
     public RectTransform BlueprintPanel;
     public ShipManager ShipManager;
-    //public BaseCanvasController CanvasController;
 
     private List<Blueprint> BlueprintNames;
     public Blueprint Current { get; set; }
@@ -51,15 +49,6 @@ public class BlueprintListController : MonoBehaviour
         Current = null;
     }
 
-    //public List<Blueprint> AddItem(Blueprint item)
-    //{
-    //    BlueprintNames.Add(item);
-    //    PopulateItems();
-    //    Current = item;
-    //    Debug.Log(string.Format("Add Item {0}", item));
-    //    return BlueprintNames.Cast<Blueprint>().ToList();
-    //}
-
     void Remove(Blueprint value)
     {
         var countBefore = BlueprintNames.Count;
@@ -74,7 +63,7 @@ public class BlueprintListController : MonoBehaviour
     private void PopulateItems()
     {
         var index = 0;
-        Clear();
+        ClearItems();
         if (BlueprintNames == null) return;
         foreach (var blueprintName in BlueprintNames)
         {
@@ -82,24 +71,9 @@ public class BlueprintListController : MonoBehaviour
         }
     }
 
-    void Clear()
-    {
-        ClearItems();
-        ClearPrefabItems();
-    }
-
     void ClearItems()
     {
         var items = BlueprintPanel.GetComponentsInChildren<BlueprintItemController>();
-        foreach (var item in items)
-        {
-            Destroy(item.gameObject);
-        }
-    }
-
-    void ClearPrefabItems()
-    {
-        var items = BlueprintPanel.GetComponentsInChildren<BlueprintPlane>();
         foreach (var item in items)
         {
             Destroy(item.gameObject);
@@ -116,20 +90,6 @@ public class BlueprintListController : MonoBehaviour
         tempItemPanel.FileNameText.text = item.FileName;
         var tempButton = tempItemPanel.GetComponentInChildren<Button>();
         tempButton.onClick.AddListener(() => TheButtonClicked(item));
-        //CreateBlueprintPrefab(item);
-    }
-
-    /// <summary>
-    /// Create the Blueprint Item on a plane from the jpg image file
-    /// </summary>
-    /// <param name="item"></param>
-    void CreateBlueprintPrefab(Blueprint item)
-    {
-		var plane = Instantiate(PrefabBluprint);
-        plane.transform.SetParent(BlueprintPanel, true);
-        var scriptReference = plane.GetComponent<BlueprintPlane>();
-        if (scriptReference == null) return;
-        StartCoroutine(scriptReference.SetBlueprintItem(item));
     }
 
     void TheButtonClicked(Blueprint value)
