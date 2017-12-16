@@ -72,7 +72,7 @@ public class ShipManager : MonoBehaviour
 
     void LoadBlueprintAction()
     {
-        var filepath = FileHelper.GetFilePath(LoadBlueprintController.PathText.text, LoadBlueprintController.FileText.text);
+        var filepath = LoadBlueprintController.PathText.text;
         var item = new Blueprint {FileName = LoadBlueprintController.FileText.text, FilePath = filepath};
         if (!_currentDeck.Blueprints.Contains(item))
             _currentDeck.Blueprints.Add(item);
