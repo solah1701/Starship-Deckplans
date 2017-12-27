@@ -11,6 +11,7 @@ public class DeckPanelController : BaseCanvasController
 {
     public InputField DeckNameText;
 	public ShipManager ShipManager;
+
 	public GameObject PrefabBluprint;
 
 	void OnEnable()
@@ -32,6 +33,19 @@ public class DeckPanelController : BaseCanvasController
 	{
 		ShipManager.UpdateDeckName (DeckNameText.text);
 	}
+
+    public void AddModel()
+    {
+        var model = ShipManager.AddModel();
+        var vertexModels = ShipManager.ShowVerticesAsSpheres(model.GetComponent<MeshFilter>().mesh.vertices);
+        var rend = model.GetComponent<Renderer>();
+        rend.material.color = Color.green;
+        model.transform.SetParent(this.transform, true);
+        foreach (var vertexModel in vertexModels)
+        {
+            vertexModel.transform.SetParent(this.transform, true);
+        }
+    }
 
 	/// <summary>
 	/// Create the Blueprint Item on a plane from the jpg image file
