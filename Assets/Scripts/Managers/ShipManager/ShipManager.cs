@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections;
+using System.IO;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,18 +10,21 @@ public class ShipManager : MonoBehaviour
     public FileSystemCanvasController SaveShipController;
     public ModalDialogCanvasController DialogBox;
     public ScreenManager ScreenManager;
+	public UnityEvent OnShipLoaded;
 
     private Ship _ship;
     private bool _isSaving;
 
     void Start()
     {
+		if (OnShipLoaded == null)
+			OnShipLoaded = new UnityEvent();
         Init();
     }
 
     public void Init()
     {
-        if (_ship == null) PopulateShip(LoadShipController.GetStartingFile());
+		if (_ship == null) 		this.StartCoroutine (DownloadShip (LoadShipController.GetStartingFile()));
     }
 
     public Ship GetShip()
@@ -59,9 +63,18 @@ public class ShipManager : MonoBehaviour
     }
 
     void PopulateShip(string filepath)
-    {
-        _ship = FileHelper.Load<Ship>(filepath);
-    }
+	{
+		this.StartCoroutine (DownloadShip (filepath));
+		//_ship = FileHelper.Load<Ship> (filepath);
+		//OnShipLoaded.Invoke ();
+	}
+
+	public IEnumerator DownloadShip(string filepath){
+		var result = new WWW (string.Format("file://{0}", filepath));
+		yield return result;
+		_ship = FileHelper.Convert<Ship> (result.text);
+		OnShipLoaded.Invoke ();
+	}
 
     void SaveShipAction()
     {

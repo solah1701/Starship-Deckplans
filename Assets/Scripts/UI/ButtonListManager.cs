@@ -6,10 +6,10 @@ using Assets.Scripts.Models;
 
 public abstract class ButtonListManager : MonoBehaviour
 {
-	void OnEnable()
-	{
-		InitButtons ();
-	}
+	//void OnEnable()
+	//{
+		//InitButtons ();
+	//}
 
     public abstract ObjectItemList InitButtons();
 

@@ -33,4 +33,9 @@ public class FileHelper : MonoBehaviour {
         var json = File.ReadAllText(filepath);
         return JsonConvert.DeserializeObject<T>(json); //?? new T();
     }
+
+	public static T Convert<T>(string json)
+	{
+		return JsonConvert.DeserializeObject<T> (json);
+	}
 }

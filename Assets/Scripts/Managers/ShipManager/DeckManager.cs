@@ -12,22 +12,19 @@ public class DeckManager : MonoBehaviour
     public ScreenManager ScreenManager;
 
     private ShipManager _shipManager;
-    private Ship _ship;
-
 	public Deck CurrentDeck { get; set; }
     public UnityEvent OnDeckChanged;
 
     void Start()
     {
         _shipManager = GetComponent<ShipManager>();
-        _ship = _shipManager.GetShip();
         if (OnDeckChanged == null)
             OnDeckChanged = new UnityEvent();
     }
 
     public int DeckCount
     {
-        get { return _ship.Decks.Count; }
+		get { return _shipManager.GetShip().Decks.Count; }
     }
 
     public void BindFileController(FileSystemCanvasController fileController, UnityAction action)
@@ -37,34 +34,36 @@ public class DeckManager : MonoBehaviour
 
     public ObjectItemList GetDecks()
     {
-        return _ship == null
-            ? new ObjectItemList()
-            : _ship.Decks.Select(
+		if (_shipManager == null)
+			return new ObjectItemList();
+		return _shipManager.GetShip ().Decks.Select(
                 deck => new ButtonItem { Item = new ConfigClass.KeyValue { Key = deck.DeckName, Value = deck.DeckName } })
                 .Cast<ObjectItem>()
                 .ConvertList();
     }
 
     public ObjectItemList RemoveDeck()
-    {
-        var index = _ship.Decks.FindIndex(deck => deck.DeckName == CurrentDeck.DeckName);
-        _ship.Decks.Remove(CurrentDeck);
-        if (_ship.Decks.Count <= index)
-            CurrentDeck = _ship.Decks.Last();
+	{
+		var ship = _shipManager.GetShip ();
+        var index = ship.Decks.FindIndex(deck => deck.DeckName == CurrentDeck.DeckName);
+        ship.Decks.Remove(CurrentDeck);
+        if (ship.Decks.Count <= index)
+            CurrentDeck = ship.Decks.Last();
         else
-            CurrentDeck = _ship.Decks[index];
+            CurrentDeck = ship.Decks[index];
         OnDeckChanged.Invoke();
         return GetDecks();
     }
 
     public void AddDeck(int i)
     {
+		var ship = _shipManager.GetShip ();
         while (true)
         {
             var deckName = string.Format("Deck {0}", i++);
-            if (_ship.Decks.Exists(d => d.DeckName == deckName))
+            if (ship.Decks.Exists(d => d.DeckName == deckName))
                 continue;
-            _ship.Decks.Add(new Deck { DeckName = deckName });
+            ship.Decks.Add(new Deck { DeckName = deckName });
             GetDeck(deckName);
             OnDeckChanged.Invoke();
             return;
@@ -73,7 +72,7 @@ public class DeckManager : MonoBehaviour
 
     public Deck GetDeck(string value)
     {
-        CurrentDeck = _ship.Decks.Find(deck => deck.DeckName == value);
+		CurrentDeck = _shipManager.GetShip().Decks.Find(deck => deck.DeckName == value);
         return CurrentDeck;
     }
 
