@@ -10,13 +10,11 @@ public class ObjectModelManager : MonoBehaviour {
     public GameObject CubePrefab;
 
     private DeckManager _deckManager;
-    private Deck _currentDeck;
     private string _currentMeshType;
 
     void Start()
     {
         _deckManager = GetComponent<DeckManager>();
-        _currentDeck = _deckManager.GetCurrentDeck();
     }
 
     public void SetMeshType(string value)
@@ -27,7 +25,7 @@ public class ObjectModelManager : MonoBehaviour {
     public GameObject AddModel()
     {
         if (_currentMeshType == null) return null;
-        var meshName = _currentDeck.CreateMeshPathName();
+		var meshName = _deckManager.CurrentDeck.CreateMeshPathName();
         var path = "Assets/Meshes/" + meshName + ".asset";
 
         GameObject mesh;

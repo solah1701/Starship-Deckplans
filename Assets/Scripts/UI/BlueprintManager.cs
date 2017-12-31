@@ -10,20 +10,18 @@ public class BlueprintManager : MonoBehaviour {
     public FileSystemCanvasController LoadBlueprintController;
 
     private DeckManager _deckManager;
-    private Deck _currentDeck;
 
     void Start()
     {
         _deckManager = GetComponent<DeckManager>();
-        _currentDeck = _deckManager.GetCurrentDeck();
     }
 
     void LoadBlueprintAction()
     {
         var filepath = LoadBlueprintController.PathText.text;
         var item = new Blueprint { FileName = LoadBlueprintController.FileText.text, FilePath = filepath };
-        if (!_currentDeck.Blueprints.Contains(item))
-            _currentDeck.Blueprints.Add(item);
+		if (!_deckManager.CurrentDeck.Blueprints.Contains(item))
+			_deckManager.CurrentDeck.Blueprints.Add(item);
         ScreenManager.OpenPanel(ScreenManager.previouslyOpen);
     }
 
@@ -34,9 +32,9 @@ public class BlueprintManager : MonoBehaviour {
 
     public IEnumerable<Blueprint> GetBlueprintList()
     {
-        if (_currentDeck == null)
+		if (_deckManager.CurrentDeck == null)
             return new List<Blueprint>();
-        return _currentDeck.Blueprints;
+		return _deckManager.CurrentDeck.Blueprints;
     }
 
     public IEnumerable<Blueprint> AddBlueprint()
@@ -47,8 +45,8 @@ public class BlueprintManager : MonoBehaviour {
 
     public IEnumerable<Blueprint> RemoveBlueprint(Blueprint item)
     {
-        if (_currentDeck.Blueprints.Contains(item))
-            _currentDeck.Blueprints.Remove(item);
+		if (_deckManager.CurrentDeck.Blueprints.Contains(item))
+			_deckManager.CurrentDeck.Blueprints.Remove(item);
         return GetBlueprintList();
     }
 

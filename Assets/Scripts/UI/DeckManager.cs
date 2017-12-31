@@ -12,9 +12,9 @@ public class DeckManager : MonoBehaviour
     public ScreenManager ScreenManager;
 
     private ShipManager _shipManager;
-    private Deck _currentDeck;
     private Ship _ship;
 
+	public Deck CurrentDeck { get; set; }
     public UnityEvent OnDeckChanged;
 
     void Start()
@@ -35,11 +35,6 @@ public class DeckManager : MonoBehaviour
         _shipManager.BindFileController(fileController, action);
     }
 
-    public Deck GetCurrentDeck()
-    {
-        return _currentDeck;
-    }
-
     public ObjectItemList GetDecks()
     {
         return _ship == null
@@ -52,12 +47,12 @@ public class DeckManager : MonoBehaviour
 
     public ObjectItemList RemoveDeck()
     {
-        var index = _ship.Decks.FindIndex(deck => deck.DeckName == _currentDeck.DeckName);
-        _ship.Decks.Remove(_currentDeck);
+        var index = _ship.Decks.FindIndex(deck => deck.DeckName == CurrentDeck.DeckName);
+        _ship.Decks.Remove(CurrentDeck);
         if (_ship.Decks.Count <= index)
-            _currentDeck = _ship.Decks.Last();
+            CurrentDeck = _ship.Decks.Last();
         else
-            _currentDeck = _ship.Decks[index];
+            CurrentDeck = _ship.Decks[index];
         OnDeckChanged.Invoke();
         return GetDecks();
     }
@@ -78,8 +73,8 @@ public class DeckManager : MonoBehaviour
 
     public Deck GetDeck(string value)
     {
-        _currentDeck = _ship.Decks.Find(deck => deck.DeckName == value);
-        return _currentDeck;
+        CurrentDeck = _ship.Decks.Find(deck => deck.DeckName == value);
+        return CurrentDeck;
     }
 
     public void SelectDeck(string value, Animator panel)
@@ -91,16 +86,16 @@ public class DeckManager : MonoBehaviour
 
     public string GetDeckName()
     {
-        if (_currentDeck == null)
+        if (CurrentDeck == null)
             return "";
-        return _currentDeck.DeckName;
+        return CurrentDeck.DeckName;
     }
 
     public void UpdateDeckName(string value)
     {
-        if (_currentDeck == null || value == "")
+        if (CurrentDeck == null || value == "")
             return;
-        _currentDeck.DeckName = value;
+        CurrentDeck.DeckName = value;
         OnDeckChanged.Invoke();
     }
 }
