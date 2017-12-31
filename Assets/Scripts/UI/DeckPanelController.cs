@@ -43,7 +43,7 @@ public class DeckPanelController : BaseCanvasController
         model.transform.SetParent(this.transform, true);
         foreach (var vertexModel in vertexModels)
         {
-            vertexModel.transform.SetParent(this.transform, true);
+            vertexModel.transform.SetParent(model.transform, true);
         }
     }
 
