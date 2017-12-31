@@ -13,7 +13,7 @@ public class BlueprintListController : MonoBehaviour
 
     public GameObject PrefabItem;
     public RectTransform BlueprintPanel;
-    public ShipManager ShipManager;
+    public BlueprintManager BlueprintManager;
 
     private List<Blueprint> BlueprintNames;
     public Blueprint Current { get; set; }
@@ -30,13 +30,13 @@ public class BlueprintListController : MonoBehaviour
 
     public void InitItems()
     {
-		BlueprintNames = ShipManager.GetBlueprintList() as List<Blueprint>;
+		BlueprintNames = BlueprintManager.GetBlueprintList() as List<Blueprint>;
         PopulateItems();
     }
 
     public void AddItems()
     {
-		BlueprintNames = ShipManager.AddBlueprint() as List<Blueprint>;
+		BlueprintNames = BlueprintManager.AddBlueprint() as List<Blueprint>;
 		Current = BlueprintNames [BlueprintNames.Count - 1];
         PopulateItems();
     }
@@ -44,7 +44,7 @@ public class BlueprintListController : MonoBehaviour
     public void RemoveItems()
     {
         if (Current == null) return;
-		BlueprintNames = ShipManager.RemoveBlueprint(Current) as List<Blueprint>;
+		BlueprintNames = BlueprintManager.RemoveBlueprint(Current) as List<Blueprint>;
         PopulateItems();
         Current = null;
     }

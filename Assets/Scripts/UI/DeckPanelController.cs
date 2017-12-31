@@ -10,7 +10,9 @@ using UnityEngine.UI;
 public class DeckPanelController : BaseCanvasController
 {
     public InputField DeckNameText;
-	public ShipManager ShipManager;
+	public ObjectModelManager ObjectModelManager;
+    public DeckManager DeckManager;
+    public BlueprintManager BlueprintManager;
 
 	public GameObject PrefabBluprint;
 
@@ -21,8 +23,8 @@ public class DeckPanelController : BaseCanvasController
 
 	public void UpdateDeckName()
 	{
-		DeckNameText.text = ShipManager.GetDeckName();
-		var blueprints = ShipManager.GetBlueprintList ();
+		DeckNameText.text = DeckManager.GetDeckName();
+		var blueprints = BlueprintManager.GetBlueprintList ();
 		ClearPrefabItems ();
 		foreach (var blueprint in blueprints) {
 			CreateBlueprintPrefab (blueprint);
@@ -31,13 +33,13 @@ public class DeckPanelController : BaseCanvasController
 
 	public void GetDeckName()
 	{
-		ShipManager.UpdateDeckName (DeckNameText.text);
+        DeckManager.UpdateDeckName (DeckNameText.text);
 	}
 
     public void AddModel()
     {
-        var model = ShipManager.AddModel();
-        var vertexModels = ShipManager.ShowVerticesAsSpheres(model.GetComponent<MeshFilter>().mesh.vertices);
+        var model = ObjectModelManager.AddModel();
+        var vertexModels = ObjectModelManager.ShowVerticesAsSpheres(model.GetComponent<MeshFilter>().mesh.vertices);
         var rend = model.GetComponent<Renderer>();
         rend.material.color = Color.green;
         model.transform.SetParent(this.transform, true);

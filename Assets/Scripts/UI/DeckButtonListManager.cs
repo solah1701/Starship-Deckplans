@@ -5,28 +5,28 @@ using UnityEngine;
 
 public class DeckButtonListManager : ButtonListManager {
 
-    public ShipManager MyShipManager;
+    public DeckManager DeckManager;
 	public Animator DestinationPanel;
 
     public override ObjectItemList InitButtons()
     {
-        return MyShipManager.GetDecks();
+        return DeckManager.GetDecks();
     }
 
     public override ObjectItemList AddButton()
     {
-        MyShipManager.AddDeck(MyShipManager.DeckCount + 1);
-        return MyShipManager.GetDecks();
+        DeckManager.AddDeck(DeckManager.DeckCount + 1);
+        return DeckManager.GetDecks();
     }
 
     public override ObjectItemList RemoveButton(string value)
     {
-        MyShipManager.RemoveDeck();
-        return MyShipManager.GetDecks();
+        DeckManager.RemoveDeck();
+        return DeckManager.GetDecks();
     }
 
 	public override void ButtonListClicked (string value)
 	{
-		MyShipManager.SelectDeck (value, DestinationPanel);
+		DeckManager.SelectDeck (value, DestinationPanel);
 	}
 }
