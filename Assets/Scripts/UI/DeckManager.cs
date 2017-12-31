@@ -17,7 +17,7 @@ public class DeckManager : MonoBehaviour
 
     public UnityEvent OnDeckChanged;
 
-    void Awake()
+    void Start()
     {
         _shipManager = GetComponent<ShipManager>();
         _ship = _shipManager.GetShip();

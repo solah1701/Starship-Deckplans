@@ -13,7 +13,7 @@ public class ObjectModelManager : MonoBehaviour {
     private Deck _currentDeck;
     private string _currentMeshType;
 
-    void Awake()
+    void Start()
     {
         _deckManager = GetComponent<DeckManager>();
         _currentDeck = _deckManager.GetCurrentDeck();

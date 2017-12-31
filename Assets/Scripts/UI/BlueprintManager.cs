@@ -12,7 +12,7 @@ public class BlueprintManager : MonoBehaviour {
     private DeckManager _deckManager;
     private Deck _currentDeck;
 
-    void Awake()
+    void Start()
     {
         _deckManager = GetComponent<DeckManager>();
         _currentDeck = _deckManager.GetCurrentDeck();
