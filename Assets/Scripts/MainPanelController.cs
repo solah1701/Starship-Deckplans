@@ -17,4 +17,9 @@ public class MainPanelController : MonoBehaviour {
 	public void UpdateShipname() {
 		ShipManager.UpdateShipName (ShipNameText.text);
 	}
+
+    public void SetShipName()
+    {
+        ShipNameText.text = ShipManager.GetShipName();
+    }
 }
