@@ -343,6 +343,7 @@
     <Compile Include="Assets\Scripts\UI\Depricated\MenuController.cs" />
     <Compile Include="Assets\Scripts\UI\Enumerations\MeshEnumeration.cs" />
     <Compile Include="Assets\Scripts\UI\FavouriteButtonListManager.cs" />
+    <Compile Include="Assets\Scripts\UI\ModelListController.cs" />
     <Compile Include="Assets\Scripts\UI\ScreenManager.cs" />
     <Compile Include="Assets\Scripts\UI\Version 1\DialogBox.cs" />
     <Compile Include="Assets\Scripts\UI\Version 1\MainCanvasController.cs" />
