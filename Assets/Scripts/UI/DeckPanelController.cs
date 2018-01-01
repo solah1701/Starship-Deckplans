@@ -88,7 +88,7 @@ public class DeckPanelController : BaseCanvasController
 
     void CreateMeshPrefab(ModelMesh item)
     {
-		var empty = new GameObject ();
+		var empty = new GameObject ("EmptyContainer");
 		empty.transform.SetParent (this.transform, true);
         var path = string.Format("Assets/Meshes/{0}.prefab", item.MeshId);
 		//var guids = AssetDatabase.FindAssets (item.MeshId);
@@ -100,7 +100,7 @@ public class DeckPanelController : BaseCanvasController
 		var vertexModels = ObjectModelManager.ShowVerticesAsSpheres(model.GetComponent<MeshFilter>().sharedMesh.vertices);
 		var rend = model.GetComponent<Renderer>();
 		rend.sharedMaterial.color = Color.green;
-		model.transform.SetParent(empty.transform, true);
+		//model.transform.SetParent(empty.transform, true);
 		foreach (var vertexModel in vertexModels)
 		{
 			vertexModel.transform.SetParent(empty.transform, true);
@@ -121,6 +121,8 @@ public class DeckPanelController : BaseCanvasController
 
     void ClearMeshPrefabItems()
     {
+		var emptyContainer = GameObject.Find ("EmptyContainer");
+		Destroy (emptyContainer);
         var cuboids = GetComponentsInChildren<Cuboid>();
         foreach (var item in cuboids)
         {
