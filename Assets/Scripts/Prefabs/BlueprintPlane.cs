@@ -7,13 +7,15 @@ using Assets.Scripts.Extenders;
 [RequireComponent(typeof(ZoomAndPan))]
 public class BlueprintPlane : MonoBehaviour
 {
-    private float _prevMagnitude = 0;
+    //private float _prevMagnitude = 0;
     private ZoomAndPan _zoomAndPan;
     private float _scaleX;
     private Blueprint _currentBlueprint;
+    private bool _enableZoomAndPan;
 
-    public IEnumerator SetBlueprintItem(Blueprint item)
+    public IEnumerator SetBlueprintItem(Blueprint item, bool enableZoomAndPan)
     {
+        _enableZoomAndPan = enableZoomAndPan;
         _zoomAndPan = GetComponent<ZoomAndPan>();
         _currentBlueprint = item;
         var filename = Path.Combine(item.FilePath, item.FileName);
@@ -27,7 +29,7 @@ public class BlueprintPlane : MonoBehaviour
         }
         transform.localScale = _currentBlueprint.Scale.Map();
         transform.position = _currentBlueprint.Position.Map();
-        Debug.Log(string.Format("SetBlueprintItem Scale: {0} Position: {1}", _currentBlueprint.Scale, _currentBlueprint.Position));
+        //Debug.Log(string.Format("SetBlueprintItem Scale: {0} Position: {1}", _currentBlueprint.Scale, _currentBlueprint.Position));
     }
 
     // Use this for initialization
@@ -46,6 +48,8 @@ public class BlueprintPlane : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		//TODO: Need to change to get initial touch!
+        if (!_enableZoomAndPan) return;
         if (Input.touchCount == 1)
             _currentBlueprint.Position = _zoomAndPan.Pan().Map();
         if (Input.touchCount == 2)
@@ -53,6 +57,6 @@ public class BlueprintPlane : MonoBehaviour
             var theScale = _zoomAndPan.Zoom();
             if (theScale != Vector3.zero) _currentBlueprint.Scale = theScale.Map();
         }
-        Debug.Log(string.Format("Zoom x: {0} z: {1}", _currentBlueprint.Scale.x, _currentBlueprint.Scale.z));
+        //Debug.Log(string.Format("Zoom x: {0} z: {1}", _currentBlueprint.Scale.x, _currentBlueprint.Scale.z));
     }
 }

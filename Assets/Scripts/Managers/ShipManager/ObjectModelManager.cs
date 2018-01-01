@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts.Models;
 using UnityEditor;
 using UnityEngine;
 
@@ -26,23 +27,46 @@ public class ObjectModelManager : MonoBehaviour {
     {
         if (_currentMeshType == null) return null;
 		var meshName = _deckManager.CurrentDeck.CreateMeshPathName();
-        var path = "Assets/Meshes/" + meshName + ".asset";
-
         GameObject mesh;
-        if (_currentMeshType == "Cylinder") mesh = Instantiate(CylinderPrefab);
-        else
-            //if (_currentMeshType == "Cuboid")
-            mesh = Instantiate(CubePrefab);
-        //gameObject.AddComponent<MeshFilter>();
-        //gameObject.AddComponent<MeshRenderer>();
-        //GetComponent<MeshRenderer>().material.color = Color.white;
-        mesh.name = meshName;
+        if (!_deckManager.CurrentDeck.Meshes.Exists(m => m.MeshId == meshName))
+        {
+            _deckManager.CurrentDeck.Meshes.Add(new ModelMesh {MeshId = meshName, Position = new Vect3()});
+            var path = "Assets/Meshes/" + meshName + ".prefab";
 
-        //TODO: Asset creation should be managed when the json file is being saved, otherwise we will be left
-        //with a whole bunch of zombie assets which are not bound to anything
-        var asset = mesh.GetComponent<MeshFilter>().mesh;
-        AssetDatabase.CreateAsset(asset, path);
-        AssetDatabase.SaveAssets();
+            if (_currentMeshType == "Cylinder") mesh = AddCylinder();
+            else
+            //if (_currentMeshType == "Cuboid")
+                mesh = AddCuboid();
+            //gameObject.AddComponent<MeshFilter>();
+            //gameObject.AddComponent<MeshRenderer>();
+            //GetComponent<MeshRenderer>().material.color = Color.white;
+            mesh.name = meshName;
+
+            //TODO: Asset creation should be managed when the json file is being saved, otherwise we will be left
+            //with a whole bunch of zombie assets which are not bound to anything
+            //however there will be a requirement for temporary storage prior to json serialization
+            var asset = mesh;
+			PrefabUtility.CreatePrefab (path, mesh);
+            //AssetDatabase.CreateAsset(asset, path);
+            //AssetDatabase.SaveAssets();
+        }
+        else
+        {
+			var path = "Assets/Meshes/" + meshName + ".prefab";
+            mesh = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+        }
+        return mesh;
+    }
+
+    GameObject AddCylinder()
+    {
+        var mesh = Instantiate(CylinderPrefab);
+        return mesh;
+    }
+
+    GameObject AddCuboid()
+    {
+        var mesh = Instantiate(CubePrefab);
         return mesh;
     }
 
@@ -63,6 +87,11 @@ public class ObjectModelManager : MonoBehaviour {
             spheres.Add(sphere);
         }
         return spheres;
+    }
+
+    public IEnumerable<ModelMesh> GetModelMeshList()
+    {
+        return _deckManager.CurrentDeck == null ? new List<ModelMesh>() : _deckManager.CurrentDeck.Meshes;
     }
 
     public void RemoveModel()

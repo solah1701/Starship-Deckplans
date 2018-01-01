@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Assets.Scripts.Models;
+using UnityEngine;
 
 public class Deck
 {
@@ -20,7 +21,9 @@ public class Deck
     public string CreateMeshPathName()
     {
         NextMeshID += 1;
-        return string.Format("{0}_{1}", DeckName, NextMeshID);
+        var meshId = string.Format("{0}_{1}", DeckName, NextMeshID);
+        Debug.Log(string.Format("MeshID: {0}", meshId));
+        return meshId;
     }
 }
 
