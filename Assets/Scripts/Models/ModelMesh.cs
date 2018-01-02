@@ -8,6 +8,7 @@ namespace Assets.Scripts.Models
     public class ModelMesh
     {
         public string MeshId { get; set; }
+		public string MeshType { get; set; }
         public Vect3 Position { get; set; }
     }
 }

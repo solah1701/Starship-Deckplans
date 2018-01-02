@@ -91,16 +91,12 @@ public class DeckPanelController : BaseCanvasController
 		var empty = new GameObject ("EmptyContainer");
 		empty.transform.SetParent (this.transform, true);
         var path = string.Format("Assets/Meshes/{0}.prefab", item.MeshId);
-		//var guids = AssetDatabase.FindAssets (item.MeshId);
-		//var assetPath = AssetDatabase.GUIDToAssetPath (guids [0]);
-		//var thing = AssetDatabase.LoadAssetAtPath (assetPath, typeof(Mesh));
         var model = AssetDatabase.LoadAssetAtPath<GameObject>(path);
         var mesh = Instantiate(model);
         mesh.transform.SetParent(this.transform, true);
 		var vertexModels = ObjectModelManager.ShowVerticesAsSpheres(model.GetComponent<MeshFilter>().sharedMesh.vertices);
 		var rend = model.GetComponent<Renderer>();
-		rend.sharedMaterial.color = Color.green;
-		//model.transform.SetParent(empty.transform, true);
+		//rend.sharedMaterial.color = Color.green;
 		foreach (var vertexModel in vertexModels)
 		{
 			vertexModel.transform.SetParent(empty.transform, true);

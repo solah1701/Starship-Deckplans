@@ -30,16 +30,12 @@ public class ObjectModelManager : MonoBehaviour {
         GameObject mesh;
         if (!_deckManager.CurrentDeck.Meshes.Exists(m => m.MeshId == meshName))
         {
-            _deckManager.CurrentDeck.Meshes.Add(new ModelMesh {MeshId = meshName, Position = new Vect3()});
+            _deckManager.CurrentDeck.Meshes.Add(new ModelMesh { MeshId = meshName, Position = new Vect3(), MeshType = _currentMeshType });
             var path = "Assets/Meshes/" + meshName + ".prefab";
 
             if (_currentMeshType == "Cylinder") mesh = AddCylinder();
             else
-            //if (_currentMeshType == "Cuboid")
                 mesh = AddCuboid();
-            //gameObject.AddComponent<MeshFilter>();
-            //gameObject.AddComponent<MeshRenderer>();
-            //GetComponent<MeshRenderer>().material.color = Color.white;
             mesh.name = meshName;
 
             //TODO: Asset creation should be managed when the json file is being saved, otherwise we will be left
@@ -47,8 +43,6 @@ public class ObjectModelManager : MonoBehaviour {
             //however there will be a requirement for temporary storage prior to json serialization
             var asset = mesh;
 			PrefabUtility.CreatePrefab (path, mesh);
-            //AssetDatabase.CreateAsset(asset, path);
-            //AssetDatabase.SaveAssets();
         }
         else
         {
