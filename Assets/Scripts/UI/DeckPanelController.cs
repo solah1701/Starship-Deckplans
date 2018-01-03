@@ -99,7 +99,7 @@ public class DeckPanelController : BaseCanvasController
 		//rend.sharedMaterial.color = Color.green;
 		foreach (var vertexModel in vertexModels)
 		{
-			vertexModel.transform.SetParent(empty.transform, true);
+			vertexModel.transform.SetParent(mesh.transform, true);
 		}
 		var scriptReference = mesh.GetComponent<Cylinder>();
 		if (scriptReference == null) return;

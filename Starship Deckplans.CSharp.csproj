@@ -297,8 +297,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scenes\Events\StringEvent.cs" />
     <Compile Include="Assets\Scripts\Config.cs" />
-    <Compile Include="Assets\Scripts\Events\StringEvent.cs" />
     <Compile Include="Assets\Scripts\Experiments\TestController.cs" />
     <Compile Include="Assets\Scripts\Experiments\TestPanel.cs" />
     <Compile Include="Assets\Scripts\Experiments\TestThing.cs" />

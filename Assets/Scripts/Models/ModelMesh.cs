@@ -10,5 +10,6 @@ namespace Assets.Scripts.Models
         public string MeshId { get; set; }
 		public string MeshType { get; set; }
         public Vect3 Position { get; set; }
+        public Vect3 Scale { get; set; }
     }
 }
