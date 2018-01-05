@@ -27,7 +27,7 @@ public class ObjectModelManager : MonoBehaviour {
         _currentMeshType = value;
     }
 
-    public GameObject AddModel()
+    public IEnumerable<ModelMesh> AddModel()
     {
         if (_currentMeshType == null) return null;
 		var meshName = _deckManager.CurrentDeck.CreateMeshPathName();
@@ -52,7 +52,7 @@ public class ObjectModelManager : MonoBehaviour {
             mesh = AssetDatabase.LoadAssetAtPath<GameObject>(path);
         }
 		OnMeshAdded.Invoke();
-        return mesh;
+        return _deckManager.CurrentDeck.Meshes;
     }
 
     GameObject AddCylinder()
@@ -69,7 +69,7 @@ public class ObjectModelManager : MonoBehaviour {
         return mesh;
     }
 
-    public List<GameObject> ShowVerticesAsSpheres(Vector3[] vertices)
+    public IEnumerable<GameObject> ShowVerticesAsSpheres(Vector3[] vertices)
     {
         var spheres = new List<GameObject>();
         var threshold = 0.1f;
@@ -93,9 +93,11 @@ public class ObjectModelManager : MonoBehaviour {
         return _deckManager.CurrentDeck == null ? new List<ModelMesh>() : _deckManager.CurrentDeck.Meshes;
     }
 
-    public void RemoveModel()
+    public IEnumerable<ModelMesh> RemoveModel(ModelMesh item)
     {
-
+        if (_deckManager.CurrentDeck.Meshes.Contains(item))
+            _deckManager.CurrentDeck.Meshes.Remove(item);
+        return GetModelMeshList();
     }
 
     public void SelectMesh(string value)

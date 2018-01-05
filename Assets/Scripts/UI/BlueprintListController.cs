@@ -95,7 +95,6 @@ public class BlueprintListController : MonoBehaviour
     void TheButtonClicked(Blueprint value)
     {
         Current = value;
-		//ButtonListManager.ButtonListClicked (value.FileName);
     }
 
 }
