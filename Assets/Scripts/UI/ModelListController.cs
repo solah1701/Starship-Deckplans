@@ -65,6 +65,7 @@ public class ModelListController : MonoBehaviour {
         itemPanel.transform.SetParent(ModelPanel, false);
         itemPanel.transform.position += new Vector3(0, ypos, 0);
         var tempItemPanel = itemPanel.GetComponent<ModelItemController>();
+		tempItemPanel.MeshNameText.text = item.MeshId;
         var tempButton = tempItemPanel.GetComponentInChildren<Button>();
         tempButton.onClick.AddListener(() => TheButtonClicked(item));
     }

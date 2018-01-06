@@ -37,6 +37,7 @@ public class BlueprintListController : MonoBehaviour
     public void AddItems()
     {
 		BlueprintNames = BlueprintManager.AddBlueprint() as List<Blueprint>;
+        if (BlueprintNames == null) return;
 		Current = BlueprintNames [BlueprintNames.Count - 1];
         PopulateItems();
     }
