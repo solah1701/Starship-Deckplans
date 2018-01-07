@@ -71,16 +71,17 @@ public class ObjectModelManager : MonoBehaviour {
         return mesh;
     }
 
-    public IEnumerable<GameObject> ShowVerticesAsSpheres(Vector3[] vertices)
+    public IEnumerable<GameObject> ShowVerticesAsSpheres(Vector3[] vertices, float parentScale)
     {
         var spheres = new List<GameObject>();
         var threshold = 0.1f;
+        var scale = 0.1f/parentScale;
         foreach (var vertex in vertices)
         {
             if (spheres.Any(sph => (sph.transform.position - vertex).magnitude < threshold)) continue;
             var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             sphere.transform.position = vertex;
-            sphere.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            sphere.transform.localScale = new Vector3(scale, scale, scale);
             sphere.tag = "vertexHelper";
             var rend = sphere.GetComponent<Renderer>();
             rend.material.color = Color.red;

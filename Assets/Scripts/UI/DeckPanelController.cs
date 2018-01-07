@@ -81,17 +81,18 @@ public class DeckPanelController : BaseCanvasController
         if (model == null) return;
         var mesh = Instantiate(model);
         mesh.transform.SetParent(this.transform, true);
-        if (item.IsSelected) AddVertexModels(mesh);
+        if (item.IsSelected) AddVertexModels(mesh, item.Scale.x);
 		var scriptReference = mesh.GetComponent<MeshObject>();
 		if (scriptReference == null) return;
 		scriptReference.SetItem(item, !IsBlueprint && item.IsSelected);
     }
 
-    void AddVertexModels(GameObject mesh)
+    void AddVertexModels(GameObject mesh, float scale)
     {
-        var vertexModels = ObjectModelManager.ShowVerticesAsSpheres(mesh.GetComponent<MeshFilter>().sharedMesh.vertices);
+        var vertexModels = ObjectModelManager.ShowVerticesAsSpheres(mesh.GetComponent<MeshFilter>().sharedMesh.vertices, scale);
         foreach (var vertexModel in vertexModels)
         {
+            vertexModel.name = "VertexSphere";
             vertexModel.transform.SetParent(mesh.transform, true);
         }
     }
