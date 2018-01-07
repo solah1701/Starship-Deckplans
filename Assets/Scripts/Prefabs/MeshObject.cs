@@ -24,7 +24,6 @@ public class MeshObject : GameObjectBase
     protected override void UpdateZoom(Vect3 scale)
     {
         _currentMesh.Scale = scale;
-        Debug.Log(string.Format("Zoom x: {0} z: {1}", _currentMesh.Scale.x, _currentMesh.Scale.z));
     }
 
     protected override void UpdatePan(Vect3 position)

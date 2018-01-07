@@ -4,19 +4,14 @@ using System.IO;
 using UnityEngine;
 using Assets.Scripts.Extenders;
 
-[RequireComponent(typeof(ZoomAndPan))]
-public class BlueprintPlane : MonoBehaviour
+public class BlueprintPlane : GameObjectBase
 {
-    //private float _prevMagnitude = 0;
-    private ZoomAndPan _zoomAndPan;
     private float _scaleX;
     private Blueprint _currentBlueprint;
-    private bool _enableZoomAndPan;
 
     public IEnumerator SetBlueprintItem(Blueprint item, bool enableZoomAndPan)
     {
-        _enableZoomAndPan = enableZoomAndPan;
-        _zoomAndPan = GetComponent<ZoomAndPan>();
+        SetItem(enableZoomAndPan);
         _currentBlueprint = item;
         var filename = Path.Combine(item.FilePath, item.FileName);
         yield return StartCoroutine(SetTexture(filename));
@@ -29,7 +24,6 @@ public class BlueprintPlane : MonoBehaviour
         }
         transform.localScale = _currentBlueprint.Scale.Map();
         transform.position = _currentBlueprint.Position.Map();
-        //Debug.Log(string.Format("SetBlueprintItem Scale: {0} Position: {1}", _currentBlueprint.Scale, _currentBlueprint.Position));
     }
 
     // Use this for initialization
@@ -45,18 +39,14 @@ public class BlueprintPlane : MonoBehaviour
 		renderer.material.mainTexture = www.texture;
 	}
 
-    // Update is called once per frame
-    void Update()
+    protected override void UpdateZoom(Vect3 scale)
     {
-		//TODO: Need to change to get initial touch!
-        if (!_enableZoomAndPan) return;
-        if (Input.touchCount == 1)
-            _currentBlueprint.Position = _zoomAndPan.Pan().Map();
-        if (Input.touchCount == 2)
-        {
-            var theScale = _zoomAndPan.Zoom();
-            if (theScale != Vector3.zero) _currentBlueprint.Scale = theScale.Map();
-        }
-        //Debug.Log(string.Format("Zoom x: {0} z: {1}", _currentBlueprint.Scale.x, _currentBlueprint.Scale.z));
+        _currentBlueprint.Scale = scale;
     }
+
+    protected override void UpdatePan(Vect3 position)
+    {
+        _currentBlueprint.Position = position;
+    }
+
 }

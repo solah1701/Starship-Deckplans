@@ -120,14 +120,8 @@ public class DeckPanelController : BaseCanvasController
     {
 		var emptyContainer = GameObject.Find ("EmptyContainer");
 		Destroy (emptyContainer);
-        var cuboids = GetComponentsInChildren<Cuboid>();
+        var cuboids = GetComponentsInChildren<MeshObject>();
         foreach (var item in cuboids)
-        {
-            Destroy(item.gameObject);
-        }
-
-        var cylinders = GetComponentsInChildren<Cylinder>();
-        foreach (var item in cylinders)
         {
             Destroy(item.gameObject);
         }
