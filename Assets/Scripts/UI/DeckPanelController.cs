@@ -92,6 +92,7 @@ public class DeckPanelController : BaseCanvasController
 		empty.transform.SetParent (this.transform, true);
         var path = string.Format("Assets/Meshes/{0}.prefab", item.MeshId);
         var model = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+        if (model == null) return;
         var mesh = Instantiate(model);
         mesh.transform.SetParent(this.transform, true);
 		var vertexModels = ObjectModelManager.ShowVerticesAsSpheres(model.GetComponent<MeshFilter>().sharedMesh.vertices);
@@ -101,7 +102,7 @@ public class DeckPanelController : BaseCanvasController
 		{
 			vertexModel.transform.SetParent(mesh.transform, true);
 		}
-		var scriptReference = mesh.GetComponent<Cylinder>();
+		var scriptReference = mesh.GetComponent<MeshObject>();
 		if (scriptReference == null) return;
 		scriptReference.SetItem(item, !IsBlueprint);
     }
