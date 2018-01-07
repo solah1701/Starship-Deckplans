@@ -43,15 +43,15 @@ public class DeckManager : MonoBehaviour
     }
 
     public ObjectItemList RemoveDeck()
-	{
-		var ship = _shipManager.GetShip ();
+    {
+        var ship = _shipManager.GetShip();
         var index = ship.Decks.FindIndex(deck => deck.DeckName == CurrentDeck.DeckName);
         ship.Decks.Remove(CurrentDeck);
         if (ship.Decks.Count <= index)
             CurrentDeck = ship.Decks.Last();
         else
             CurrentDeck = ship.Decks[index];
-        OnDeckChanged.Invoke();
+        UpdateDeck();
         return GetDecks();
     }
 
@@ -65,7 +65,7 @@ public class DeckManager : MonoBehaviour
                 continue;
             ship.Decks.Add(new Deck { DeckName = deckName });
             GetDeck(deckName);
-            OnDeckChanged.Invoke();
+            UpdateDeck();
             return;
         }
     }
@@ -80,14 +80,12 @@ public class DeckManager : MonoBehaviour
     {
         GetDeck(value);
         ScreenManager.OpenPanel(panel);
-        OnDeckChanged.Invoke();
+        UpdateDeck();
     }
 
     public string GetDeckName()
     {
-        if (CurrentDeck == null)
-            return "";
-        return CurrentDeck.DeckName;
+        return CurrentDeck == null ? "" : CurrentDeck.DeckName;
     }
 
     public void UpdateDeckName(string value)
@@ -95,6 +93,11 @@ public class DeckManager : MonoBehaviour
         if (CurrentDeck == null || value == "")
             return;
         CurrentDeck.DeckName = value;
+        OnDeckChanged.Invoke();
+    }
+
+    public void UpdateDeck()
+    {
         OnDeckChanged.Invoke();
     }
 }

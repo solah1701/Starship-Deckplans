@@ -83,7 +83,7 @@ public class DeckPanelController : BaseCanvasController
 		plane.transform.SetParent(this.transform, true);
 		var scriptReference = plane.GetComponent<BlueprintPlane>();
 		if (scriptReference == null) return;
-		StartCoroutine(scriptReference.SetBlueprintItem(item, IsBlueprint));
+        if (isActiveAndEnabled) StartCoroutine(scriptReference.SetBlueprintItem(item, IsBlueprint));
 	}
 
     void CreateMeshPrefab(ModelMesh item)

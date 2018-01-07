@@ -95,8 +95,9 @@ public class ObjectModelManager : MonoBehaviour {
 
     public IEnumerable<ModelMesh> RemoveModel(ModelMesh item)
     {
-        if (_deckManager.CurrentDeck.Meshes.Contains(item))
-            _deckManager.CurrentDeck.Meshes.Remove(item);
+        if (!_deckManager.CurrentDeck.Meshes.Contains(item)) return GetModelMeshList();
+        _deckManager.CurrentDeck.Meshes.Remove(item);
+        _deckManager.UpdateDeck();
         return GetModelMeshList();
     }
 

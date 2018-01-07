@@ -1,33 +1,18 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UI\DeckPanelController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Managers\ShipManager\ShipManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\UI\Version 1\ShipCanvasController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\MainPanelController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\BlueprintListController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\FileSystemCanvasController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\DeckButtonListManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\DeckPanelController.cs" Line="13" Column="36" />
-      <File FileName="Assets\Scripts\UI\Enumerations\MeshEnumeration.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Experiments\TestPanel.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\ButtonListController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\ButtonListManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Managers\ShipManager\DeckManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Managers\ShipManager\ShipManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Managers\ShipManager\BlueprintManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Managers\ShipManager\ObjectModelManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Prefabs\BlueprintPlane.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Prefabs\ZoomAndPan.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\ModelListController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Models\Deck.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Prefabs\Cylinder.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Models\ObjectItem.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Models\ModelMesh.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI\ModelListController.cs" Line="68" Column="29" />
+      <File FileName="Assets\Scripts\Managers\ShipManager\ObjectModelManager.cs" Line="56" Column="1" />
+      <File FileName="Assets\Scripts\UI\BlueprintListController.cs" Line="90" Column="63" />
+      <File FileName="Assets\Scripts\UI\ModelItemController.cs" Line="7" Column="18" />
+      <File FileName="Assets\Scripts\UI\BlueprintItemController.cs" Line="5" Column="1" />
+      <File FileName="Assets\Scripts\Managers\ShipManager\ShipManager.cs" Line="82" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Scripts\Managers\ShipManager\ShipManager.cs" line="82" column="1" />
+      <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Scripts\UI\ModelListController.cs" line="75" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
