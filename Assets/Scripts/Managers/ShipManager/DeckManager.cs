@@ -47,10 +47,7 @@ public class DeckManager : MonoBehaviour
         var ship = _shipManager.GetShip();
         var index = ship.Decks.FindIndex(deck => deck.DeckName == CurrentDeck.DeckName);
         ship.Decks.Remove(CurrentDeck);
-        if (ship.Decks.Count <= index)
-            CurrentDeck = ship.Decks.Last();
-        else
-            CurrentDeck = ship.Decks[index];
+        CurrentDeck = ship.Decks.Count <= index ? ship.Decks.Last() : ship.Decks[index];
         UpdateDeck();
         return GetDecks();
     }

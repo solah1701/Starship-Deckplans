@@ -14,6 +14,7 @@ public class ObjectModelManager : MonoBehaviour {
 
     private DeckManager _deckManager;
     private string _currentMeshType;
+    private ModelMesh _activeMesh;
 
     void Start()
     {
@@ -33,9 +34,11 @@ public class ObjectModelManager : MonoBehaviour {
 		var meshName = _deckManager.CurrentDeck.CreateMeshPathName();
 		var path = "Assets/Meshes/" + meshName + ".prefab";
         GameObject mesh;
+        ModelMesh newModelMesh = null;
         if (!_deckManager.CurrentDeck.Meshes.Exists(m => m.MeshId == meshName))
         {
-            _deckManager.CurrentDeck.Meshes.Add(new ModelMesh { MeshId = meshName, Position = new Vect3(), MeshType = _currentMeshType });
+            newModelMesh = new ModelMesh {MeshId = meshName, Position = new Vect3(), MeshType = _currentMeshType};
+            _deckManager.CurrentDeck.Meshes.Add(newModelMesh);
 
             if (_currentMeshType == "Cylinder") mesh = AddCylinder();
             else
@@ -51,20 +54,19 @@ public class ObjectModelManager : MonoBehaviour {
         {
             mesh = AssetDatabase.LoadAssetAtPath<GameObject>(path);
         }
-		OnMeshAdded.Invoke();
+        if (newModelMesh != null) SelectMesh(newModelMesh);
+        OnMeshAdded.Invoke();
         return _deckManager.CurrentDeck.Meshes;
     }
 
     GameObject AddCylinder()
     {
-        //var mesh = Instantiate(CylinderPrefab);
 		var mesh = CylinderPrefab;
         return mesh;
     }
 
     GameObject AddCuboid()
     {
-        //var mesh = Instantiate(CubePrefab);
 		var mesh = CubePrefab;
         return mesh;
     }
@@ -96,13 +98,19 @@ public class ObjectModelManager : MonoBehaviour {
     public IEnumerable<ModelMesh> RemoveModel(ModelMesh item)
     {
         if (!_deckManager.CurrentDeck.Meshes.Contains(item)) return GetModelMeshList();
-        _deckManager.CurrentDeck.Meshes.Remove(item);
-        _deckManager.UpdateDeck();
+        var deck = _deckManager.CurrentDeck;
+        var index = deck.Meshes.FindIndex(mesh => mesh == item);
+        deck.Meshes.Remove(item);
+        var nextSelectedMesh = deck.Meshes.Count <= index ? deck.Meshes.Last() : deck.Meshes[index];
+        SelectMesh(nextSelectedMesh);
         return GetModelMeshList();
     }
 
-    public void SelectMesh(string value)
+    public void SelectMesh(ModelMesh item)
     {
-
+        if (_activeMesh != null) _activeMesh.IsSelected = false;
+        _activeMesh = item;
+        _activeMesh.IsSelected = true;
+        _deckManager.UpdateDeck();
     }
 }

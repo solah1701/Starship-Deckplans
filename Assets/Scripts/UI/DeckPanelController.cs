@@ -59,20 +59,6 @@ public class DeckPanelController : BaseCanvasController
         }
     }
 
-    //TODO: This is in the wrong place - Should be ModelListController
-    //public void AddModel()
-    //{
-    //    var model = ObjectModelManager.AddModel();
-    //    var vertexModels = ObjectModelManager.ShowVerticesAsSpheres(model.GetComponent<MeshFilter>().mesh.vertices);
-    //    var rend = model.GetComponent<Renderer>();
-    //    rend.material.color = Color.green;
-    //    model.transform.SetParent(this.transform, true);
-    //    foreach (var vertexModel in vertexModels)
-    //    {
-    //        vertexModel.transform.SetParent(model.transform, true);
-    //    }
-    //}
-
     /// <summary>
     /// Create the Blueprint Item on a plane from the jpg image file
     /// </summary>
@@ -95,19 +81,22 @@ public class DeckPanelController : BaseCanvasController
         if (model == null) return;
         var mesh = Instantiate(model);
         mesh.transform.SetParent(this.transform, true);
-		var vertexModels = ObjectModelManager.ShowVerticesAsSpheres(model.GetComponent<MeshFilter>().sharedMesh.vertices);
-		var rend = model.GetComponent<Renderer>();
-		//rend.sharedMaterial.color = Color.green;
-		foreach (var vertexModel in vertexModels)
-		{
-			vertexModel.transform.SetParent(mesh.transform, true);
-		}
+        if (item.IsSelected) AddVertexModels(mesh);
 		var scriptReference = mesh.GetComponent<MeshObject>();
 		if (scriptReference == null) return;
 		scriptReference.SetItem(item, !IsBlueprint);
     }
 
-	void ClearBlueprintPrefabItems()
+    void AddVertexModels(GameObject mesh)
+    {
+        var vertexModels = ObjectModelManager.ShowVerticesAsSpheres(mesh.GetComponent<MeshFilter>().sharedMesh.vertices);
+        foreach (var vertexModel in vertexModels)
+        {
+            vertexModel.transform.SetParent(mesh.transform, true);
+        }
+    }
+
+    void ClearBlueprintPrefabItems()
 	{
 		var items = GetComponentsInChildren<BlueprintPlane>();
 		foreach (var item in items)

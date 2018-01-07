@@ -73,5 +73,6 @@ public class ModelListController : MonoBehaviour {
     void TheButtonClicked(ModelMesh item)
     {
         Current = item;
+        ObjectModelManager.SelectMesh(Current);
     }
 }
