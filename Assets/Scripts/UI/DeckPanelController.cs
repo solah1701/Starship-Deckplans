@@ -74,8 +74,6 @@ public class DeckPanelController : BaseCanvasController
 
     void CreateMeshPrefab(ModelMesh item)
     {
-		var empty = new GameObject ("EmptyContainer");
-		empty.transform.SetParent (this.transform, true);
         var path = string.Format("Assets/Meshes/{0}.prefab", item.MeshId);
         var model = AssetDatabase.LoadAssetAtPath<GameObject>(path);
         if (model == null) return;
@@ -108,8 +106,6 @@ public class DeckPanelController : BaseCanvasController
 
     void ClearMeshPrefabItems()
     {
-		var emptyContainer = GameObject.Find ("EmptyContainer");
-		Destroy (emptyContainer);
         var cuboids = GetComponentsInChildren<MeshObject>();
         foreach (var item in cuboids)
         {

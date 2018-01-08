@@ -109,7 +109,9 @@ public class ObjectModelManager : MonoBehaviour {
 
     public void SelectMesh(ModelMesh item)
     {
-        if (_activeMesh != null) _activeMesh.IsSelected = false;
+		if (_activeMesh == null)
+			_activeMesh = _deckManager.CurrentDeck.Meshes.First (m => m.IsSelected);
+		_activeMesh.IsSelected = false;
         _activeMesh = item;
         _activeMesh.IsSelected = true;
         _deckManager.UpdateDeck();
