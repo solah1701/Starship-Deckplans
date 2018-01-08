@@ -15,7 +15,7 @@ public class ObjectModelManager : MonoBehaviour {
     private DeckManager _deckManager;
     private string _currentMeshType;
     private ModelMesh _activeMesh;
-
+    public bool SelectVertexMode;
     void Start()
     {
         _deckManager = GetComponent<DeckManager>();
@@ -26,6 +26,7 @@ public class ObjectModelManager : MonoBehaviour {
     public void SetMeshType(string value)
     {
         _currentMeshType = value;
+        SelectVertexMode = false;
     }
 
     public IEnumerable<ModelMesh> AddModel()
@@ -114,6 +115,13 @@ public class ObjectModelManager : MonoBehaviour {
 		_activeMesh.IsSelected = false;
         _activeMesh = item;
         _activeMesh.IsSelected = true;
+        _deckManager.UpdateDeck();
+    }
+
+    public void SelectVertices()
+    {
+        SelectVertexMode = true;
+        _currentMeshType = string.Empty;
         _deckManager.UpdateDeck();
     }
 }

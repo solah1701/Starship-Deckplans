@@ -37,6 +37,7 @@ public class DeckPanelController : BaseCanvasController
     {
         RebuildBlueprintPrefabs();
 		RebuildMeshPrefabs ();
+        BuildBoundingBox();
     }
 
     private void RebuildBlueprintPrefabs()
@@ -57,6 +58,11 @@ public class DeckPanelController : BaseCanvasController
         {
             CreateMeshPrefab(meshObject);
         }
+    }
+
+    private void BuildBoundingBox()
+    {
+        if (ObjectModelManager.SelectVertexMode) Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
     }
 
     /// <summary>

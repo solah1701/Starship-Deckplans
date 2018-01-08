@@ -23,5 +23,10 @@ namespace Assets.Scripts.Extenders
         {
             return new Vector3 {x = item.x, y = item.y, z = item.z};
         }
+
+        public static Vector3 TransformPoint(this Vector3 item, Transform transform)
+        {
+            return transform.TransformPoint(item);
+        }
     }
 }

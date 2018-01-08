@@ -324,6 +324,7 @@
     <Compile Include="Assets\Scripts\Models\Ship.cs" />
     <Compile Include="Assets\Scripts\MyGameObject.cs" />
     <Compile Include="Assets\Scripts\Prefabs\BlueprintPlane.cs" />
+    <Compile Include="Assets\Scripts\Prefabs\BoundingBox.cs" />
     <Compile Include="Assets\Scripts\Prefabs\GameObjectBase.cs" />
     <Compile Include="Assets\Scripts\Prefabs\MeshObject.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ZoomAndPan.cs" />
