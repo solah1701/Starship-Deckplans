@@ -75,6 +75,7 @@ public class ObjectModelManager : MonoBehaviour {
     public IEnumerable<GameObject> ShowVerticesAsSpheres(Vector3[] vertices, float parentScale)
     {
         var spheres = new List<GameObject>();
+        if (parentScale == 0.0) return spheres;
         var threshold = 0.1f;
         var scale = 0.1f/parentScale;
         foreach (var vertex in vertices)

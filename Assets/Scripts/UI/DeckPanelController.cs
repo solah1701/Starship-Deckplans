@@ -62,7 +62,7 @@ public class DeckPanelController : BaseCanvasController
 
     private void BuildBoundingBox()
     {
-        if (ObjectModelManager.SelectVertexMode) Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
+        //if (ObjectModelManager.SelectVertexMode) Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
     }
 
     /// <summary>
