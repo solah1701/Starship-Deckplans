@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Extenders;
 using UnityEngine;
 
-public class BoundingBox : MonoBehaviour
+public class BoundingBox : GameObjectBase
 {
     public Color Color = Color.green;
     public bool UseCollider = false;
@@ -15,6 +15,16 @@ public class BoundingBox : MonoBehaviour
     private Vector3 _backTopRight;
     private Vector3 _backBottomLeft;
     private Vector3 _backBottomRight;
+
+    protected override void UpdateZoom(Vect3 scale)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void UpdatePan(Vect3 position)
+    {
+        throw new System.NotImplementedException();
+    }
 
     void Update()
     {
@@ -50,6 +60,19 @@ public class BoundingBox : MonoBehaviour
 
     void DrawBox()
     {
-        
+        Debug.DrawLine(_frontTopLeft, _frontTopRight, Color);
+        Debug.DrawLine(_frontTopRight, _frontBottomRight, Color);
+        Debug.DrawLine(_frontBottomRight, _frontBottomLeft, Color);
+        Debug.DrawLine(_frontBottomLeft, _frontTopLeft, Color);
+
+        Debug.DrawLine(_backTopLeft, _backTopRight, Color);
+        Debug.DrawLine(_backTopRight, _backBottomRight, Color);
+        Debug.DrawLine(_backBottomRight, _backBottomLeft, Color);
+        Debug.DrawLine(_backBottomLeft, _backTopLeft, Color);
+
+        Debug.DrawLine(_frontTopLeft, _backTopLeft, Color);
+        Debug.DrawLine(_frontTopRight, _backTopRight, Color);
+        Debug.DrawLine(_frontBottomRight, _backBottomRight, Color);
+        Debug.DrawLine(_frontBottomLeft, _backBottomLeft, Color);
     }
 }

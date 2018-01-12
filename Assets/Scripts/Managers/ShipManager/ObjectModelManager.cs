@@ -16,6 +16,7 @@ public class ObjectModelManager : MonoBehaviour {
     private string _currentMeshType;
     private ModelMesh _activeMesh;
     public bool SelectVertexMode;
+
     void Start()
     {
         _deckManager = GetComponent<DeckManager>();
@@ -75,7 +76,7 @@ public class ObjectModelManager : MonoBehaviour {
     public IEnumerable<GameObject> ShowVerticesAsSpheres(Vector3[] vertices, float parentScale)
     {
         var spheres = new List<GameObject>();
-        if (parentScale == 0.0) return spheres;
+        if (parentScale <= 0.001) return spheres;
         var threshold = 0.1f;
         var scale = 0.1f/parentScale;
         foreach (var vertex in vertices)
