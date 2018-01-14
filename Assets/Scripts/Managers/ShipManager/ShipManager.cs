@@ -29,7 +29,7 @@ public class ShipManager : MonoBehaviour
 
     public Ship GetShip()
     {
-        return _ship;
+        return _ship ?? (_ship = new Ship());
     }
 
     public void Load()
