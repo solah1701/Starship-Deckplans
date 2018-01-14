@@ -105,6 +105,11 @@ public class ObjectModelManager : MonoBehaviour {
         var deck = _deckManager.CurrentDeck;
         var index = deck.Meshes.FindIndex(mesh => mesh == item);
         deck.Meshes.Remove(item);
+        if (deck.Meshes.Count <= 0)
+        {
+            _deckManager.UpdateDeck();
+            return GetModelMeshList();
+        }
         var nextSelectedMesh = deck.Meshes.Count <= index ? deck.Meshes.Last() : deck.Meshes[index];
         SelectMesh(nextSelectedMesh);
         return GetModelMeshList();
@@ -112,9 +117,7 @@ public class ObjectModelManager : MonoBehaviour {
 
     public void SelectMesh(ModelMesh item)
     {
-		if (_activeMesh == null)
-			_activeMesh = _deckManager.CurrentDeck.Meshes.First (m => m.IsSelected);
-		_activeMesh.IsSelected = false;
+		if (_activeMesh != null) _activeMesh.IsSelected = false;
         _activeMesh = item;
         _activeMesh.IsSelected = true;
         _deckManager.UpdateDeck();

@@ -31,6 +31,7 @@ public class BoundingBoxController : MonoBehaviour {
 		if (!_boxStarted && touch.phase == TouchPhase.Began) {
 			_startPosition = touch.position;
 			CreatePrefab ();
+		    _prefab.transform.position = _startPosition;
 			_boxStarted = true;
 			Debug.Log(string.Format("Bounding Box: Start position {0}", _startPosition));
 		}
@@ -49,9 +50,12 @@ public class BoundingBoxController : MonoBehaviour {
         _prefab.transform.SetParent(transform, true);
     }
 
-	void DestroyPrefab(){
-		if (_prefab == null)
-			return;
-		Destroy (_prefab);
+	void DestroyPrefab()
+	{
+	    var prefabs = GetComponentsInChildren<BoundingBox>();
+	    foreach (var prefab in prefabs)
+	    {
+	        Destroy(prefab.gameObject);
+	    }
 	}
 }
