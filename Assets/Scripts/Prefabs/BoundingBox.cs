@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts.Extenders;
 using UnityEngine;
 
-public class BoundingBox : GameObjectBase
+public class BoundingBox : MonoBehaviour
 {
     public Color Color = Color.green;
     public bool UseCollider = false;
@@ -15,16 +15,6 @@ public class BoundingBox : GameObjectBase
     private Vector3 _backTopRight;
     private Vector3 _backBottomLeft;
     private Vector3 _backBottomRight;
-
-    protected override void UpdateZoom(Vect3 scale)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected override void UpdatePan(Vect3 position)
-    {
-        throw new System.NotImplementedException();
-    }
 
     void Update()
     {
