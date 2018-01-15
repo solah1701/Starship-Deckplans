@@ -123,9 +123,9 @@ public class ObjectModelManager : MonoBehaviour {
         _deckManager.UpdateDeck();
     }
 
-    public void SelectVertices()
+    public void SelectVertices(bool select)
     {
-        SelectVertexMode = true;
+        SelectVertexMode = select;
         _currentMeshType = string.Empty;
         _deckManager.UpdateDeck();
     }
