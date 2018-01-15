@@ -13,13 +13,14 @@ public class BoundingBoxController : MonoBehaviour {
     public float ScaleYNum = 271;
     public float ScaleYOff = -6;
 
-    public float ScaleX;
-    public float ScaleY;
+    private float ScaleX;
+    private float ScaleY;
 
     private BoundingBox _prefab;
 	private bool _boxStarted;
     private Vector2 _startPosition;
     private Vector2 _endPosition;
+    private Vector3 _referencePosition;
 
     // Use this for initialization
     void Start ()
@@ -46,10 +47,21 @@ public class BoundingBoxController : MonoBehaviour {
             CreatePrefab();
             var px = CalculatePosition(_startPosition.x, Screen.width, Screen.width/ScaleX);
             var py = CalculatePosition(_startPosition.y, Screen.height, Screen.height/ScaleY);
+            _referencePosition = _prefab.transform.position;
             _prefab.transform.Translate(px, 0, py);
             _boxStarted = true;
             Debug.Log(string.Format("Bounding Box: Start position = {0} actual = {1} width {2} height {3}",
                 _startPosition, _prefab.transform.position, Screen.width, Screen.height));
+        }
+        if (_boxStarted && touch.phase == TouchPhase.Moved)
+        {
+            var dif = touch.position;
+            var px = CalculatePosition(dif.x, Screen.width, Screen.width / ScaleX);
+            var py = CalculatePosition(dif.y, Screen.height, Screen.height / ScaleY);
+            _prefab.transform.position = _referencePosition;
+            _prefab.transform.Translate(px, 0, py);
+            Debug.Log(string.Format("Bounding Box: Moving position = {0} actual = {1} width {2} height {3}",
+                dif, _prefab.transform.position, Screen.width, Screen.height));
         }
         if (_boxStarted && touch.phase == TouchPhase.Ended)
         {
