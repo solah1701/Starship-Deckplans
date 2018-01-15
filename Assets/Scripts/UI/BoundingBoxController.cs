@@ -16,6 +16,9 @@ public class BoundingBoxController : MonoBehaviour {
     private float ScaleX;
     private float ScaleY;
 
+    private float _startX;
+    private float _startY;
+
     private BoundingBox _prefab;
 	private bool _boxStarted;
     private Vector2 _startPosition;
@@ -45,23 +48,29 @@ public class BoundingBoxController : MonoBehaviour {
         {
             _startPosition = touch.position;
             CreatePrefab();
-            var px = CalculatePosition(_startPosition.x, Screen.width, Screen.width/ScaleX);
-            var py = CalculatePosition(_startPosition.y, Screen.height, Screen.height/ScaleY);
+            _startX = CalculatePosition(_startPosition.x, Screen.width, Screen.width/ScaleX);
+            _startY = CalculatePosition(_startPosition.y, Screen.height, Screen.height/ScaleY);
             _referencePosition = _prefab.transform.position;
-            _prefab.transform.Translate(px, 0, py);
+            _prefab.transform.Translate(_startX, 0, _startY);
             _boxStarted = true;
             Debug.Log(string.Format("Bounding Box: Start position = {0} actual = {1} width {2} height {3}",
                 _startPosition, _prefab.transform.position, Screen.width, Screen.height));
         }
         if (_boxStarted && touch.phase == TouchPhase.Moved)
         {
-            var dif = touch.position;
-            var px = CalculatePosition(dif.x, Screen.width, Screen.width / ScaleX);
-            var py = CalculatePosition(dif.y, Screen.height, Screen.height / ScaleY);
+            var diff = touch.position;
+            var px = CalculatePosition(diff.x, Screen.width, Screen.width / ScaleX);
+            var py = CalculatePosition(diff.y, Screen.height, Screen.height / ScaleY);
             _prefab.transform.position = _referencePosition;
             _prefab.transform.Translate(px, 0, py);
-            Debug.Log(string.Format("Bounding Box: Moving position = {0} actual = {1} width {2} height {3}",
-                dif, _prefab.transform.position, Screen.width, Screen.height));
+            var diffScaleX = CalculatePosition(diff.x, Screen.width, Screen.width/ScaleX);
+            var diffScaleY = CalculatePosition(diff.y, Screen.height, Screen.height / ScaleY);
+            var diffX = _startX > diffScaleX ? _startX - diffScaleX : diffScaleX - _startX;
+            var diffY = _startY > diffScaleY ? _startY - diffScaleY : diffScaleY - _startY;
+            _prefab.transform.localScale = new Vector3(diffX, 1, diffY);
+
+            Debug.Log(string.Format("Bounding Box: Moving position = {0} actual = {1} diff x {2} diff y {3}",
+                diff, _prefab.transform.position, diffX, diffY));
         }
         if (_boxStarted && touch.phase == TouchPhase.Ended)
         {
