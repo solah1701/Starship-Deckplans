@@ -1,9 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Managers\ShipManager\ObjectModelManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UI\BoundingBoxController.cs">
     <Files>
-      <File FileName="Assets\Scripts\UI\ModelListController.cs" Line="76" Column="32" />
-      <File FileName="Assets\Scripts\Managers\ShipManager\ObjectModelManager.cs" Line="118" Column="5" />
+      <File FileName="Assets\Scripts\UI\ModelListController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Managers\ShipManager\ObjectModelManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UI\BlueprintListController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UI\ModelItemController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UI\BlueprintItemController.cs" Line="1" Column="1" />
@@ -11,9 +11,9 @@
       <File FileName="Assets\Scripts\Prefabs\MeshObject.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Prefabs\GameObjectBase.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UI\DeckPanelController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\BoundingBoxController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Managers\ShipManager\DeckManager.cs" Line="39" Column="1" />
-      <File FileName="Assets\Scripts\UI\BaseCanvasController.cs" Line="18" Column="1" />
+      <File FileName="Assets\Scripts\UI\BoundingBoxController.cs" Line="75" Column="41" />
+      <File FileName="Assets\Scripts\Managers\ShipManager\DeckManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI\BaseCanvasController.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
