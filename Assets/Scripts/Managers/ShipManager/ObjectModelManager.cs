@@ -12,7 +12,11 @@ public class ObjectModelManager : MonoBehaviour {
     public GameObject CubePrefab;
 	public UnityEvent OnMeshAdded;
     public Color VertexColor = Color.yellow;
+    public bool CanZoomAndPanObject { get { return !SelectVertexMode && !EditVertexMode; } }
     public bool SelectVertexMode;
+    public bool EditVertexMode;
+    public bool LockXMode;
+    public bool LockYMode;
 
     private DeckManager _deckManager;
     private string _currentMeshType;
@@ -30,6 +34,9 @@ public class ObjectModelManager : MonoBehaviour {
     {
         _currentMeshType = value;
         SelectVertexMode = false;
+        EditVertexMode = false;
+        LockXMode = false;
+        LockYMode = false;
     }
 
     public IEnumerable<ModelMesh> AddModel()
@@ -107,6 +114,7 @@ public class ObjectModelManager : MonoBehaviour {
         vs.ObjectModelManager = this;
         return sphere;
     }
+
     public IEnumerable<ModelMesh> GetModelMeshList()
     {
         return _deckManager.CurrentDeck == null ? new List<ModelMesh>() : _deckManager.CurrentDeck.Meshes;
@@ -139,23 +147,32 @@ public class ObjectModelManager : MonoBehaviour {
     public void SelectVertices(bool select)
     {
         SelectVertexMode = select;
+        EditVertexMode = false;
+        LockXMode = false;
+        LockYMode = false;
         _currentMeshType = string.Empty;
         _deckManager.UpdateDeck();
     }
 
     public void EditVertices(bool select)
     {
-        
+        EditVertexMode = select;
+        _currentMeshType = string.Empty;
+        SelectVertexMode = false;
     }
 
     public void LockX(bool select)
     {
-        
+        _currentMeshType = string.Empty;
+        SelectVertexMode = false;
+
     }
 
     public void LockY(bool select)
     {
-        
+        _currentMeshType = string.Empty;
+        SelectVertexMode = false;
+
     }
 
     public void ResetVertices()

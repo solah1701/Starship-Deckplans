@@ -88,7 +88,7 @@ public class DeckPanelController : BaseCanvasController
         if (item.IsSelected) AddVertexModels(mesh, item.Scale.x);
 		var scriptReference = mesh.GetComponent<MeshObject>();
 		if (scriptReference == null) return;
-		scriptReference.SetItem(item, !IsBlueprint && item.IsSelected && !ObjectModelManager.SelectVertexMode);
+		scriptReference.SetItem(item, !IsBlueprint && item.IsSelected && ObjectModelManager.CanZoomAndPanObject);
     }
 
     void AddVertexModels(GameObject mesh, float scale)

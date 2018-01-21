@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(TouchHelper))]
 public class BoundingBoxController : MonoBehaviour {
 
     public BoundingBox BoundingBoxPrefab;
@@ -12,11 +13,6 @@ public class BoundingBoxController : MonoBehaviour {
     public float ScaleYDen = 50;
     public float ScaleYNum = 271;
     public float ScaleYOff = -6;
-
-    public int LeftBounds;
-    public int RightBounds;
-    public int TopBounds;
-    public int BottomBounds;
 
     private float ScaleX;
     private float ScaleY;
@@ -30,18 +26,14 @@ public class BoundingBoxController : MonoBehaviour {
     private Vector2 _endPosition;
     private Vector3 _referencePosition;
     private float _zScale;
+    private TouchHelper _touchHelper;
 
-    private int _left, _right, _top, _bottom;
-
-    // Use this for initialization
     void Start ()
     {
         ScaleX = CalculateScaleX();
         ScaleY = CalculateScaleY();
-        _left = LeftBounds;
-        _right = Screen.width - RightBounds;
-        _top = Screen.height - TopBounds;
-        _bottom = BottomBounds;
+
+        _touchHelper = GetComponent<TouchHelper>();
 
         Debug.Log(string.Format("ScaleX = {0} ScaleY = {1}", ScaleX, ScaleY));
     }
@@ -54,11 +46,8 @@ public class BoundingBoxController : MonoBehaviour {
 
     void SetupBoundingBox()
     {
-        if (Input.touchCount < 1)
-            return;
-        var touch = Input.GetTouch(0);
-        var pos = touch.position;
-        if (pos.x < _left || pos.x > _right || pos.y > _top || pos.y < _bottom) return;
+        if (!_touchHelper.TouchInBounds()) return;
+        var touch = _touchHelper.GetTouch();
         if (!_boxStarted && touch.phase == TouchPhase.Began)
         {
             ObjectModelManager.ResetVertices();

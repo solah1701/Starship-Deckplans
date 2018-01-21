@@ -307,6 +307,7 @@
     <Compile Include="Assets\Scripts\FileSystemCanvasController.cs" />
     <Compile Include="Assets\Scripts\Helpers\FileHelper.cs" />
     <Compile Include="Assets\Scripts\Helpers\ImageFileHelper.cs" />
+    <Compile Include="Assets\Scripts\Helpers\TouchHelper.cs" />
     <Compile Include="Assets\Scripts\LookAtObject.cs" />
     <Compile Include="Assets\Scripts\MainPanelController.cs" />
     <Compile Include="Assets\Scripts\Managers\ScreenManager.cs" />
@@ -351,6 +352,7 @@
     <Compile Include="Assets\Scripts\UI\Depricated\MenuButton.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\MenuCanvasController.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\MenuController.cs" />
+    <Compile Include="Assets\Scripts\UI\EditMeshContoller.cs" />
     <Compile Include="Assets\Scripts\UI\Enumerations\MeshEnumeration.cs" />
     <Compile Include="Assets\Scripts\UI\FavouriteButtonListManager.cs" />
     <Compile Include="Assets\Scripts\UI\ModelItemController.cs" />
