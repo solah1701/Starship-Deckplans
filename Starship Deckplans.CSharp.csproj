@@ -262,9 +262,6 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>Library\UnityAssemblies\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>Library\UnityAssemblies\UnityEngine.Advertisements.dll</HintPath>
     </Reference>
@@ -285,6 +282,9 @@
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>Library\UnityAssemblies\UnityEngine.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>Library\UnityAssemblies\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets\UnityPackages\JsonNet\Newtonsoft.Json.dll</HintPath>
@@ -327,6 +327,7 @@
     <Compile Include="Assets\Scripts\Prefabs\BoundingBox.cs" />
     <Compile Include="Assets\Scripts\Prefabs\GameObjectBase.cs" />
     <Compile Include="Assets\Scripts\Prefabs\MeshObject.cs" />
+    <Compile Include="Assets\Scripts\Prefabs\VertexSphere.cs" />
     <Compile Include="Assets\Scripts\Prefabs\ZoomAndPan.cs" />
     <Compile Include="Assets\Scripts\Tri.cs" />
     <Compile Include="Assets\Scripts\UI\Animations\Closed.cs" />

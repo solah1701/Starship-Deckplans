@@ -24,6 +24,7 @@ public class BoundingBoxController : MonoBehaviour {
     private Vector2 _startPosition;
     private Vector2 _endPosition;
     private Vector3 _referencePosition;
+    private float _zScale;
 
     // Use this for initialization
     void Start ()
@@ -46,15 +47,17 @@ public class BoundingBoxController : MonoBehaviour {
         var touch = Input.GetTouch(0);
         if (!_boxStarted && touch.phase == TouchPhase.Began)
         {
+            ObjectModelManager.ResetVertices();
             _startPosition = touch.position;
             CreatePrefab();
+            _zScale = _prefab.transform.localScale.y;
             _startX = CalculatePosition(_startPosition.x, Screen.width, Screen.width/ScaleX);
             _startY = CalculatePosition(_startPosition.y, Screen.height, Screen.height/ScaleY);
             _referencePosition = _prefab.transform.position;
             _prefab.transform.Translate(_startX, 0, _startY);
             _boxStarted = true;
-            Debug.Log(string.Format("Bounding Box: Start position = {0} actual = {1} width {2} height {3}",
-                _startPosition, _prefab.transform.position, Screen.width, Screen.height));
+            //Debug.Log(string.Format("Bounding Box: Start position = {0} actual = {1} width {2} height {3}",
+            //    _startPosition, _prefab.transform.position, Screen.width, Screen.height));
         }
 		if (_boxStarted && touch.phase == TouchPhase.Moved) {
 			var diff = touch.position;
@@ -73,10 +76,10 @@ public class BoundingBoxController : MonoBehaviour {
 			if (diffY < 0)
 				diffY = diffY * -1;
 
-			_prefab.transform.localScale = new Vector3 (diffX, 1, diffY);
+			_prefab.transform.localScale = new Vector3 (diffX, _zScale, diffY);
 
-			Debug.Log (string.Format ("Bounding Box: Moving position = {0} actual = {1} diff x {2} diff y {3}",
-				diff, _prefab.transform.position, diffX, diffY));
+			//Debug.Log (string.Format ("Bounding Box: Moving position = {0} actual = {1} diff x {2} diff y {3}",
+			//	diff, _prefab.transform.position, diffX, diffY));
 		}
         if (_boxStarted && touch.phase == TouchPhase.Ended)
         {
@@ -84,6 +87,11 @@ public class BoundingBoxController : MonoBehaviour {
             _boxStarted = false;
             //Debug.Log(string.Format("Bounding Box: End position = {0} delta = {1}", _endPosition, touch.deltaPosition));
         }
+    }
+
+    void HighlightVerticies()
+    {
+        
     }
 
     float CalculateScaleX()

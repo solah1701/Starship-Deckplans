@@ -11,6 +11,7 @@ public class ObjectModelManager : MonoBehaviour {
     public GameObject CylinderPrefab;
     public GameObject CubePrefab;
 	public UnityEvent OnMeshAdded;
+    public Color VertexColor = Color.yellow;
 
     private DeckManager _deckManager;
     private string _currentMeshType;
@@ -82,18 +83,26 @@ public class ObjectModelManager : MonoBehaviour {
         foreach (var vertex in vertices)
         {
             if (spheres.Any(sph => (sph.transform.position - vertex).magnitude < threshold)) continue;
-            var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            var sphere = CreateSphere();
             sphere.transform.position = vertex;
             sphere.transform.localScale = new Vector3(scale, scale, scale);
             sphere.tag = "vertexHelper";
             var rend = sphere.GetComponent<Renderer>();
-            rend.material.color = Color.red;
+            rend.material.color = VertexColor;
 
             spheres.Add(sphere);
         }
         return spheres;
     }
 
+    GameObject CreateSphere()
+    {
+        var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        var sc = sphere.GetComponent<Collider>();
+        sc.enabled = true;
+        sphere.AddComponent<VertexSphere>();
+        return sphere;
+    }
     public IEnumerable<ModelMesh> GetModelMeshList()
     {
         return _deckManager.CurrentDeck == null ? new List<ModelMesh>() : _deckManager.CurrentDeck.Meshes;
@@ -127,6 +136,11 @@ public class ObjectModelManager : MonoBehaviour {
     {
         SelectVertexMode = select;
         _currentMeshType = string.Empty;
+        _deckManager.UpdateDeck();
+    }
+
+    public void ResetVertices()
+    {
         _deckManager.UpdateDeck();
     }
 }

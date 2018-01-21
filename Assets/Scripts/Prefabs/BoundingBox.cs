@@ -22,6 +22,20 @@ public class BoundingBox : MonoBehaviour
         DrawBox();
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.name != "VertexSphere") return;
+        var vs = other.GetComponentInParent<VertexSphere>();
+        vs.SetVertexColor(true);
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.name != "VertexSphere") return;
+        var vs = other.GetComponentInParent<VertexSphere>();
+        vs.SetVertexColor(false);
+    }
+
     void CalcPositions()
     {
         Bounds bounds = GetComponent<MeshFilter>().mesh.bounds;
@@ -29,7 +43,11 @@ public class BoundingBox : MonoBehaviour
         if (UseCollider)
         {
             BoxCollider bc = GetComponent<BoxCollider>();
-            if (bc != null) bounds = bc.bounds;
+            if (bc != null)
+            {
+                bounds = bc.bounds;
+                bc.enabled = true;
+            }
             else return;
         }
 
