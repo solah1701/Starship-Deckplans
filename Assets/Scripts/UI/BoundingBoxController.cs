@@ -13,6 +13,11 @@ public class BoundingBoxController : MonoBehaviour {
     public float ScaleYNum = 271;
     public float ScaleYOff = -6;
 
+    public int LeftBounds;
+    public int RightBounds;
+    public int TopBounds;
+    public int BottomBounds;
+
     private float ScaleX;
     private float ScaleY;
 
@@ -26,11 +31,18 @@ public class BoundingBoxController : MonoBehaviour {
     private Vector3 _referencePosition;
     private float _zScale;
 
+    private int _left, _right, _top, _bottom;
+
     // Use this for initialization
     void Start ()
     {
         ScaleX = CalculateScaleX();
         ScaleY = CalculateScaleY();
+        _left = LeftBounds;
+        _right = Screen.width - RightBounds;
+        _top = Screen.height - TopBounds;
+        _bottom = BottomBounds;
+
         Debug.Log(string.Format("ScaleX = {0} ScaleY = {1}", ScaleX, ScaleY));
     }
 	
@@ -45,6 +57,8 @@ public class BoundingBoxController : MonoBehaviour {
         if (Input.touchCount < 1)
             return;
         var touch = Input.GetTouch(0);
+        var pos = touch.position;
+        if (pos.x < _left || pos.x > _right || pos.y > _top || pos.y < _bottom) return;
         if (!_boxStarted && touch.phase == TouchPhase.Began)
         {
             ObjectModelManager.ResetVertices();
@@ -87,11 +101,6 @@ public class BoundingBoxController : MonoBehaviour {
             _boxStarted = false;
             //Debug.Log(string.Format("Bounding Box: End position = {0} delta = {1}", _endPosition, touch.deltaPosition));
         }
-    }
-
-    void HighlightVerticies()
-    {
-        
     }
 
     float CalculateScaleX()

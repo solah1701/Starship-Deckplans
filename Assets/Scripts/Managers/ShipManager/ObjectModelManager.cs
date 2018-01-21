@@ -12,11 +12,12 @@ public class ObjectModelManager : MonoBehaviour {
     public GameObject CubePrefab;
 	public UnityEvent OnMeshAdded;
     public Color VertexColor = Color.yellow;
+    public bool SelectVertexMode;
 
     private DeckManager _deckManager;
     private string _currentMeshType;
     private ModelMesh _activeMesh;
-    public bool SelectVertexMode;
+    private List<GameObject> _selectedVertices;
 
     void Start()
     {
@@ -77,6 +78,7 @@ public class ObjectModelManager : MonoBehaviour {
     public IEnumerable<GameObject> ShowVerticesAsSpheres(Vector3[] vertices, float parentScale)
     {
         var spheres = new List<GameObject>();
+        _selectedVertices = new List<GameObject>();
         if (parentScale <= 0.001) return spheres;
         var threshold = 0.1f;
         var scale = 0.1f/parentScale;
@@ -101,6 +103,8 @@ public class ObjectModelManager : MonoBehaviour {
         var sc = sphere.GetComponent<Collider>();
         sc.enabled = true;
         sphere.AddComponent<VertexSphere>();
+        var vs = sphere.GetComponent<VertexSphere>();
+        vs.ObjectModelManager = this;
         return sphere;
     }
     public IEnumerable<ModelMesh> GetModelMeshList()
@@ -139,8 +143,29 @@ public class ObjectModelManager : MonoBehaviour {
         _deckManager.UpdateDeck();
     }
 
+    public void EditVertices(bool select)
+    {
+        
+    }
+
+    public void LockX(bool select)
+    {
+        
+    }
+
+    public void LockY(bool select)
+    {
+        
+    }
+
     public void ResetVertices()
     {
+        _selectedVertices = new List<GameObject>();
         _deckManager.UpdateDeck();
+    }
+
+    public void AddSelectedVertex(GameObject sphere)
+    {
+        _selectedVertices.Add(sphere);
     }
 }
