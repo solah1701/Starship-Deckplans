@@ -8,6 +8,15 @@ public class TouchHelper : MonoBehaviour {
     public int RightBounds = 200;
     public int TopBounds = 40;
     public int BottomBounds = 0;
+    public float ScaleXDen = 47;
+    public float ScaleXNum = 635;
+    public float ScaleXOff = 19;
+    public float ScaleYDen = 50;
+    public float ScaleYNum = 271;
+    public float ScaleYOff = -6;
+
+    private float ScaleX;
+    private float ScaleY;
 
     private Touch _touch;
 
@@ -19,6 +28,19 @@ public class TouchHelper : MonoBehaviour {
         _top = Screen.height - TopBounds;
         _bottom = BottomBounds;
     }
+
+    public void CalculateScale()
+    {
+        ScaleX = CalculateScaleX();
+        ScaleY = CalculateScaleY();
+        //Debug.Log(string.Format("ScaleX {0} ScaleY {1}", ScaleX, ScaleY));
+    }
+
+    public float CalculatePosition(float cursor, float touch, float page)
+    {
+        return page - 2 * cursor * page / touch;
+    }
+
 
     public bool TouchInBounds()
     {
@@ -32,4 +54,25 @@ public class TouchHelper : MonoBehaviour {
     {
         return _touch;
     }
+
+    public float GetScaleX()
+    {
+        return ScaleX;
+    }
+
+    public float GetScaleY()
+    {
+        return ScaleY ;
+    }
+
+    float CalculateScaleX()
+    {
+        return Screen.width * ScaleXDen / ScaleXNum + ScaleXOff;
+    }
+
+    float CalculateScaleY()
+    {
+        return Screen.height * ScaleYDen / ScaleYNum + ScaleYOff;
+    }
+
 }

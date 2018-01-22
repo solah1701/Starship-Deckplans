@@ -7,15 +7,9 @@ public class BoundingBoxController : MonoBehaviour {
 
     public BoundingBox BoundingBoxPrefab;
     public ObjectModelManager ObjectModelManager;
-    public float ScaleXDen = 47;
-    public float ScaleXNum = 635;
-    public float ScaleXOff = 19;
-    public float ScaleYDen = 50;
-    public float ScaleYNum = 271;
-    public float ScaleYOff = -6;
 
-    private float ScaleX;
-    private float ScaleY;
+    private float _scaleX;
+    private float _scaleY;
 
     private float _startX;
     private float _startY;
@@ -30,12 +24,10 @@ public class BoundingBoxController : MonoBehaviour {
 
     void Start ()
     {
-        ScaleX = CalculateScaleX();
-        ScaleY = CalculateScaleY();
-
         _touchHelper = GetComponent<TouchHelper>();
-
-        Debug.Log(string.Format("ScaleX = {0} ScaleY = {1}", ScaleX, ScaleY));
+        _touchHelper.CalculateScale();
+        _scaleX = _touchHelper.GetScaleX();
+        _scaleY = _touchHelper.GetScaleY();
     }
 	
 	// Update is called once per frame
@@ -54,8 +46,8 @@ public class BoundingBoxController : MonoBehaviour {
             _startPosition = touch.position;
             CreatePrefab();
             _zScale = _prefab.transform.localScale.y;
-            _startX = CalculatePosition(_startPosition.x, Screen.width, Screen.width/ScaleX);
-            _startY = CalculatePosition(_startPosition.y, Screen.height, Screen.height/ScaleY);
+            _startX = _touchHelper.CalculatePosition(_startPosition.x, Screen.width, Screen.width/_scaleX);
+            _startY = _touchHelper.CalculatePosition(_startPosition.y, Screen.height, Screen.height/_scaleY);
             _referencePosition = _prefab.transform.position;
             _prefab.transform.Translate(_startX, 0, _startY);
             _boxStarted = true;
@@ -64,12 +56,10 @@ public class BoundingBoxController : MonoBehaviour {
         }
 		if (_boxStarted && touch.phase == TouchPhase.Moved) {
 			var diff = touch.position;
-			var px = CalculatePosition (diff.x, Screen.width, Screen.width / ScaleX);
-			var py = CalculatePosition (diff.y, Screen.height, Screen.height / ScaleY);
-			var diffScaleX = CalculatePosition (diff.x, Screen.width, Screen.width / ScaleX);
-			var diffScaleY = CalculatePosition (diff.y, Screen.height, Screen.height / ScaleY);
-			var diffX = _startX - diffScaleX;
-			var diffY = _startY - diffScaleY;
+			var px = _touchHelper.CalculatePosition (diff.x, Screen.width, Screen.width / _scaleX);
+			var py = _touchHelper.CalculatePosition (diff.y, Screen.height, Screen.height / _scaleY);
+			var diffX = _startX - px;
+			var diffY = _startY - py;
 
 			_prefab.transform.position = _referencePosition;
 			_prefab.transform.Translate (px + diffX / 2, 0, py + diffY / 2);
@@ -90,21 +80,6 @@ public class BoundingBoxController : MonoBehaviour {
             _boxStarted = false;
             //Debug.Log(string.Format("Bounding Box: End position = {0} delta = {1}", _endPosition, touch.deltaPosition));
         }
-    }
-
-    float CalculateScaleX()
-    {
-        return Screen.width * ScaleXDen/ScaleXNum + ScaleXOff;
-    }
-
-    float CalculateScaleY()
-    {
-        return Screen.height * ScaleYDen/ScaleYNum + ScaleYOff;
-    }
-
-    float CalculatePosition(float cursor, float touch, float page)
-    {
-        return page - 2*cursor*page/touch;
     }
 
     void CreatePrefab()

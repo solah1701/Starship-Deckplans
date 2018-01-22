@@ -12,11 +12,14 @@ public class ObjectModelManager : MonoBehaviour {
     public GameObject CubePrefab;
 	public UnityEvent OnMeshAdded;
     public Color VertexColor = Color.yellow;
-    public bool CanZoomAndPanObject { get { return !SelectVertexMode && !EditVertexMode; } }
     public bool SelectVertexMode;
     public bool EditVertexMode;
     public bool LockXMode;
     public bool LockYMode;
+
+    public bool CanZoomAndPanObject { get { return !SelectVertexMode && !EditVertexMode; } }
+    public bool CanShowBoundingBox { get { return SelectVertexMode; } }
+    public List<GameObject> SelectedVertices { get { return _selectedVertices; } } 
 
     private DeckManager _deckManager;
     private string _currentMeshType;
@@ -165,14 +168,14 @@ public class ObjectModelManager : MonoBehaviour {
     {
         _currentMeshType = string.Empty;
         SelectVertexMode = false;
-
+        LockXMode = select;
     }
 
     public void LockY(bool select)
     {
         _currentMeshType = string.Empty;
         SelectVertexMode = false;
-
+        LockYMode = select;
     }
 
     public void ResetVertices()
