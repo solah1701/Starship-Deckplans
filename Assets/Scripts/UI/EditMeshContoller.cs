@@ -41,11 +41,13 @@ public class EditMeshContoller : MonoBehaviour
         Debug.Log(string.Format("parent name {0}", parent.name));
         var mesh = parent.GetComponent<MeshFilter>().mesh;
         var meshVertices = mesh.vertices;
+        var meshScale = parent.transform.localScale.x;
         foreach (GameObject selectedVertex in ObjectModelManager.SelectedVertices)
         {
-            var index = meshVertices.IndexOf(v => v.Equals(selectedVertex.transform.position));
+            var vs = selectedVertex.GetComponent<VertexSphere>();
             selectedVertex.transform.Translate(dx, 0, dy);
-            meshVertices[index] = selectedVertex.transform.position;
+            meshVertices[vs.VertexIndex] = selectedVertex.transform.position / meshScale; //new Vector3(dx, 0, dy);
+            Debug.Log(string.Format("MoveVertices Index {0} position {1}", vs.VertexIndex, selectedVertex.transform.position));
         }
         mesh.vertices = meshVertices;
         mesh.RecalculateBounds();

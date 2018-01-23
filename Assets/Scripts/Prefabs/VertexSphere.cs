@@ -7,6 +7,7 @@ public class VertexSphere : MonoBehaviour {
     public Color Color = Color.yellow;
     public Color HighlightColor = Color.red;
     public ObjectModelManager ObjectModelManager;
+    public int VertexIndex;
 
     public void SetVertexColor(bool highlight)
     {

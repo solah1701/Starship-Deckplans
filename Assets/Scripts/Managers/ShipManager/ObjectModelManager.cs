@@ -92,10 +92,11 @@ public class ObjectModelManager : MonoBehaviour {
         if (parentScale <= 0.001) return spheres;
         var threshold = 0.1f;
         var scale = 0.1f/parentScale;
+        var vertexIndex = 0;
         foreach (var vertex in vertices)
         {
             if (spheres.Any(sph => (sph.transform.position - vertex).magnitude < threshold)) continue;
-            var sphere = CreateSphere();
+            var sphere = CreateSphere(vertexIndex++);
             sphere.transform.position = vertex;
             sphere.transform.localScale = new Vector3(scale, scale, scale);
             sphere.tag = "vertexHelper";
@@ -107,7 +108,7 @@ public class ObjectModelManager : MonoBehaviour {
         return spheres;
     }
 
-    GameObject CreateSphere()
+    GameObject CreateSphere(int vertexIndex)
     {
         var sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         var sc = sphere.GetComponent<Collider>();
@@ -115,6 +116,7 @@ public class ObjectModelManager : MonoBehaviour {
         sphere.AddComponent<VertexSphere>();
         var vs = sphere.GetComponent<VertexSphere>();
         vs.ObjectModelManager = this;
+        vs.VertexIndex = vertexIndex;
         return sphere;
     }
 
