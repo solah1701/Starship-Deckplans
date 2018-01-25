@@ -51,6 +51,7 @@ public class EditMeshContoller : MonoBehaviour
         }
         mesh.vertices = meshVertices;
         mesh.RecalculateBounds();
+        mesh.RecalculateNormals();
         //if (touch.phase == TouchPhase.Began)
         //{
         //    var startPosition = touch.position;
