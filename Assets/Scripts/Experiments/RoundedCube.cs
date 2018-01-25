@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public class Cube : MonoBehaviour {
+public class RoundedCube : MonoBehaviour {
 
     public int xSize, ySize, zSize;
     public int roundness;
@@ -36,6 +36,7 @@ public class Cube : MonoBehaviour {
             (xSize - 1) * (zSize - 1) +
             (ySize - 1) * (zSize - 1)) * 2;
         vertices = new Vector3[cornerVertices + edgeVertices + faceVertices];
+        normals = new Vector3[vertices.Length];
         int v = 0;
         for (int y = 0; y <= ySize; y++)
         {
@@ -71,6 +72,7 @@ public class Cube : MonoBehaviour {
             }
         }
         mesh.vertices = vertices;
+        mesh.normals = normals;
     }
 
     private void CreateTriangles()
@@ -230,10 +232,12 @@ public class Cube : MonoBehaviour {
     private void OnDrawGizmos()
     {
         if (vertices == null) return;
-        Gizmos.color = Color.black;
         for(int i = 0; i < vertices.Length; i++)
         {
+            Gizmos.color = Color.black;
             Gizmos.DrawSphere(vertices[i], 0.1f);
+            //Gizmos.color = Color.yellow;
+            //Gizmos.DrawRay(vertices[i], normals[i]);
         }
     }
 }

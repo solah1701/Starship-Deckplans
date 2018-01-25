@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2017.3.0f3</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -299,7 +301,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scenes\Events\StringEvent.cs" />
     <Compile Include="Assets\Scripts\Config.cs" />
-    <Compile Include="Assets\Scripts\Experiments\Cube.cs" />
+    <Compile Include="Assets\Scripts\Experiments\RoundedCube.cs" />
     <Compile Include="Assets\Scripts\Experiments\CubeSphere.cs" />
     <Compile Include="Assets\Scripts\Experiments\DeformCubeScript.cs" />
     <Compile Include="Assets\Scripts\Experiments\Grid.cs" />
