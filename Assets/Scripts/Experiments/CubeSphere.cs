@@ -40,18 +40,9 @@ public class CubeSphere : MonoBehaviour {
         int t = 0, v = 0;
         for (int q = 0; q < gridSize; q++, v++)
         {
-            t = SetQuad(triangles, t, v, v + 1, v + ring, v + ring + 1);
+            t = MeshHelper.SetQuad(triangles, t, v, v + 1, v + ring, v + ring + 1);
         }
         mesh.triangles = triangles;
-    }
-
-    private static int SetQuad(int[] triangles, int i, int v00, int v10, int v01, int v11)
-    {
-        triangles[i] = v00;
-        triangles[i + 1] = triangles[i + 4] = v01;
-        triangles[i + 2] = triangles[i + 3] = v10;
-        triangles[i + 5] = v11;
-        return i + 6;
     }
 
     private void CreateColliders()
