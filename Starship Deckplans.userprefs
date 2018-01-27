@@ -1,20 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\UI\BoundingBoxController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Experiments\Cylinder.cs">
     <Files>
       <File FileName="Assets\Scripts\UI\ModelListController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Managers\ShipManager\ObjectModelManager.cs" Line="164" Column="1" />
+      <File FileName="Assets\Scripts\Managers\ShipManager\ObjectModelManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UI\BlueprintListController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UI\ModelItemController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UI\BlueprintItemController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Managers\ShipManager\ShipManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Prefabs\MeshObject.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Prefabs\GameObjectBase.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\UI\DeckPanelController.cs" Line="27" Column="7" />
-      <File FileName="Assets\Scripts\UI\BoundingBoxController.cs" Line="63" Column="10" />
-      <File FileName="Assets\Scripts\Managers\ShipManager\DeckManager.cs" Line="98" Column="1" />
+      <File FileName="Assets\Scripts\UI\DeckPanelController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\UI\BoundingBoxController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Managers\ShipManager\DeckManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\UI\BaseCanvasController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\MainPanelController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Experiments\Cylinder.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -23,6 +24,7 @@
       <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Scripts\UI\ModelListController.cs" line="38" column="1" />
       <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Scripts\Managers\ShipManager\ObjectModelManager.cs" line="156" column="1" />
       <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Scripts\Managers\ShipManager\ObjectModelManager.cs" line="151" column="1" />
+      <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Tutorial Projects\Starship Deckplans\Assets\Scripts\Experiments\Cylinder.cs" line="84" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

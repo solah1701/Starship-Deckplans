@@ -53,14 +53,22 @@
   <ItemGroup>
      <Compile Include="Assets\Scenes\Events\StringEvent.cs" />
      <Compile Include="Assets\Scripts\Config.cs" />
+     <Compile Include="Assets\Scripts\Experiments\CubeSphere.cs" />
+     <Compile Include="Assets\Scripts\Experiments\Cylinder.cs" />
+     <Compile Include="Assets\Scripts\Experiments\DeformCubeScript.cs" />
+     <Compile Include="Assets\Scripts\Experiments\Grid.cs" />
+     <Compile Include="Assets\Scripts\Experiments\RoundedCube.cs" />
      <Compile Include="Assets\Scripts\Experiments\TestController.cs" />
      <Compile Include="Assets\Scripts\Experiments\TestPanel.cs" />
      <Compile Include="Assets\Scripts\Experiments\TestThing.cs" />
      <Compile Include="Assets\Scripts\Extenders\ObjectItemExtender.cs" />
      <Compile Include="Assets\Scripts\Extenders\VectorExtender.cs" />
      <Compile Include="Assets\Scripts\FileSystemCanvasController.cs" />
+     <Compile Include="Assets\Scripts\Gizmos\CircleGizmo.cs" />
      <Compile Include="Assets\Scripts\Helpers\FileHelper.cs" />
      <Compile Include="Assets\Scripts\Helpers\ImageFileHelper.cs" />
+     <Compile Include="Assets\Scripts\Helpers\MeshHelper.cs" />
+     <Compile Include="Assets\Scripts\Helpers\TouchHelper.cs" />
      <Compile Include="Assets\Scripts\LookAtObject.cs" />
      <Compile Include="Assets\Scripts\MainPanelController.cs" />
      <Compile Include="Assets\Scripts\Managers\ScreenManager.cs" />
@@ -105,6 +113,7 @@
      <Compile Include="Assets\Scripts\UI\Depricated\MenuButton.cs" />
      <Compile Include="Assets\Scripts\UI\Depricated\MenuCanvasController.cs" />
      <Compile Include="Assets\Scripts\UI\Depricated\MenuController.cs" />
+     <Compile Include="Assets\Scripts\UI\EditMeshContoller.cs" />
      <Compile Include="Assets\Scripts\UI\Enumerations\MeshEnumeration.cs" />
      <Compile Include="Assets\Scripts\UI\FavouriteButtonListManager.cs" />
      <Compile Include="Assets\Scripts\UI\ModelItemController.cs" />
@@ -113,6 +122,7 @@
      <Compile Include="Assets\Scripts\UI\Version 1\MainCanvasController.cs" />
      <Compile Include="Assets\Scripts\UI\Version 1\ShipCanvasController.cs" />
      <Compile Include="Assets\UnityPackages\JsonNetSample\JsonNetSample.cs" />
+     <None Include="Assets\Shaders\Rounded Cube Grid.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -182,6 +192,9 @@
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
+ <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+ <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/2015/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+ </Reference>
  <Reference Include="Newtonsoft.Json">
  <HintPath>C:/Users/Public/Documents/Unity Projects/Tutorial Projects/Starship Deckplans/Assets/UnityPackages/JsonNet/Newtonsoft.Json.dll</HintPath>
  </Reference>
@@ -205,9 +218,6 @@
  </Reference>
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>C:/Users/Stephen/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
- </Reference>
- <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
- <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/2015/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

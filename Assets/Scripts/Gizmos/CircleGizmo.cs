@@ -56,7 +56,6 @@ public class CircleGizmo : MonoBehaviour
             if (it <= 1) DebugShowPoint(i, it, 1f);
             if (it > 1 && it <= 3) DebugShowPoint(ind, 1f, 2f - it);
             if (it > 3 && it <= 5) DebugShowPoint(ind, 4f - it, -1f);
-            if (it >= 7) DebugShowPoint(ind, it - 8f, 1f);
             if (resolution%2 == 0)
             {
                 if (it > 5 && it < 7) DebugShowPoint(ind, -1f, 6f - it);
@@ -65,6 +64,7 @@ public class CircleGizmo : MonoBehaviour
             {
                 if (it > 5 && it < 7) DebugShowPoint(ind, -1f, it - 6f);
             }
+            if (it >= 7) DebugShowPoint(ind, it - 8f, 1f);
         }
     }
 
