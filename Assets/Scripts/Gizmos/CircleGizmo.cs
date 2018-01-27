@@ -12,8 +12,7 @@ public class CircleGizmo : MonoBehaviour
     public enum GenerationType
     {
         UseOriginal,
-        Test1,
-        Test2
+        UseMyCircle
     }
 
     private Dictionary<GenerationType, Action> generatorSelection;
@@ -23,8 +22,7 @@ public class CircleGizmo : MonoBehaviour
         generatorSelection = new Dictionary<GenerationType, Action>
         {
             { GenerationType.UseOriginal, Original },
-            { GenerationType.Test1, Test1 },
-            { GenerationType.Test2, Test2 }
+            { GenerationType.UseMyCircle, MyCircle }
         };
     }
 
@@ -48,48 +46,13 @@ public class CircleGizmo : MonoBehaviour
         }
     }
 
-    void Test1()
-    {
-        //float step = 2f / resolution;
-        //float step2 = 2f * step;
-        //for (int i = 0; i <= resolution/2f; i++)
-        //{
-        //    ShowPoint(i * step2 - 1f, -1f);
-        //    ShowPoint(1f - i * step2, 1f);
-        //    //Debug.Log(string.Format("i {0}, x {1}, y {2}", i, i*step2 - 1f, 1f - i*step2));
-        //}
-
-        if (resolution%2 == 0)
-        {
-            var res = resolution/4;
-            float step = 2f/res;
-            for (int i = 0; i <= res; i++)
-            {
-                DebugShowPoint(i, i * step - 1f, -1f);
-                DebugShowPoint(i, i * step - 1f, 1f);
-            }
-            for (int i = 0; i < res; i++)
-            {
-                DebugShowPoint(i, -1f, i * step - 1f);
-                DebugShowPoint(i, 1f, i * step - 1f);
-            }
-        }
-        else
-        {
-            ShowPoint(0f, 1f);
-            ShowPoint(-1f, -2f/3);
-            ShowPoint(1f, -2f/3);
-        }
-    }
-
-    void Test2()
+    void MyCircle()
     {
         float step = 8f / resolution;
         for (int i = 0; i < resolution; i++)
         {
             var it = i*step;
             var ind = i + 1;
-            //Debug.Log(string.Format("i {0} of {1}, it {2}", ind, resolution, it));
             if (it <= 1) DebugShowPoint(i, it, 1f);
             if (it > 1 && it <= 3) DebugShowPoint(ind, 1f, 2f - it);
             if (it > 3 && it <= 5) DebugShowPoint(ind, 4f - it, -1f);
