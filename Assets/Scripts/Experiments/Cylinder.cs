@@ -36,7 +36,6 @@ public class Cylinder : MonoBehaviour
         for (int i = 0; i < Segments; i++, v++)
         {
             var it = i * step;
-            var ind = i + 1;
             if (it <= 1) CreateCirclePoint(v, Segments, it, 1f);
             if (it > 1 && it <= 3) CreateCirclePoint(v, Segments,1f, 2f - it);
             if (it > 3 && it <= 5) CreateCirclePoint(v, Segments, 4f - it, -1f);
@@ -58,8 +57,12 @@ public class Cylinder : MonoBehaviour
 
     void CreateCirclePoint(int v, int vDash, float x, float y)
     {
-        vertices[v] = new Vector3(Radius*x, 0f, Radius*y);
-        vertices[v+vDash] = new Vector3(Radius * x, 1f, Radius * y);
+        Vector2 circle;
+        circle.x = x * Mathf.Sqrt(1f - y * y * 0.5f);
+        circle.y = y * Mathf.Sqrt(1f - x * x * 0.5f);
+
+        vertices[v] = new Vector3(Radius*circle.x, 0f, Radius*circle.y);
+        vertices[v + vDash] = new Vector3(Radius*circle.x, 1f, Radius*circle.y);
         Debug.Log(string.Format("vertex {0}, x {1}, y {2}, z {3}", v, vertices[v].x, vertices[v].y, vertices[v].z));
     }
 
