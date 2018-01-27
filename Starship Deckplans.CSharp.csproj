@@ -299,6 +299,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scenes\Events\StringEvent.cs" />
     <Compile Include="Assets\Scripts\Config.cs" />
+    <Compile Include="Assets\Scripts\Experiments\Cone.cs" />
     <Compile Include="Assets\Scripts\Experiments\CubeSphere.cs" />
     <Compile Include="Assets\Scripts\Experiments\Cylinder.cs" />
     <Compile Include="Assets\Scripts\Experiments\DeformCubeScript.cs" />
