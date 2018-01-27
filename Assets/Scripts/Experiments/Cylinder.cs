@@ -111,8 +111,14 @@ public class Cylinder : MonoBehaviour
         return MeshHelper.SetTriangle(triangles, t, p1, q1, hub);
     }
 
+    void OnValidate()
+    {
+        Generate();
+    }
+
     private void OnDrawGizmos()
     {
+        if (mesh == null) Generate();
         if (vertices == null) return;
         for (int i = 0; i < vertices.Length; i++)
         {

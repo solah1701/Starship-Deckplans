@@ -211,13 +211,19 @@ public class Cone : MonoBehaviour
 
         mesh.RecalculateBounds();
         //mesh.Optimize();
+        Debug.Log(string.Format("Vertex count {0}", vertices.Length));
+    }
+
+    void OnValidate()
+    {
+        GenerateMesh();
     }
 
     private void OnDrawGizmos()
     {
+        if (mesh == null) GenerateMesh();
         var vertices = mesh.vertices;
         var normals = mesh.normals;
-
         if (vertices == null) return;
         for (int i = 0; i < vertices.Length; i++)
         {
