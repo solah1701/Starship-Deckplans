@@ -210,8 +210,6 @@ public class Cone : MonoBehaviour
         mesh.triangles = triangles;
 
         mesh.RecalculateBounds();
-        //mesh.Optimize();
-        Debug.Log(string.Format("Vertex count {0}", vertices.Length));
     }
 
     void OnValidate()
