@@ -318,6 +318,9 @@
     <Compile Include="Assets\Scripts\Helpers\TouchHelper.cs" />
     <Compile Include="Assets\Scripts\LookAtObject.cs" />
     <Compile Include="Assets\Scripts\MainPanelController.cs" />
+    <Compile Include="Assets\Scripts\Managers\ButtonListManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\DeckButtonListManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\FavouriteButtonListManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ScreenManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ShipManager\BlueprintManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ShipManager\DeckManager.cs" />
@@ -349,8 +352,6 @@
     <Compile Include="Assets\Scripts\UI\BlueprintListController.cs" />
     <Compile Include="Assets\Scripts\UI\BoundingBoxController.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonListController.cs" />
-    <Compile Include="Assets\Scripts\UI\ButtonListManager.cs" />
-    <Compile Include="Assets\Scripts\UI\DeckButtonListManager.cs" />
     <Compile Include="Assets\Scripts\UI\DeckPanelController.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\BaseContainerController.cs" />
     <Compile Include="Assets\Scripts\UI\Depricated\BlueprintController.cs" />
@@ -362,7 +363,7 @@
     <Compile Include="Assets\Scripts\UI\Depricated\MenuController.cs" />
     <Compile Include="Assets\Scripts\UI\EditMeshContoller.cs" />
     <Compile Include="Assets\Scripts\UI\Enumerations\MeshEnumeration.cs" />
-    <Compile Include="Assets\Scripts\UI\FavouriteButtonListManager.cs" />
+    <Compile Include="Assets\Scripts\UI\MeshButtonController.cs" />
     <Compile Include="Assets\Scripts\UI\ModelItemController.cs" />
     <Compile Include="Assets\Scripts\UI\ModelListController.cs" />
     <Compile Include="Assets\Scripts\UI\Version 1\DialogBox.cs" />
