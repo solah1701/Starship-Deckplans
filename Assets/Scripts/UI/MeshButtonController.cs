@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MeshButtonController : MonoBehaviour
 {
+    public bool UseButtonLogic;
 
     public bool Cylinder;
     public bool Cuboid;
@@ -38,6 +40,8 @@ public class MeshButtonController : MonoBehaviour
         {"Lock Y Button", ButtonType.LockY}
     };
 
+    private Dictionary<ButtonType, Button> buttons = new Dictionary<ButtonType, Button>();
+
     void Start()
     {
         Debug.Log("Start Mesh Button Controller");
@@ -50,6 +54,7 @@ public class MeshButtonController : MonoBehaviour
         foreach (Button button in buttons)
         {
             var theButton = button;
+            this.buttons.Add(mapButtonTypes[theButton.name], theButton);
             button.onClick.AddListener(() => ButtonClicked(theButton));
             Debug.Log(string.Format("Button Name {0}", button.name));
         }
@@ -66,9 +71,42 @@ public class MeshButtonController : MonoBehaviour
         if (buttonType == ButtonType.LockX) cb.normalColor = UpdateState(ref LockX);
         if (buttonType == ButtonType.LockY) cb.normalColor = UpdateState(ref LockY);
         button.colors = cb;
+        if (UseButtonLogic) ButtonLogic(buttonType);
     }
 
-    public Color UpdateState(ref bool value)
+    void ButtonLogic(ButtonType value)
+    {
+        if (Cylinder && ButtonType.Cylinder == value) ClearAllBut(ButtonType.Cylinder);
+        if (Cuboid && ButtonType.Cuboid == value) ClearAllBut(ButtonType.Cuboid);
+        if (Select && ButtonType.Select == value) ClearAllBut(ButtonType.Select);
+        if (ButtonType.Edit == value) ClearAllBut(ButtonType.Edit);
+    }
+
+    void ClearAllBut(ButtonType value)
+    {
+        if (Cylinder && ButtonType.Cylinder != value) UpdateButtonState(value, ref Cylinder);
+        if (Cuboid && ButtonType.Cuboid != value) UpdateButtonState(value, ref Cuboid);
+        if (Select && ButtonType.Select != value) UpdateButtonState(value, ref Select);
+        if (Edit && ButtonType.Edit != value) UpdateButtonState(value, ref Edit);
+        if (ButtonType.LockX != value) UpdateButtonState(value, ref LockX, Edit);
+        if (ButtonType.LockY != value) UpdateButtonState(value, ref LockY, Edit);
+    }
+
+    void UpdateButtonState(ButtonType button, ref bool value, bool enabled = true)
+    {
+        var buttons = GetComponentsInChildren<Button>();
+        var theButton = buttons.First(b => b.name == mapButtonTypes.FirstOrDefault(v => v.Value == button).Key);
+        //var theButton = buttons[button];
+        var cb = theButton.colors;
+        cb.normalColor = UpdateState(ref value);
+        theButton.colors = cb;
+        theButton.enabled = enabled;
+        Debug.Log(string.Format("Button Name {0}", theButton.name));
+        var bmgr = theButton.GetComponent<ButtonManager>();
+        if (bmgr != null) bmgr.EnableButton(enabled);
+    }
+
+    Color UpdateState(ref bool value)
     {
         value = !value;
         return value ? SelectedColor : NormalColor;
