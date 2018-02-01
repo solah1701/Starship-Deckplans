@@ -319,7 +319,6 @@
     <Compile Include="Assets\Scripts\LookAtObject.cs" />
     <Compile Include="Assets\Scripts\MainPanelController.cs" />
     <Compile Include="Assets\Scripts\Managers\ButtonListManager.cs" />
-    <Compile Include="Assets\Scripts\Managers\ButtonManager.cs" />
     <Compile Include="Assets\Scripts\Managers\DeckButtonListManager.cs" />
     <Compile Include="Assets\Scripts\Managers\FavouriteButtonListManager.cs" />
     <Compile Include="Assets\Scripts\Managers\ScreenManager.cs" />

@@ -20,6 +20,13 @@ public class MeshButtonController : MonoBehaviour
     public Color NormalColor = Color.white;
     public Color SelectedColor = new Color(106, 119, 255, 255);
 
+    private const string CYLINDER_BUTTON = "Cylinder Button";
+    private const string CUBOID_BUTTON = "Cuboid Button";
+    private const string SELECT_BUTTON = "Select Button";
+    private const string EDIT_BUTTON = "Edit Button";
+    private const string LOCK_X_BUTTON = "Lock X Button";
+    private const string LOCK_Y_BUTTON = "Lock Y Button";
+
     private enum ButtonType
     {
         Cylinder,
@@ -32,15 +39,13 @@ public class MeshButtonController : MonoBehaviour
 
     private Dictionary<string, ButtonType> mapButtonTypes = new Dictionary<string, ButtonType>
     {
-        {"Cylinder Button", ButtonType.Cylinder},
-        {"Cuboid Button", ButtonType.Cuboid},
-        {"Select Button", ButtonType.Select},
-        {"Edit Button", ButtonType.Edit},
-        {"Lock X Button", ButtonType.LockX},
-        {"Lock Y Button", ButtonType.LockY}
+        {CYLINDER_BUTTON, ButtonType.Cylinder},
+        {CUBOID_BUTTON, ButtonType.Cuboid},
+        {SELECT_BUTTON, ButtonType.Select},
+        {EDIT_BUTTON, ButtonType.Edit},
+        {LOCK_X_BUTTON, ButtonType.LockX},
+        {LOCK_Y_BUTTON, ButtonType.LockY}
     };
-
-    private Dictionary<ButtonType, Button> buttons = new Dictionary<ButtonType, Button>();
 
     void Start()
     {
@@ -48,62 +53,101 @@ public class MeshButtonController : MonoBehaviour
         GetButtonsInPanel();
     }
 
+    private Dictionary<string, string[]> mapButtonsToClear = new Dictionary<string, string[]>
+    {
+        {CYLINDER_BUTTON, new[] { CUBOID_BUTTON, SELECT_BUTTON, EDIT_BUTTON, LOCK_X_BUTTON, LOCK_Y_BUTTON }},
+        {CUBOID_BUTTON, new[] { CYLINDER_BUTTON, SELECT_BUTTON, EDIT_BUTTON, LOCK_X_BUTTON, LOCK_Y_BUTTON }},
+        {SELECT_BUTTON, new[] { CYLINDER_BUTTON, CUBOID_BUTTON, EDIT_BUTTON, LOCK_X_BUTTON, LOCK_Y_BUTTON }},
+        {EDIT_BUTTON, new[] { CYLINDER_BUTTON, CUBOID_BUTTON, SELECT_BUTTON, LOCK_X_BUTTON, LOCK_Y_BUTTON }},
+        {LOCK_X_BUTTON, new[] { LOCK_Y_BUTTON }},
+        {LOCK_Y_BUTTON, new[] { LOCK_X_BUTTON}}
+    };
+
+    private Dictionary<string, string[]> mapButtonsToDisable = new Dictionary<string, string[]>
+    {
+        {CYLINDER_BUTTON, new[] { LOCK_X_BUTTON, LOCK_Y_BUTTON }},
+        {CUBOID_BUTTON, new[] { LOCK_X_BUTTON, LOCK_Y_BUTTON }},
+        {SELECT_BUTTON, new[] { LOCK_X_BUTTON, LOCK_Y_BUTTON }},
+        {EDIT_BUTTON, new [] { "" }},
+        {LOCK_X_BUTTON, new[] { "" }},
+        {LOCK_Y_BUTTON, new[] { "" }}
+
+    };
+
+    private Dictionary<string, string[]> mapButtonsToEnable = new Dictionary<string, string[]>
+    {
+        {CYLINDER_BUTTON, new [] { "" }},
+        {CUBOID_BUTTON, new [] { "" }},
+        {SELECT_BUTTON, new [] { "" }},
+        {EDIT_BUTTON, new[] { LOCK_X_BUTTON, LOCK_Y_BUTTON }},
+        {LOCK_X_BUTTON, new[] { "" }},
+        {LOCK_Y_BUTTON, new[] { "" }}
+
+    };
+
     void GetButtonsInPanel()
     {
         var buttons = GetComponentsInChildren<Button>();
+
         foreach (Button button in buttons)
         {
-            var theButton = button;
-            this.buttons.Add(mapButtonTypes[theButton.name], theButton);
-            button.onClick.AddListener(() => ButtonClicked(theButton));
-            Debug.Log(string.Format("Button Name {0}", button.name));
+            var btn = button;
+            button.onClick.AddListener(() => ButtonClicked(btn));
+            AddActionListener(button, buttons.ToList().FindAll(b => mapButtonsToClear[btn.name].Contains(b.name)), true, ButtonClear);
+            AddActionListener(button, buttons.ToList().FindAll(b => mapButtonsToDisable[btn.name].Contains(b.name)), false, ButtonDisable);
+            AddActionListener(button, buttons.ToList().FindAll(b => mapButtonsToEnable[btn.name].Contains(b.name)), true, ButtonDisable);
+        }
+    }
+
+    void AddActionListener(Button button, List<Button> btns, bool enable, Action<Button, bool> action)
+    {
+        foreach (Button btn in btns)
+        {
+            var bn = btn;
+            button.onClick.AddListener(() => action(bn, enable));
         }
     }
 
     void ButtonClicked(Button button)
     {
         var buttonType = mapButtonTypes[button.name];
+        if (buttonType == ButtonType.Cylinder) UpdateButtonState(button, ref Cylinder);
+        if (buttonType == ButtonType.Cuboid) UpdateButtonState(button, ref Cuboid);
+        if (buttonType == ButtonType.Select) UpdateButtonState(button, ref Select);
+        if (buttonType == ButtonType.Edit) UpdateButtonState(button, ref Edit);
+        if (buttonType == ButtonType.LockX) UpdateButtonState(button, ref LockX);
+        if (buttonType == ButtonType.LockY) UpdateButtonState(button, ref LockY);
+    }
+
+    void ButtonClear(Button button, bool enable)
+    {
+        var buttonType = mapButtonTypes[button.name];
+        if (buttonType == ButtonType.Cylinder) ClearButtonState(button, ref Cylinder);
+        if (buttonType == ButtonType.Cuboid) ClearButtonState(button, ref Cuboid);
+        if (buttonType == ButtonType.Select) ClearButtonState(button, ref Select);
+        if (buttonType == ButtonType.Edit) ClearButtonState(button, ref Edit);
+    }
+
+    void ButtonDisable(Button button, bool enable)
+    {
+        var buttonType = mapButtonTypes[button.name];
+        if (buttonType == ButtonType.LockX) ClearButtonState(button, ref LockX, enable);
+        if (buttonType == ButtonType.LockY) ClearButtonState(button, ref LockY, enable);
+    }
+
+    void ClearButtonState(Button button, ref bool value, bool enabled = true)
+    {
+        value = true;
+        UpdateButtonState(button, ref value, enabled);
+    }
+
+    void UpdateButtonState(Button button, ref bool value, bool enabled = true)
+    {
         var cb = button.colors;
-        if (buttonType == ButtonType.Cylinder) cb.normalColor = UpdateState(ref Cylinder);
-        if (buttonType == ButtonType.Cuboid) cb.normalColor = UpdateState(ref Cuboid);
-        if (buttonType == ButtonType.Select) cb.normalColor = UpdateState(ref Select);
-        if (buttonType == ButtonType.Edit) cb.normalColor = UpdateState(ref Edit);
-        if (buttonType == ButtonType.LockX) cb.normalColor = UpdateState(ref LockX);
-        if (buttonType == ButtonType.LockY) cb.normalColor = UpdateState(ref LockY);
-        button.colors = cb;
-        if (UseButtonLogic) ButtonLogic(buttonType);
-    }
-
-    void ButtonLogic(ButtonType value)
-    {
-        if (Cylinder && ButtonType.Cylinder == value) ClearAllBut(ButtonType.Cylinder);
-        if (Cuboid && ButtonType.Cuboid == value) ClearAllBut(ButtonType.Cuboid);
-        if (Select && ButtonType.Select == value) ClearAllBut(ButtonType.Select);
-        if (ButtonType.Edit == value) ClearAllBut(ButtonType.Edit);
-    }
-
-    void ClearAllBut(ButtonType value)
-    {
-        if (Cylinder && ButtonType.Cylinder != value) UpdateButtonState(value, ref Cylinder);
-        if (Cuboid && ButtonType.Cuboid != value) UpdateButtonState(value, ref Cuboid);
-        if (Select && ButtonType.Select != value) UpdateButtonState(value, ref Select);
-        if (Edit && ButtonType.Edit != value) UpdateButtonState(value, ref Edit);
-        if (ButtonType.LockX != value) UpdateButtonState(value, ref LockX, Edit);
-        if (ButtonType.LockY != value) UpdateButtonState(value, ref LockY, Edit);
-    }
-
-    void UpdateButtonState(ButtonType button, ref bool value, bool enabled = true)
-    {
-        var buttons = GetComponentsInChildren<Button>();
-        var theButton = buttons.First(b => b.name == mapButtonTypes.FirstOrDefault(v => v.Value == button).Key);
-        //var theButton = buttons[button];
-        var cb = theButton.colors;
         cb.normalColor = UpdateState(ref value);
-        theButton.colors = cb;
-        theButton.enabled = enabled;
-        Debug.Log(string.Format("Button Name {0}", theButton.name));
-        var bmgr = theButton.GetComponent<ButtonManager>();
-        if (bmgr != null) bmgr.EnableButton(enabled);
+        button.colors = cb;
+        button.enabled = enabled;
+        Debug.Log(string.Format("Button Name {0}", button.name));
     }
 
     Color UpdateState(ref bool value)
