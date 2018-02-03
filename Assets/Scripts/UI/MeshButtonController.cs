@@ -8,17 +8,15 @@ using UnityEngine.UI;
 
 public class MeshButtonController : MonoBehaviour
 {
-    public bool UseButtonLogic;
-
-    public bool Cylinder;
-    public bool Cuboid;
-    public bool Select;
-    public bool Edit;
-    public bool LockX;
-    public bool LockY;
-
     public Color NormalColor = Color.white;
     public Color SelectedColor = new Color(106, 119, 255, 255);
+
+    private bool _cylinder;
+    private bool _cuboid;
+    private bool _select;
+    private bool _edit;
+    private bool _lockX;
+    private bool _lockY;
 
     private const string CYLINDER_BUTTON = "Cylinder Button";
     private const string CUBOID_BUTTON = "Cuboid Button";
@@ -48,7 +46,7 @@ public class MeshButtonController : MonoBehaviour
         {LOCK_Y_BUTTON, ButtonType.LockY}
     };
 
-    private Dictionary<string, string[]> mapButtonsToClear = new Dictionary<string, string[]>
+    private readonly Dictionary<string, string[]> _mapButtonsToClear = new Dictionary<string, string[]>
     {
         {CYLINDER_BUTTON, new[] { CUBOID_BUTTON, SELECT_BUTTON, EDIT_BUTTON, LOCK_X_BUTTON, LOCK_Y_BUTTON }},
         {CUBOID_BUTTON, new[] { CYLINDER_BUTTON, SELECT_BUTTON, EDIT_BUTTON, LOCK_X_BUTTON, LOCK_Y_BUTTON }},
@@ -58,7 +56,7 @@ public class MeshButtonController : MonoBehaviour
         {LOCK_Y_BUTTON, new[] { LOCK_X_BUTTON}}
     };
 
-    private Dictionary<string, string[]> mapButtonsToDisable = new Dictionary<string, string[]>
+    private readonly Dictionary<string, string[]> _mapButtonsToDisable = new Dictionary<string, string[]>
     {
         {CYLINDER_BUTTON, new[] { LOCK_X_BUTTON, LOCK_Y_BUTTON }},
         {CUBOID_BUTTON, new[] { LOCK_X_BUTTON, LOCK_Y_BUTTON }},
@@ -68,7 +66,7 @@ public class MeshButtonController : MonoBehaviour
         {LOCK_Y_BUTTON, new[] { "" }}
     };
 
-    private Dictionary<string, string[]> mapButtonsToEnable = new Dictionary<string, string[]>
+    private readonly Dictionary<string, string[]> _mapButtonsToEnable = new Dictionary<string, string[]>
     {
         {CYLINDER_BUTTON, new [] { "" }},
         {CUBOID_BUTTON, new [] { "" }},
@@ -77,7 +75,7 @@ public class MeshButtonController : MonoBehaviour
         {LOCK_X_BUTTON, new[] { "" }},
         {LOCK_Y_BUTTON, new[] { "" }}
     };
-#endregion
+    #endregion
 
     void Start()
     {
@@ -93,9 +91,9 @@ public class MeshButtonController : MonoBehaviour
         {
             var btn = button;
             button.onClick.AddListener(() => ButtonClicked(btn));
-            AddActionListener(button, buttons.ToList().FindAll(b => mapButtonsToClear[btn.name].Contains(b.name)), true, ButtonClear);
-            AddActionListener(button, buttons.ToList().FindAll(b => mapButtonsToDisable[btn.name].Contains(b.name)), false, ButtonDisable);
-            AddActionListener(button, buttons.ToList().FindAll(b => mapButtonsToEnable[btn.name].Contains(b.name)), true, ButtonDisable);
+            AddActionListener(button, buttons.ToList().FindAll(b => _mapButtonsToClear[btn.name].Contains(b.name)), true, ButtonClear);
+            AddActionListener(button, buttons.ToList().FindAll(b => _mapButtonsToDisable[btn.name].Contains(b.name)), false, ButtonDisable);
+            AddActionListener(button, buttons.ToList().FindAll(b => _mapButtonsToEnable[btn.name].Contains(b.name)), true, ButtonDisable);
         }
     }
 
@@ -111,28 +109,28 @@ public class MeshButtonController : MonoBehaviour
     void ButtonClicked(Button button)
     {
         var buttonType = mapButtonTypes[button.name];
-        if (buttonType == ButtonType.Cylinder) UpdateButtonState(button, ref Cylinder);
-        if (buttonType == ButtonType.Cuboid) UpdateButtonState(button, ref Cuboid);
-        if (buttonType == ButtonType.Select) UpdateButtonState(button, ref Select);
-        if (buttonType == ButtonType.Edit) UpdateButtonState(button, ref Edit);
-        if (buttonType == ButtonType.LockX) UpdateButtonState(button, ref LockX);
-        if (buttonType == ButtonType.LockY) UpdateButtonState(button, ref LockY);
+        if (buttonType == ButtonType.Cylinder) UpdateButtonState(button, ref _cylinder);
+        if (buttonType == ButtonType.Cuboid) UpdateButtonState(button, ref _cuboid);
+        if (buttonType == ButtonType.Select) UpdateButtonState(button, ref _select);
+        if (buttonType == ButtonType.Edit) UpdateButtonState(button, ref _edit);
+        if (buttonType == ButtonType.LockX) UpdateButtonState(button, ref _lockX);
+        if (buttonType == ButtonType.LockY) UpdateButtonState(button, ref _lockY);
     }
 
     void ButtonClear(Button button, bool enable)
     {
         var buttonType = mapButtonTypes[button.name];
-        if (buttonType == ButtonType.Cylinder) ClearButtonState(button, ref Cylinder);
-        if (buttonType == ButtonType.Cuboid) ClearButtonState(button, ref Cuboid);
-        if (buttonType == ButtonType.Select) ClearButtonState(button, ref Select);
-        if (buttonType == ButtonType.Edit) ClearButtonState(button, ref Edit);
+        if (buttonType == ButtonType.Cylinder) ClearButtonState(button, ref _cylinder);
+        if (buttonType == ButtonType.Cuboid) ClearButtonState(button, ref _cuboid);
+        if (buttonType == ButtonType.Select) ClearButtonState(button, ref _select);
+        if (buttonType == ButtonType.Edit) ClearButtonState(button, ref _edit);
     }
 
     void ButtonDisable(Button button, bool enable)
     {
         var buttonType = mapButtonTypes[button.name];
-        if (buttonType == ButtonType.LockX) ClearButtonState(button, ref LockX, enable);
-        if (buttonType == ButtonType.LockY) ClearButtonState(button, ref LockY, enable);
+        if (buttonType == ButtonType.LockX) ClearButtonState(button, ref _lockX, enable && _edit);
+        if (buttonType == ButtonType.LockY) ClearButtonState(button, ref _lockY, enable && _edit);
     }
 
     void ClearButtonState(Button button, ref bool value, bool enabled = true)
