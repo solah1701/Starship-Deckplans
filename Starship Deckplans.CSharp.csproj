@@ -303,6 +303,7 @@
     <Compile Include="Assets\Scripts\Experiments\CubeSphere.cs" />
     <Compile Include="Assets\Scripts\Experiments\Cylinder.cs" />
     <Compile Include="Assets\Scripts\Experiments\DeformCubeScript.cs" />
+    <Compile Include="Assets\Scripts\Experiments\ExpButtonController.cs" />
     <Compile Include="Assets\Scripts\Experiments\Grid.cs" />
     <Compile Include="Assets\Scripts\Experiments\RoundedCube.cs" />
     <Compile Include="Assets\Scripts\Experiments\TestController.cs" />

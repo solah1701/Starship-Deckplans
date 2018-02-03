@@ -37,6 +37,7 @@ public class MeshButtonController : MonoBehaviour
         LockY
     }
 
+    #region Mapping Dictionaries
     private Dictionary<string, ButtonType> mapButtonTypes = new Dictionary<string, ButtonType>
     {
         {CYLINDER_BUTTON, ButtonType.Cylinder},
@@ -46,12 +47,6 @@ public class MeshButtonController : MonoBehaviour
         {LOCK_X_BUTTON, ButtonType.LockX},
         {LOCK_Y_BUTTON, ButtonType.LockY}
     };
-
-    void Start()
-    {
-        Debug.Log("Start Mesh Button Controller");
-        GetButtonsInPanel();
-    }
 
     private Dictionary<string, string[]> mapButtonsToClear = new Dictionary<string, string[]>
     {
@@ -71,7 +66,6 @@ public class MeshButtonController : MonoBehaviour
         {EDIT_BUTTON, new [] { "" }},
         {LOCK_X_BUTTON, new[] { "" }},
         {LOCK_Y_BUTTON, new[] { "" }}
-
     };
 
     private Dictionary<string, string[]> mapButtonsToEnable = new Dictionary<string, string[]>
@@ -82,8 +76,14 @@ public class MeshButtonController : MonoBehaviour
         {EDIT_BUTTON, new[] { LOCK_X_BUTTON, LOCK_Y_BUTTON }},
         {LOCK_X_BUTTON, new[] { "" }},
         {LOCK_Y_BUTTON, new[] { "" }}
-
     };
+#endregion
+
+    void Start()
+    {
+        Debug.Log("Start Mesh Button Controller");
+        GetButtonsInPanel();
+    }
 
     void GetButtonsInPanel()
     {
@@ -143,9 +143,11 @@ public class MeshButtonController : MonoBehaviour
 
     void UpdateButtonState(Button button, ref bool value, bool enabled = true)
     {
-        var cb = button.colors;
-        cb.normalColor = UpdateState(ref value);
-        button.colors = cb;
+        var colorBlock = button.colors;
+        var updatedColor = UpdateState(ref value);
+        colorBlock.normalColor = updatedColor;
+        colorBlock.highlightedColor = updatedColor;
+        button.colors = colorBlock;
         button.enabled = enabled;
         Debug.Log(string.Format("Button Name {0}", button.name));
     }
